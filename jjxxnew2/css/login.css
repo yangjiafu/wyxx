@@ -1,0 +1,226 @@
+﻿/*.loginBg{*/
+    /*width: 100%;*/
+    /*height:1000px;*/
+    /*margin: 0 auto;*/
+    /*background-color:rgba(0,0,0,.3);*/
+    /*position: fixed;*/
+    /*z-index: 1000;*/
+/*}*/
+/*.loginBg>div{*/
+    /*width: 500px;*/
+    /*height: 300px;*/
+    /*background-color: #fff;*/
+    /*position: fixed;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%,-60%);*/
+/*}*/
+/*.login-left{*/
+    /*margin-top: 4%;*/
+    /*width: 60%;*/
+    /*height:90%;*/
+    /*padding:0 5%;*/
+/*}*/
+/*.login-first a{*/
+    /*text-decoration: none;*/
+    /*margin: 0 30px;*/
+/*}*/
+/*.login-first a>span{*/
+    /*display: inline-block;*/
+    /*padding:15px 0;*/
+    /*!*border-bottom: 2px solid red;*!*/
+/*}*/
+/*.loginActive{*/
+    /*border-bottom: 2px solid blue;*/
+/*}*/
+/*.loginTitle{*/
+    /*font-size: 16px;*/
+    /*color:#858585;*/
+/*}*/
+/*.login-entry li{*/
+    /*width:100%;*/
+    /*height:30px;*/
+    /*margin:15px 0;*/
+    /*line-height: 30px;*/
+    /*!*border:1px solid red;*!*/
+    /*font-size: 13px;*/
+    /*color:#858585;*/
+/*}*/
+/*.login-input{*/
+    /*width: 80%;*/
+    /*height: 30px;*/
+    /*margin-left:7px;*/
+/*}*/
+/*.login-entry li button{*/
+    /*width: 81%;*/
+    /*height:30px;*/
+    /*background-color: #3671CF;*/
+    /*margin-left: 19%;*/
+    /*color:#fff;*/
+    /*margin-top: 10px;*/
+/*}*/
+/*.login-right span{*/
+    /*display: inline-block;*/
+    /*width: 25px;*/
+    /*height:25px;*/
+    /*text-align: center;*/
+    /*line-height: 20px;*/
+    /*border-radius: 50%;*/
+    /*border:2px solid #fff;*/
+    /*z-index: 9999;*/
+    /*position: absolute;*/
+    /*top:15px;*/
+    /*right:15px;*/
+    /*color: #fff;*/
+    /*font-size: 16px;*/
+/*}*/
+
+
+
+
+
+
+
+/*#loginBox{*/
+    /*display: none;*/
+/*}*/
+.loginBg{
+    width: 100%;
+    height:1000px;
+    margin: 0 auto;
+    background-color:rgba(0,0,0,.4);
+    position: fixed;
+    z-index: 1000;
+    /*display: none;*/
+}
+.loginBg>div{
+    width: 550px;
+    height: 370px;
+    background-color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-60%);
+}
+.login-left{
+    margin-top: 4%;
+    width: 60%;
+    height:90%;
+    padding:0 5%;
+}
+.login-first a{
+    text-decoration: none;
+    margin: 0 30px;
+}
+.login-first span{
+    display: inline-block;
+    padding:15px 0;
+    /*border-bottom: 2px solid red;*/
+}
+.loginActive{
+    color: #3671CF!important;
+    border-bottom: 2px solid #3671CF;
+}
+.loginTitle{
+    font-size: 16px;
+    color:#858585;
+}
+.login-entry li{
+    width:100%;
+    height:30px;
+    margin:35px 0;
+    line-height: 30px;
+    /*border:1px solid red;*/
+    font-size: 13px;
+    color:#858585;
+}
+.login-input{
+    width: 80%;
+    height: 30px;
+    margin-left:7px;
+}
+.login-entry li button{
+    width: 81%;
+    height:30px;
+    background-color: #3671CF;
+    margin-left: 18%;
+    color:#fff;
+    margin-top: 5px;
+}
+/*退出*/
+.login-right span{
+    display: inline-block;
+    width: 25px;
+    height:25px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 50%;
+    border:2px solid #fff;
+    z-index: 9999;
+    position: absolute;
+    top:15px;
+    right:15px;
+    color: #fff;
+    font-size: 16px;
+}
+/*注册*/
+.login-enroll ul li{
+    width: 100%;
+    height:25px;
+    /*border:1px solid red;*/
+    line-height: 25px;
+    margin: 10px 0;
+    font-size: 13px;
+    color:#858585;
+    position: relative;
+}
+.login-enroll li input{
+    width: 68%;
+    height:100%;
+    /*margin-right: 0px;*/
+}
+.login-enroll span{
+    display: inline-block;
+    width: 28%;
+    height:25px;
+    line-height: 30px;
+    /*border:1px solid blue;*/
+}
+.login-enroll button{
+    width: 60%;
+    height: 25px;
+    border: none;
+    background-color: blue;
+    color: #fff;
+    margin-left: 28%;
+    margin-top: 15px;
+}
+.login-error{
+    color:red;
+    position: absolute;
+    top:5px;
+    right:-20px;
+    font-size: 26px;
+    line-height: 25px;
+}
+.redShow{
+    color: red;font-size: 18px;float: right;
+}
+
+
+/*修改密码*/
+.find-title{
+    text-align: center;
+    border-bottom:1px solid #D3D3D3;
+    font-size: 16px;
+}
+.find-title span{
+    display: inline-block;
+    padding:15px 0;
+    border-bottom: 2px solid #3671CF;
+}
+.find-login li{
+    height:30px !important;
+    margin: 25px 0 !important;
+}
+

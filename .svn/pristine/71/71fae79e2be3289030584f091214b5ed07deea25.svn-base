@@ -1,0 +1,295 @@
+﻿<!doctype html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <title>九君网校</title>
+
+        <!--<link rel="apple-touch-icon" href="apple-touch-icon.png">-->
+        <!-- Place favicon.ico in the root directory -->
+
+        <!--<link rel="stylesheet" href="css/normalize.css">-->
+    <link href="img/icon.ico"rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <link rel="stylesheet" href="bise/font/demo.css">
+    <link rel="stylesheet" href="bise/font/iconfont.css">
+    <script src="bise/font/iconfont.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/stars.css">
+    <link rel="stylesheet" href="css/courseItem.css">
+    <link rel="stylesheet" href="css/time-base.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/examCourse.css">
+    <link rel="stylesheet" href="bise/swiper.css">
+    <link rel="stylesheet" href="css/loading.css" />
+    <!--<link rel="stylesheet" href="bise/ionic/css/ionic.css">-->
+    <!--<script src="bise/ionic/js/ionic.js"></script>-->
+    <!--<script src="bise/ionic/js/ionic.bundle.js"></script>-->
+    <script src="js/jquery-3.2.3.js" type="text/javascript"></script>
+    <script src="js/angular.js" type="text/javascript"></script>
+    <script src="js/angular-ui-router.js" type="text/javascript"></script>
+    <script src="index.js"></script>
+
+
+    <script src="bise/swiper.js"></script>
+
+    <script src="Content/AllCourseListCtrl.js"></script>
+    <script src="Content/homeCtrl.js"></script>
+    <script src="Content/myCourseCtrl.js"></script>
+    <script src="Content/myInformationCtrl.js"></script>
+    <script src="Content/newCtrl.js"></script>
+    <!--<script src="Content/starsceshi.js"></script>-->
+    <script src="Content/courseItemCtrl.js"></script>
+    <script src="Content/LearnCourseCtrl.js"></script>
+    <script src="Content/LearnCourse1Ctrl.js"></script>
+    <script src="Content/LoginCtrl.js"></script>
+    <script src="Content/examCourse1.js"></script>
+    <script src="Content/MyInfo.BaseInfoCtrl.js"></script>
+    <script src="Content/MyInfo.UpdatePassword.js"></script>
+    <script src="Content/MyInfo.AccountManager.js"></script>
+    <script src="Content/learnRecordCtrl.js"></script>
+    <script src="Content/messageItem.js"></script>
+    <script src="Content/messageItemUrlCtrl.js"></script>
+    <script src="Content/UserRegistCtrl.js"></script>
+    <script src="Content/findPassword.js"></script>
+    <!--<script src="Content/UserRegistCtrl.js"></script>-->
+    <script src="js/pages.js"></script>
+    <script src="bise/line.js"></script>
+
+    <script src="bise/start.js"></script>
+
+    <script src="js/moment.js"></script>
+    <script src="Service/ConvertService.js"></script>
+    <script src="Service/CourseService1.js"></script>
+    <script src="Service/CustomFilters.js"></script>
+    <script src="Service/DataService.js"></script>
+    <script src="Service/DataShareService.js"></script>
+    <script src="Service/encodeService.js"></script>
+    <script src="Service/ExamService.js"></script>
+    <script src="Service/regularService.js"></script>
+    <script src="Service/storeService.js"></script>
+    <script src="Service/utilityService.js"></script>
+
+        <!--<script src="js/plugins.js"></script>-->
+
+</head>
+<body ng-controller="appCtrl">
+
+<div class="loginBg" ng-if="showLogin" id="loginBox" >
+        <div >
+            <div class="login-left left" id="findPwd" ng-controller="FindPasswordCtrl" style="display: none;">
+                <div class="find-title">
+                    <span>找回密码</span>
+                </div>
+                <div class="login-enroll find-login">
+                    <ul>
+                        <li><span>手机号码:</span>
+                            <input type="text" ng-model="userInfo.userPhone">
+                        </li>
+                        <li class="find-code"><span>验证码:</span>
+                            <input style="width: 30%" type="text" ng-model="userInfo.verificationCode">
+                            <button style=" width:25%;height: 30px;margin:0 10px 0 0;background-color: #858585;"
+                                    class="button button-small pull-right btn_radius_ellipse " ng-click="sendVerificationCode()" ng-if="times<=0">获取验证码</button>
+                            <span class="pull-right" style="color:red; margin-right:15px;" ng-if="times>0">{{times}}</span>
+                        </li>
+                        <li><span>密码:</span>
+                            <input type="password" ng-model="userInfo.password">
+                        </li>
+                        <li><span>验证密码:</span>
+                            <input type="password" ng-model="userInfo.repeatPassword">
+                        </li>
+                        <li>
+                            <button style="height:30px;background-color: #3671CF;margin-top: 0" class="button button-block button-positive" ng-click="resetPassword()">
+                                重置密码
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="login-left left"  id="login">
+                <div class="login-first" style="text-align: center;border-bottom:1px solid #D3D3D3;">
+                    <a href="#" ng-click="actives='entry'">
+                        <span ng-class="{'loginActive':actives=='entry'}" class="loginTitle">登录</span>
+                    </a>
+                    <a href="#" ng-click="actives='enroll'">
+                        <span ng-class="{'loginActive':actives=='enroll'}" class="loginTitle">注册</span>
+                    </a>
+                </div>
+                <div class="login-entry" ng-if="actives=='entry'" ng-controller="LoginCtrl">
+                    <ul>
+                        <li>
+                            用户名:<input class="login-input" type="text"
+                                       ng-model="info.a">
+                        </li>
+                        <li>
+                            密&nbsp;&nbsp;&nbsp;码:<input class="login-input" style="margin-left: 9px;"
+                                                        type="password"  ng-model="info.p" >
+                        </li>
+                        <li><button  ng-click="login()" style="border:none;border-radius: 2px;">登录</button></li>
+                        <li style="margin-top: 13%">
+                            <span style="margin-left:8%;">
+                                <input style="margin: 0 10px;padding-top:5px" type="checkbox">记住密码
+                            </span>
+                            <span class="right pointer" ng-click="findPassword();"><a style="color:#858585" href="">忘记密码</a></span>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="login-enroll" ng-if="actives=='enroll'" ng-controller="UserRegistCtrl">
+                    <ul>
+                        <li>
+                            <span>账号:</span>
+                            <input type="text"ng-model="userInfo.account">
+                            <i ng-hide="account.isRight" class="redShow">*</i>
+                        </li>
+                        <li><span>密码:</span>
+                            <input  type="password"ng-model="userInfo.password">
+                            <!--<i  ng-hide="userPassword.isRight" class="redShow">*</i>-->
+                        </li>
+                        <li><span>确认密码:</span>
+                            <input  type="password"ng-model="userInfo.repeatPassword">
+                            <i ng-hide="repeatPassword.isRight" class="redShow">*</i>
+                        </li>
+                        <!--<li>-->
+                            <!--<span>身份证号：</span><input ng-model="inputs.idCard" class="login-card" type="text">-->
+                            <!--&lt;!&ndash;<span class="login-error" style="width:15px;height:30px;">*</span>&ndash;&gt;-->
+                        <!--</li>-->
+
+                        <!--<li><span>身份证: </span>-->
+                            <!--<input type="text" ng-model="userInfo.idCard"></li>-->
+                        <li><span>姓名: </span>
+                            <input type="text" ng-model="userInfo.userName"></li>
+
+                        <li><span>手机号码: </span>
+                            <input ng-model="userInfo.userPhone" class="login-phone" type="text">
+                            <i ng-hide="userPhone.isRight"  class="redShow" >*</i>
+                            <!--<span class="login-error" style="width:15px;height:30px;">*</span>-->
+                        </li>
+                        <li><span>验证码: </span>
+                            <input type="text" ng-model="userInfo.verificationCode" style="width: 30%">
+                            <input  ng-click="sendVerificationCode()"
+                                    type="submit"
+                                    style="width: 20%"
+                                    value="验证码" ng-if="60<times||times<=0">
+                            <span style="color:red;width: 5%" ng-if="times>0&&userInfo.userPhone!=''">{{times}}</span>
+                            <i ng-hide="verificationCode.isRight"  class="redShow">*</i>
+                        </li>
+
+
+                        <li><button type="submit" value="注册"  ng-click="regist()" >注册</button></li>
+                        <!--<li>点击注册表示您已经同意了<a href="#"><<要学习服务条款>></a></li>-->
+                    </ul>
+                </div>
+            </div>
+
+            <div style="width: 40%;height:100%;" class="login-right right">
+                <img src="img/icon/login.jpg" style="width: 100%;height:100%;">
+                <span class="pointer" ng-click="hiddenBox()" style="">X</span>
+            </div>
+        </div>
+</div>
+
+<div class="headerNav" id="headtopWidth" ng-if="showNav">
+    <div class="headerTop">
+        <div class="left" style="margin-left: 10%;height: 30px">
+            <a href="#" class="color_white">欢迎来到九君信息网校！</a>
+        </div>
+        <div class="right" style="width: 40%;height: 25px;margin-right: 10%">
+            <ul class="right ulStyle">
+                <li><a target="_blank" href="https://www.pgyer.com/wyxx"><img src="img/icon/phone1.png">下载app</a></li>
+                <li class="color_white">|</li>
+                <li><a href="">咨询热线：0871-65399886</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="headerContent" id="headFlot">
+        <div class="left Bglogo "></div>
+        <ul class="left ulStyle marginRight" style="margin-left: 5%;width:60%">
+            <li ng-click="goHome(); " ng-class="{'activeBottom':navMenu=='首页'}"><span>首页</span></li>
+            <li ng-click="goAllCorse(); " ng-class="{'activeBottom':navMenu=='全部课程'}"><span>全部课程</span></li>
+            <li ng-click="goMyCourse(); " ng-class="{'activeBottom':navMenu=='我的课程'}"><span>我的课程</span></li>
+            <li ng-click="goMyInformation(); " ng-class="{'activeBottom':navMenu=='我的信息'}"  ><span>我的信息</span></li>
+	    <li><span></span></li>
+            <!--<li ng-class="{'activeBottom':navMenu=='新闻资讯'}"  ng-click="navMenu='新闻资讯';goNew()"><span>新闻资讯</span></li>-->
+            <!--<li ng-click="goStars()"><a href="">信息</a></li>
+            <li style="position: relative">
+                <input type="text" class="searchInput" placeholder="搜索...">
+                <img src="img/icon/search.png" alt="" class="searchInputimg">
+               <span class="iconfont"
+                style="border: 1px solid #e3e3e3;padding: 6px;margin-left: -5px;">&#xe70a;</span>
+            </li>
+		-->
+            <li style="float:right">
+                {{loginInfo}}&nbsp;&nbsp;
+                <span ng-if="!loginInfo">
+                    <span ng-click="showLoginBox('entry')">登录</span> &nbsp;/&nbsp;
+                    <span ng-click="showLoginBox('enroll')" style="color: red">注册</span>
+                    <span class="iconfont">&#xe625;</span>
+                </span>
+                <span ng-if="loginInfo"ng-click="exitLogin();"style="color: red">
+                    <span class="iconfont">&#xe640;</span>退出
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div ui-view id="screenWidth" ></div>
+
+<div class="footer" id="footerWidth" ng-if="footerNav">
+    <h1 style="font-size: 20px;margin: 5px 0 5px 0"><a  target="_blank"  href="http://www.ynjjxx.com/gw/aboutus.html">关于我们</a></h1>
+    <div class="line" style="margin: auto"></div>
+    <ul class="ulStyle footerUl" style="display: table;margin: auto;">
+        
+	<!-- <li><a href="">帮助</a></li>
+        <li><a href="">隐私声明</a></li> 
+        <li><a href="http://www.ynjjxx.com/gw/">用户协议</a></li> 
+        <li><a href="" title="0871-65399886">联系方式</a></li> 
+        <li><a href="http://www.ynjjxx.com/gw/aboutus.html">关于我们</a></li>-->
+    </ul>
+    <div class="line" style="margin: auto"></div>
+<!--
+    <ul class="ulStyle footerUl"  style="display: table;margin: auto;">
+        <li> <span class="iconfont  icon-weibo-copy"></span> </li>
+        <li> <span class="iconfont  icon-qq"></span> </li>
+        <li> <span class="iconfont  icon-weixin"></span> </li>
+    </ul>
+-->
+    <p style="color: #5e5e5e">技术支持:<a  target="_blank"  href="http://www.ynjjxx.com/gw/">云南九君信息技术服务有限公司</a></p>
+	<p style="color: #5e5e5e">客服热线: 0871-65399886 &nbsp;&nbsp;备案号: 滇ICP 00908978号</p>
+</div>
+<script type="text/javascript">
+    (function(){
+            document.body.style.width = screen.width + 'px';
+            $('#screenWidth').css('minHeight',(screen.height-180)+'px');
+            if (screen.width>1360) {
+                $('#screenWidth').css(
+                    {'width': '1380px', 'margin': 'auto', 'position':'relative'}
+                );
+//                $('#screenWidth,#headtopWidth,#footerWidth').css(
+//                    {'width': '1380px', 'margin': 'auto', 'position':'relative'}
+//                );
+
+            }
+        }()
+    )
+</script>
+<script type="text/javascript">
+    window.onscroll = function () {
+        var topScroll = document.body.scrollTop;
+        if (topScroll > 30){
+            $('#headFlot').css({'position':'fixed','top':'0','z-index':'3'})
+        }
+        else
+        {
+//            $('#headFlot').css({'position':'relative','width':'1380px'});
+            $('#headFlot').css({'position':'relative','width':'100%'});
+        }
+    }
+</script>
+<script src="js/bootstrap.js"></script>
+<script src="js/main.js"></script>
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+</body>
+</html>

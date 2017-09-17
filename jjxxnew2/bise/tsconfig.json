@@ -1,0 +1,202 @@
+[
+  {
+    "type": "图文组",
+    "sendTime": "2017-04-07T09:24:15+08:00",
+    "from": {
+      "userId": "1",
+      "userName": "admin"
+    },
+    "to": {
+      "userId": "3",
+      "userName": "test3"
+    },
+    "msgList": [
+      {
+        "msgId": "1",
+        "msgClassifyId": "1",
+        "pic": "www.ynjjxx.com/zsdt/files/messages/1.jpg",
+        "title": "2017年云南省昆明南片区",
+        "subTitle": "首届批发与零售行业招聘会",
+        "url": "",
+        "content": "主办单位：云南中豪螺蛳湾国际商贸城物业管理有限公司/n协办单位：云南省人力资源管理协会 /n承办单位：云南招聘网（www.ynzp.com）/n大会规模：预计500家企业(提供岗位7000个以上) 参会人数30000人/n服务对象：社会各界求职人员",
+        "isRead": "0",
+        "contents": [
+          "主办单位：云南中豪螺蛳湾国际商贸城物业管理有限公司",
+          "协办单位：云南省人力资源管理协会 ",
+          "承办单位：云南招聘网（www.ynzp.com）",
+          "大会规模：预计500家企业(提供岗位7000个以上) 参会人数30000人",
+          "服务对象：社会各界求职人员"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "图文组",
+    "sendTime": "2017-04-07T09:24:14+08:00",
+    "from": {
+      "userId": "1",
+      "userName": "admin"
+    },
+    "to": {
+      "userId": "3",
+      "userName": "test3"
+    },
+    "msgList": [
+      {
+        "msgId": "2",
+        "msgClassifyId": "1",
+        "pic": "www.ynjjxx.com/zsdt/files/messages/2.jpg",
+        "title": "七彩云楚雄大型招聘会",
+        "subTitle": "",
+        "url": "",
+        "content": "活动时间： 2017年03月18日9点-16点/n活动地点：楚雄市鹿城南路兆顺第一城兆顺广场四、/n主办单位：楚雄市人力资源市场/n招聘会规模参会企业：150家（主要成分为楚雄当地有招聘需求的知名大小企业及个体工商户)/n提供岗位：1500个/n预计求职人数：3000人次/n服务对象：应往届毕业生、社会各界求职人员、城镇失业人员、农村劳动力等",
+        "isRead": "0",
+        "contents": [
+          "活动时间： 2017年03月18日9点-16点",
+          "活动地点：楚雄市鹿城南路兆顺第一城兆顺广场四、",
+          "主办单位：楚雄市人力资源市场",
+          "招聘会规模参会企业：150家（主要成分为楚雄当地有招聘需求的知名大小企业及个体工商户)",
+          "提供岗位：1500个",
+          "预计求职人数：3000人次",
+          "服务对象：应往届毕业生、社会各界求职人员、城镇失业人员、农村劳动力等"
+        ]
+      }
+    ]
+  }
+]
+[
+  {
+    "type": "图文组",
+    "sendTime": "2017-04-07T09:25:12+08:00",
+    "from": {
+      "userId": "1",
+      "userName": "admin"
+    },
+    "to": {
+      "userId": "3",
+      "userName": "test3"
+    },
+    "msgList": [
+      {
+        "msgId": "4",
+        "msgClassifyId": "2",
+        "pic": "www.ynjjxx.com/zsdt/files/messages/4.jpg",
+        "title": "两学一做",
+        "subTitle": "",
+        "url": "",
+        "content": "“两学一做”学习教育是推进思想建党、组织建党、制度治党的有力抓手，是全面从严治党的基础性工程，要坚持不懈抓下去。/n要把思想政治建设摆在首位，坚持用党章党规规范党员、干部言行，用党的创新理论武装全党，引导全体党员做合格党员。/n要抓住“关键少数”，抓实基层支部，坚持问题导向，发挥先进典型示范作用。",
+        "isRead": "0",
+        "contents": [
+          "“两学一做”学习教育是推进思想建党、组织建党、制度治党的有力抓手，是全面从严治党的基础性工程，要坚持不懈抓下去。",
+          "要把思想政治建设摆在首位，坚持用党章党规规范党员、干部言行，用党的创新理论武装全党，引导全体党员做合格党员。",
+          "要抓住“关键少数”，抓实基层支部，坚持问题导向，发挥先进典型示范作用。"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "图文组",
+    "sendTime": "2017-04-07T09:24:13+08:00",
+    "from": {
+      "userId": "1",
+      "userName": "admin"
+    },
+    "to": {
+      "userId": "3",
+      "userName": "test3"
+    },
+    "msgList": [
+      {
+        "msgId": "3",
+        "msgClassifyId": "2",
+        "pic": "www.ynjjxx.com/zsdt/files/messages/3.jpg",
+        "title": "农民工务工指南",
+        "subTitle": "",
+        "url": "",
+        "content": "农民工是我国工业化、城镇化快速发展阶段涌现出的一支新型劳动大军,是推动我国经济和社会发展的巨大力量。党和国家高度重视农民工工作,制定了一系列提高农民工地位、改善农民工生活状况、维护农民工合法权益的法律、法规和政策,形成了关爱农工的良好工作局面。\r\n 近年来,中央文明办等八部门联合在全国组织开展了关爱农民工志愿服务活动,各省积极响应中央有关部门的号召,按照中央文明办的要求,协调省直有关部门围绕提高农民工岗位技能、维护农民工文化权益、保障农民工身心健康、关爱农民工子女和提升农民工文明素质等广泛开展志愿服务活动,在全省兴起了关心爱护农民工的热潮。",
+        "isRead": "0",
+        "contents": [
+          "农民工是我国工业化、城镇化快速发展阶段涌现出的一支新型劳动大军,是推动我国经济和社会发展的巨大力量。党和国家高度重视农民工工作,制定了一系列提高农民工地位、改善农民工生活状况、维护农民工合法权益的法律、法规和政策,形成了关爱农工的良好工作局面。\r\n 近年来,中央文明办等八部门联合在全国组织开展了关爱农民工志愿服务活动,各省积极响应中央有关部门的号召,按照中央文明办的要求,协调省直有关部门围绕提高农民工岗位技能、维护农民工文化权益、保障农民工身心健康、关爱农民工子女和提升农民工文明素质等广泛开展志愿服务活动,在全省兴起了关心爱护农民工的热潮。"
+        ]
+      }
+    ]
+  }
+]
+[
+  {
+    "type": "图文组",
+    "sendTime": "2017-04-07T09:25:14+08:00",
+    "from": {
+      "userId": "1",
+      "userName": "admin"
+    },
+    "to": {
+      "userId": "3",
+      "userName": "test3"
+    },
+    "msgList": [
+      {
+        "msgId": "6",
+        "msgClassifyId": "4",
+        "pic": "www.ynjjxx.com/zsdt/files/messages/6.jpg",
+        "title": "实现目标的3种策略，让你的人生更高效",
+        "subTitle": "",
+        "url": "http://www.ynjjxx.com/zsdt/files/messages/aqcx1/aqcx1.html",
+        "content": "",
+        "isRead": "0"
+      }
+    ]
+  }
+]
+[
+  {
+    "type": "图文组",
+    "sendTime": "2017-04-07T09:25:13+08:00",
+    "from": {
+      "userId": "1",
+      "userName": "admin"
+    },
+    "to": {
+      "userId": "3",
+      "userName": "test3"
+    },
+    "msgList": [
+      {
+        "msgId": "5",
+        "msgClassifyId": "3",
+        "pic": "www.ynjjxx.com/zsdt/files/messages/5.jpg",
+        "title": "不要把一辈子浪费在做决定上",
+        "subTitle": "",
+        "url": "http://www.ynjjxx.com/zsdt/files/messages/mrxz1/mrxz1.html",
+        "content": "",
+        "isRead": "0"
+      }
+    ]
+  }
+]
+[
+  {
+    "type": "图文组",
+    "sendTime": "2017-04-07T09:25:15+08:00",
+    "from": {
+      "userId": "1",
+      "userName": "admin"
+    },
+    "to": {
+      "userId": "3",
+      "userName": "test3"
+    },
+    "msgList": [
+      {
+        "msgId": "7",
+        "msgClassifyId": "5",
+        "pic": "www.ynjjxx.com/zsdt/files/messages/7.jpg",
+        "title": "100万真的够赔吗？三者险买多少最合适？",
+        "subTitle": "",
+        "url": "http:/www.ynjjxx.com/zsdt/files/messages/aqcx2/aqcx2.html",
+        "content": "",
+        "isRead": "0"
+      }
+    ]
+  }
+]

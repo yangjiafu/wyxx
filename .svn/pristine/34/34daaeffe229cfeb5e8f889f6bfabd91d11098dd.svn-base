@@ -1,0 +1,20 @@
+<!--
+Create tabs with an icon and label, using the tabs-positive style.
+Each tab's child <ion-nav-view> directive will have its own
+navigation history that also transitions its views in and out.
+-->
+<ion-tabs class="tabs-icon-top tabs-color-active-positive">
+    <!-- Dashboard Tab -->
+    <ion-tab title="要" icon-off="iconfont icon-xinwen" icon-on="iconfont icon-xinwen" href="#/tab/messageClassify">
+        <ion-nav-view name="tab-message"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="学" icon-off="iconfont icon-kecheng" icon-on="iconfont icon-kecheng" href="#/tab/allCourseList">
+        <ion-nav-view name="tab-course"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="习" icon-off="iconfont icon-jiaoyushoufei" icon-on="iconfont icon-jiaoyushoufei" href="#/tab/courseList">
+        <ion-nav-view name="tab-mycourse"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="我" icon-off="iconfont icon-wode" icon-on="iconfont icon-wode" href="#/tab/person">
+        <ion-nav-view name="tab-person"></ion-nav-view>
+    </ion-tab>
+</ion-tabs>

@@ -1,0 +1,38 @@
+﻿<div class="content">
+    <img src="img/banner/banner6(1).jpg"  style="width: 100%" alt="">
+    <div class="contentPlateTop" >
+        <div style="width: 100%;height: 80px;padding: 0px 0 20px 0">
+            <div class="left" style="width: 18%;height: 50px;">
+                <h1 style="font-size: 30px;display: inline-block;line-height: 40px" class="left">ALL COURSE</h1>
+            </div>
+            <div style="width: 80%;height: 50px;" class="left clear">
+                <p style="font-size: 16px;color: #3671ce;font-weight: 900">全部课程</p>
+                <span style="color: #8c8c8c">更多课程尽在九君网</span>
+            </div>
+        </div>
+        <div class="allCourseNavList" style="position: relative">
+            <ul class="ulStyle allCourseList" style="padding-left: 50px;">
+                <li style="margin-left: -50px;font-weight: 700;"
+                    ng-click="goCourse('0_0')"
+                    ng-class="{'activeCourseMenu':courseMenu=='0_0'}">全部</li>
+                <li ng-repeat="item in m.sd.treeCourse"
+                ng-click="goCourse(item)" ng-class="{'activeCourseMenu':courseMenu==item.id}">{{item.title}}</li>
+            </ul>
+        </div>
+    </div>
+    <div style="width: 80%;margin: auto" class="clear">
+        <!--全部-->
+        <div ng-repeat="allcourse in m.sd.classifyCourse" ng-if="courseMenu =='0_0' || courseMenu==allcourse.id">
+            <div class="left contentPlateBodyList box-shadow pointer"
+                 ng-repeat="courseItem in allcourse.nodes"
+                 ng-click="goCourseItem(courseItem.id)">
+                <img src="{{courseItem.img}}" alt=""class="contentPlateImg">
+                <p class="titleStyle">{{courseItem.title}}</p>
+                <lineh></lineh>
+                <star rating-value="courseItem.starRating" max=5 readonly="true"></star>
+                <span> <span class="iconfont icon-renqun"></span>人数{{courseItem.commentNumber}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+

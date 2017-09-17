@@ -1,0 +1,135 @@
+<div class="contentPlateTop" style="background-color: #f5f5f5;width:1200px;
+padding-top: 60px;font-size: 18px;min-height: 800px;">
+    <div class="examTop">
+        <ul>
+            <li style="color:#F66526;"><i class="glyphicon glyphicon-time"></i>&nbsp;{{m.examInfo.useTime}}</li>
+            <li>共{{m.exam.questions.length}}题</li>
+            <li style="float:right;color:#fff;font-size: 18px;margin-right: 10px;">
+                <button class="quitBtn"
+                        style="width: 90%;height: 40px;background-color: #3671CF"
+                        ng-click="showExamCompleteInfo()"
+                        data-target="#learnInfo" data-toggle="modal">
+                    <span class="iconfont">&#xe602;</span><span>退出测试</span>
+                </button></li>
+        </ul>
+    </div>
+
+    <!--<div class="examNav">-->
+        <!--<div>{{m.params.courseName}}</div>-->
+    <!--</div>-->
+
+    <div class=" box-shadow examLeft" style="width:100%;min-height:550px;margin-bottom: 10px;overflow-y: auto" id="selectTxt">
+        <div style="padding: 15px 0 0 15px">
+            <h5>
+                <span class="size18">{{m.exam.index + 1}}、{{m.exam.curQuestion.title}}</span>
+                <span class="typeColor2 block marginLeft20" ng-if="m.exam.curQuestion.rightAnswerCount > 1">
+                    多选题{{m.exam.curQuestion.rightAnswerCount}}
+                </span>
+                <span class="typeColor2 block marginLeft20" ng-if="m.exam.curQuestion.rightAnswerCount == 1">单选题</span>
+            </h5>
+        </div>
+        <div style="padding:0 0px 30px 15px;height:450px;overflow-y: auto;margin-top: 15px;" class="lineHeight"  id="selectInput">
+            <ul>
+                <li ng-repeat="item in m.exam.curQuestion.items">
+                    <input type="checkbox" ng-checked="item.isUserChoice"
+                           ng-disabled="m.exam.curQuestion.answerStatus != 0"/>
+                    <span class="pointer" ng-click="item.isUserChoice = !item.isUserChoice">{{item.title}}</span>
+                </li>
+            </ul>
+            <button class="btn"
+            style="position: absolute;bottom: 20px;left: 20px;"
+            ng-disabled="m.isDoAllQuestion"
+            ng-click="next()"><i class="glyphicon glyphicon-ok-sign btnIcon"></i>确定
+            </button>
+            <div style="color:#ff00dc; margin-left:50px; bottom:50px;position: absolute;right: 80px;bottom: 20px;font-size: 22px;" ng-if="m.isDoAllQuestion">
+                已做完所有题目
+            </div>
+        </div>
+    </div>
+    <!--<div class="examFooter">-->
+        <!--<button class="btn mainButton" ng-click="prior()" ng-disabled="m.learn.index<=0">-->
+            <!--<i class="icon iconfont icon-shangyiti"></i>-->
+            <!--< &nbsp;&nbsp; 上一题-->
+        <!--</button>-->
+        <!--&lt;!&ndash;<button class="btn mainButton" ng-click="submitQuestion()"&ndash;&gt;-->
+        <!--&lt;!&ndash;ng-disabled="m.learn.curQuestion.type!='question'"><i class="icon iconfont icon-tijiao1"></i>选择&ndash;&gt;-->
+        <!--&lt;!&ndash;</button>&ndash;&gt;-->
+        <!--<button class="btn"-->
+                <!--ng-disabled="m.isDoAllQuestion"-->
+                <!--ng-click="next()">-->
+            <!--&lt;!&ndash;<i class="glyphicon glyphicon-ok-sign btnIcon"></i>&ndash;&gt;-->
+            <!--√ &nbsp;&nbsp; 确定-->
+        <!--</button>-->
+        <!--<button class="btn mainButton" ng-click="next()"-->
+                <!--ng-disabled="m.learn.index>=m.learn.questions.length -1 || (m.learn.curQuestion.type=='question' && m.learn.curQuestion.answerStatus != 1)">-->
+            <!--下一题 &nbsp;&nbsp; >-->
+            <!--<i class="icon iconfont icon-xiayiti"></i>-->
+        <!--</button>-->
+    <!--</div>-->
+
+
+    <!--<div class="left examRight" style="margin-top: 40px">-->
+    <!--<div class="box-shadow examRightPlate titleStyle"style="height: auto;line-height: inherit">-->
+    <!--{{m.params.courseName}}-->
+    <!--</div>-->
+    <!--<div class="box-shadow examRightPlate titleStyle">-->
+    <!--<span class="pointer"><i class="iconfont" ng-click="play()">&#xe605;</i>开始</span>-->
+    <!--&nbsp;&nbsp;-->
+    <!--<span class="pointer"><i class="iconfont" ng-click="resume()">&#xe61a;</i>播放</span>-->
+    <!--&nbsp;&nbsp;-->
+    <!--<span class="pointer"><i class="iconfont" ng-click="pause()">&#xe683;</i>暂停</span>-->
+    <!--</div>-->
+    <!--<div class="box-shadow examRightPlate">共{{m.exam.questions.length}}题</div>-->
+    <!--<div class="box-shadow examRightPlate"><i class="glyphicon glyphicon-time"></i>&nbsp;{{m.examInfo.useTime}}</div>-->
+    <!--<div class="box-shadow examRightPlate">-->
+    <!--<button class="quitBtn"-->
+    <!--style="width: 100%;height: 100%;"-->
+    <!--ng-click="showExamCompleteInfo()"-->
+    <!--data-target="#learnInfo" data-toggle="modal">-->
+    <!--<i class="glyphicon glyphicon-log-out btnIcon"></i>退出测试-->
+    <!--</button>-->
+    <!--</div>-->
+    <!--</div>-->
+</div>
+<div class="clear"></div>
+
+<div class="modal fade" id="learnInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel" style="font-size: 16px;">本次学习信息</h4>
+            </div>
+            <div class="modal-body learnInfo" style="font-size: 16px;">
+                <ul>
+                    <li><span class="learnInfoKey">课程名称：</span><span
+                            class="learnInfoValue">{{m.params.courseName}}</span></li>
+                    <li><span class="learnInfoKey">开始时间：</span><span class="learnInfoValue">{{m.examInfo.startTime|customDate}}</span>
+                    </li>
+                    <li><span class="learnInfoKey">结束时间：</span><span class="learnInfoValue">{{m.examInfo.endTime|customDate}}</span>
+                    </li>
+                    <li><span class="learnInfoKey">用时：</span><span class="learnInfoValue">{{m.examInfo.useTime}}</span>
+                    </li>
+                    <li><span class="learnInfoKey">主题数：</span><span
+                            class="learnInfoValue">{{m.examInfo.questionNumber}}</span></li>
+                    <li><span class="learnInfoKey">完成主题数：</span><span
+                            class="learnInfoValue">{{m.examInfo.answerNumber}}</span></li>
+                    <li><span class="learnInfoKey">正确主题数：</span><span class="learnInfoValue">{{m.examInfo.answerRightNumber}}</span>
+                    </li>
+                    <li><span class="learnInfoKey">得分：</span><span class="learnInfoValue">{{m.examInfo.score}}</span>
+                    </li>
+                </ul>
+
+                <h1>{{learnType}}</h1>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn mainButton" ng-click="examCompleted()"><i
+                        class="glyphicon glyphicon-ok-sign btnIcon"></i>确定
+                </button>
+                <button type="button" class="btn mainButton" data-dismiss="modal"><i
+                        class="glyphicon glyphicon-remove-sign btnIcon"></i>取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

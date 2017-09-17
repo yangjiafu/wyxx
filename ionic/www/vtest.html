@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <title>Hello World</title>
+</head>
+<body>
+  <div class="app">
+    <!-- 这里添加一个button去调用自己写的拍照函数 -->
+    <button onClick="startTalk()">说话</button>
+  </div>
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript">
+    function startTalk() {
+      xunfeiListenSpeaking.startSpeak(
+        function () { }, null,"今截至8月9日13时10分，经初步核查，“8·8”九寨沟地震已致19人死亡，247人受伤（40人重伤，其中7人已转院，其余已全部转移到九寨沟县人民医院和县中藏医院；207人轻伤）。死亡和受伤情况主要发生在漳扎镇辖区内。经核查已排除火花海有堰塞湖情况。"
+      );
+    }
+  </script>
+</body>
+</html>

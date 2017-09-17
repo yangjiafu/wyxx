@@ -1,0 +1,151 @@
+<div class="content">
+    <div style="z-index: 1000;width: 100%;height: 370px;overflow: hidden;margin: auto" id="bannerPage">
+        <div class="contentList" id="listLeft">
+            <ul>
+                <li style="padding: 14px 15px;">
+                    <img src="img/icon/line2.png">
+                    全部</li>
+                <li  ng-repeat="(key,value) in m.courseClassify.nodes"
+                     ng-if="key<=6"
+                     ng-click="goContentItem(value.id)">
+
+                    <!--<div class="Aline" ng-if="item.id==1"></div>-->
+                    {{value.title}}
+                    <img class="right" src="img/icon/right.png" alt="" >
+                </li>
+                <li class="moreList">更多
+                    <img class="right" src="img/icon/down.png" alt="">
+                    <div class="contentList">
+                        <ul>
+                            <li ng-repeat="(key,value) in m.courseClassify.nodes"
+                                ng-if="key>6"
+                                style="background-color: rgba(0,0,0,.5);"
+                                ng-click="goContentItem(value.id)">
+                                {{value.title}}
+                                <img class="right" src="img/icon/right.png" alt="" >
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="banner">
+            <ul class="bannerList banner_float_Left">
+                <li id="bannerImg" style="background-image: url('img/banner/banner2.jpg')"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div  class="contentPlate">
+    <p class="plateTitle" style="width: 80%;margin:20px auto 0 auto">
+                <span class="typeColor1">
+                    <span  class="iconfont" >&#xe6ee;</span>
+                </span>
+        最新课程/
+        <span style="font-size: 10px;color: #c3c3c3;font-weight: normal">NEWEST CLASSROME</span>
+    </p>
+    <div class="contentPlateTop">
+        <div class="contentPlateTopBG box-shadow pointer"
+             ng-click="goCourseItem(value.id)"
+             ng-repeat="(key,value) in contentPlateTopItem">
+            <div style="background: url({{value.imgUrl}}) no-repeat center;background-size: cover"></div>
+            <div style="background: url('img/bg/bg1.png') no-repeat center;background-size: cover"></div>
+            <br>
+            <h2 style="font-size: 20px;font-weight: bolder;margin:10px 20px">{{value.contentPlateTitle}}</h2>
+            <p class="marginLeft20 typeStyle typeStyleBG{{key}} ">{{value.type}}</p>
+            <br/>
+            <span class="marginLeft20 typeColor{{key}}">立即查看
+                <span class="iconfont icon-jiantouyou"></span>
+            </span>
+        </div>
+    </div>
+
+
+    <!--精品课程模块-->
+    <div class="contentPlateTop contentPlateHeight">
+        <div>
+            <p class="plateTitle">
+                <span class="plateColor0">
+                    <span  class="iconfont" >&#xe6ee;</span>
+                </span>
+                精品课程/
+                <span style="font-size: 10px;color: #c3c3c3;font-weight: normal">EXQUISITE CLASSROME</span>
+            </p>
+            <!-- 精品课程模块 -->
+            <div class="contentPlateBody">
+                <div class="contentPlateBodyLeft left "
+                     style="background: url('img/bg/images/首页---副本2_07.jpg')"></div>
+                <div class="left contentPlateBodyList box-shadow pointer"
+                     ng-repeat="Item in fineIems"
+                     ng-click="goCourseItem(Item.id)">
+                    <img width="100%"  ng-src="{{Item.img}}">
+                    <p class="titleStyle">{{Item.title}}</p>
+                    <lineh></lineh>
+                    <star rating-value="Item.starRating" max=5 readonly="true"></star>{{Item.starRating.toFixed(1)}}
+                    <span style="margin-left: 20px" class="iconfont icon-renqun"></span>人数{{Item.commentNumber}}
+                </div>
+            </div>
+        </div>
+        <!--热门课程课程模块-->
+        <div>
+            <p class="plateTitle">
+                <span class="plateColor0">
+                    <span  class="iconfont typeColor1" >&#xe609;</span>
+                </span>
+                热门课程/
+                <span style="font-size: 10px;color: #c3c3c3;font-weight: normal">POPULAR CLASSROME</span>
+            </p>
+            <div class="contentPlateBody">
+                <div class="contentPlateBodyLeft left "
+                     style="background: url('img/bg/images/首页---副本2_29.jpg')"></div>
+                <div class="left contentPlateBodyList box-shadow pointer"
+                     ng-repeat="Item in hotItems"
+                     ng-click="goCourseItem(Item.id)">
+                    <img width="100%"  ng-src="{{Item.img}}">
+                    <p class="titleStyle">{{Item.title}}</p>
+                    <linec></linec>
+                    <star rating-value="Item.starRating" max=5 readonly="true"></star>{{Item.starRating.toFixed(1)}}
+                    <span style="margin-left: 20px" class="iconfont icon-renqun"></span>人数{{Item.commentNumber}}
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 新闻咨询 -->
+        <div ng-if="allList.type =='newConsult'">
+            <p class="plateTitle">
+                <span class="plateColor0">
+                    <span  class="iconfont icon-line1-copy1" ></span>
+                </span>
+                {{allList.mainTitle}}/
+                <span style="font-size: 10px;color: #c3c3c3;font-weight: normal">EXQUISITE CLASSROME</span>
+            </p>
+            <div class="contentPlateBody" ng-if="allList.type == 'newConsult'">
+                <div class="contentPlateBodyLeft left "
+                     style="background: url({{allList.mainItemImgUrl}})"></div>
+                <div class="left contentPlateNewConsultList box-shadow clearfix"
+                     ng-repeat="Item in allList.contentPlateList">
+                    <img src="{{Item.listImgUrl}}"style="width: 33%" class="left">
+                    <div style="width: 33%;height: 100%;padding: 20px" class="left">时间</div>
+                    <div style="width: 33%;height: 100%;padding: 20px" class="left">
+                        <p>{{Item.listTitle}}</p>
+                        <p>{{Item.listPart}}</p>
+                    </div>
+                </div>
+                <div  class="contentPlateNewConsultFooter left" style="background: url('{{allList.mainfooterImgUrl}}')">
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+<!--<script type="text/javascript">-->
+    <!--$('#bannerPage').css({'width':screen.width,'position':'absolute','left':'0'});-->
+<!--</script>-->
+

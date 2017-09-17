@@ -1,0 +1,5 @@
+<div>
+    <div style="background-color:#fff;">
+        <iframe id="myframe" ng-src="{{m.url}}" style="width:99%;"></iframe>
+    </div>
+</div>

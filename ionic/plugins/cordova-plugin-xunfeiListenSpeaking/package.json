@@ -1,0 +1,19 @@
+{
+  "name": "IFlyspeech",
+  "version": "0.0.2",
+  "description": "科大讯飞的语音听说读写的cordova插件  ### Supported Platforms",
+  "cordova": {
+    "id": "cordova-plugin-xunfeiListenSpeaking",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "xyh",
+  "license": "ISC"
+}

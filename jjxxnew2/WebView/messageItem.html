@@ -1,0 +1,35 @@
+<div>
+    {{messageItem}}
+</div>messageItemCtrl
+
+<div>
+    没有网址的网页
+    <div style="background-color: #fff;padding: 10px">
+        <div>
+            <div style="border:none;">
+                <h2 class="text-center nonMargin wxh2">{{messageItem.title}}</h2>
+                <p style="color:rgba(128,128,128,0.5);padding-top: 15px;">
+                    <span class="pull-left padding-left wxh3">{{messageItem.subTitle}}</span>
+                    <span class="pull-right padding-right wxh3">
+                        {{messageItem.sendTime|date:'yyyy-MM-dd'}}</span>
+                </p>
+                <div class="clearfix"></div>
+            </div>
+            <div style="border:none;padding-top: 0; white-space:normal;">
+                <img class="padding" ng-if="messageItem.pic" ng-src="http://{{messageItem.pic}}" style="width:100%;" />
+                <div ng-if="messageItem.contents">
+                    <div class="row" style="border:none; padding:10px;vertical-align: top" ng-repeat="item in messageItem.contents">
+                        <p  ng-if="item.isKeyValue"
+                            class="wxh3" style="width:27%;color:rgba(128,128,128,0.5); display:inline-block;vertical-align: top">{{item.key}}：</p>
+                        <p  ng-if="item.isKeyValue"
+                            class="wxh3" style="width:70%;color:rgba(128,128,128,1); display:inline-block;vertical-align: top">{{item.value}}</p>
+                        <span ng-if="!item.isKeyValue" style="color:rgba(128,128,128,1);">{{item.value}}</span>
+                    </div>
+                </div>
+                <div ng-if="!messageItem.contents">
+                    <span class="wxh2" style="border:none; display:block; padding:10px 0px; ">{{messageItem.content}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

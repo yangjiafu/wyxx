@@ -1,0 +1,97 @@
+<div class="content">
+    <img src="img/banner/banner6.jpg"  style="width: 100%" alt="">
+    <div class="contentPlateTop" style="height:80px">
+        <div class="left" style="width: 18%;height: 50px;">
+            <h1 style="font-size: 30px;display: inline-block;line-height: 40px" class="left">MY COURSE</h1>
+        </div>
+        <div style="width: 80%;height: 50px;" class="left">
+            <p style="font-size: 16px;color: #3671ce;font-weight: 900">新闻咨询</p>
+            <span style="color: #8c8c8c">更多课程尽在九君网</span>
+        </div>
+    </div>
+
+    <div class="courseInfoSub box-shadow"style="padding: 0;margin-bottom: 30px;"
+         ng-repeat="item in modal.news"
+         ng-if = "item[0].msgList[0].msgClassifyId"
+         ng-class="{'pointer':item[0].msgList[0].url!=''}"
+         ng-click="toMessageItem(item[0].msgList[0])">
+        <div class="left" style="height: 100%;width: 300px;overflow: hidden;">
+            <img  style="height: 100%;float: left;"
+                  ng-src="http://{{item[0].msgList[0].pic}}" alt="">
+        </div >
+        <div class="courseInfoSubMiddle left">
+            <div class="courseInfoSubTime">
+                {{item[0].sendTime | date:'yyyy MM-dd'}}
+            </div>
+            <span ng-if="item[0].msgList[0].subTitle">
+                来源：{{item[0].msgList[0].subTitle}}
+            </span>
+            <span ng-if="!item[0].msgList[0].subTitle">来源于网络</span>
+        </div>
+
+
+        <div class="courseContent">
+            <h3 class="size16" >{{item[0].msgList[0].title}}</h3>
+            <linex></linex>
+            <p class="nonMargin" style="width: 100%">{{item[0].msgList[0].content}}</p>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<!--下一级页面-->
+<!--<div >-->
+    <!--<div>-->
+        <!--<div class="stable-bg" id="newsList">-->
+            <!--<div ng-repeat="item in modal.shareData.messageList" class="item" style="margin:10px; background-color: #fff;padding: 10px;border-radius: 5px">-->
+                <!--<a ng-if="item.type=='图文' || item.type=='文字'" ng-href="#/tab/messageItem/{{item.msgId}}" style="text-decoration:none; border:none;">-->
+                    <!--<div  class="item item-avatar-left" style="border-bottom:1px solid rgba(128,128,128,0.2)">-->
+                        <!--<img ng-if="item.src" ng-src="item.src" />-->
+                        <!--<img ng-if="!item.src" src="imgs/news_thumbnail_close.jpg" />-->
+                        <!--<h2 class="wxh2">{{item.title}}</h2>-->
+                        <!--<p class="font_min nonMargin">-->
+                            <!--{{item.subTitle}}-->
+                            <!--<span class="pull-right">{{item.sendTime|date:'yyyy-MM-dd'}}</span>-->
+                        <!--</p>-->
+                        <!--<div class="clearfix"></div>-->
+                    <!--</div>-->
+                <!--</a>-->
+
+                <!--<div ng-if="item.type=='图文组'">-->
+                    <!--<div ng-repeat="msgItem in item.msgList">-->
+                        <!--<a ng-href="javascript:void(0)" ng-click="toMessageItem(msgItem)" style="text-decoration:none;">-->
+                            <!--<div ng-if="$index==0">-->
+                                <!--<img ng-if="msgItem.pic" ng-src="http://{{msgItem.pic}}" style="width:100%;" />-->
+                                <!--<img ng-if="!msgItem.pic" src="../imgs/news_big.jpg" style="width:100%" />-->
+                                <!--<h2 class="padding-top wxh2">-->
+                                    <!--{{msgItem.title}}-->
+                                    <!--<span class="pull-right font_min myFontColor" ng-if="msgItem.subTitle==''">{{item.sendTime|date:'yyyy-MM-dd'}}</span>-->
+                                <!--</h2>-->
+                                <!--<p class="font_min myFontColor nonMargin" ng-if="msgItem.subTitle!=''">-->
+                                    <!--<span>{{msgItem.subTitle}}</span>-->
+                                    <!--<span class="pull-right">{{item.sendTime|date:'yyyy-MM-dd'}}</span>-->
+                                <!--</p>-->
+                            <!--</div>-->
+                        <!--</a>-->
+
+                        <!--<a ng-href="#/tab/messageItem/{{msgItem.msgId}}" class="item item-avatar-left"  ng-if="$index>0" style="border-left-style:none; border-right-style:none;">-->
+                            <!--<img ng-if="msgItem.pic" ng-src="msgItem.pic" />-->
+                            <!--<img ng-if="!msgItem.pic" src="../imgs/news_thumbnail_close.jpg" />-->
+                            <!--<h2 class="padding-top wxh2">{{msgItem.title}}</h2>-->
+                            <!--<p class="font_min nonMargin">{{msgItem.subTitle}}-->
+                                <!--<span class="pull-right">{{item.sendTime|date:'yyyy-MM-dd'}}</span>-->
+                            <!--</p>-->
+                            <!--<div class="clearfix"></div>-->
+                        <!--</a>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->

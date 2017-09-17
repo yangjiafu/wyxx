@@ -1,0 +1,134 @@
+<div class="yourseat">
+    <span>你的位置:&nbsp;</span>
+    <a href="#!/home">首页&nbsp;>&nbsp;</a>
+    <a href="#">我的信息</a>
+</div>
+<div class="myInfo">
+    <div class="myInfo-left left">
+        <div class="personalInformation box-shadow">
+            <div class="personalInformation-up bg-img"></div>
+            <p ng-controller="MyInfo.BaseInfoCtrl" style="height: 28px;font-size: 16px" >{{personInfo.name}}</p>
+            <div class="personalInformation-down">
+                <div class="left" style="border-right:2px solid #ececec;" ng-controller="myCourseCtrl">
+                    <div>收藏</div>
+                    <div>{{m.courseList.length}}</div>
+                </div>
+                <div class="right" ng-controller="learnRecordCtrl">
+                    <div>学习</div>
+                    <div>{{m.learnInfoCount}}</div>
+                </div>
+            </div>
+        </div>
+        <ul class="pointout">
+            <li class="box-shadow" ng-class="{'pointerActive':actives=='infor'}" style="margin-top: 20px;" ng-click="goMyInfor('infor')">
+                <a href="#"><span class="iconfont icon-renqun"></span>基本信息</a>
+                <div class="triangle_border_right">
+                    <span></span>
+                </div>
+            </li>
+            <li class="box-shadow" ng-class="{'pointerActive':actives=='learn'}"
+                ng-click="goLearn('learn')">
+                <a href="#"><span class="iconfont icon-4"></span>学习记录</a></li>
+            <li class="box-shadow" ng-class="{'pointerActive':actives=='edit'}"
+                ng-click="goEdit('edit')">
+                <a href="#"><span class="iconfont">&#xe64b;</span>修改密码</a></li>
+        </ul>
+    </div>
+    <!--基本信息-->
+    <div ng-if="actives=='infor'"  ng-controller="MyInfo.BaseInfoCtrl" class="myInfo-right right">
+        <div class="myinfoRightFirst">
+            <!--<p style="width: 500px;height: 300px">{{personInfo}}</p>-->
+            <span class="iconfont icon-line1-copy1" style="color:#3671ce;margin-left: 2%;"></span>
+            <span>基本信息</span>
+        </div>
+        <ul class="myInfo-right-ul1">
+
+            <li style="margin-top: 3%">
+                账号:<input style="color: #cccccc;border:1px solid #dddddd" ng-model="personInfo.account" readonly type="text" class="myInfo-right-input">
+            </li>
+            <li style="margin-bottom: 5%">姓名:
+                <input type="text" ng-model="personInfo.name" class="myInfo-right-input">
+                <div class="myInfo-right-div">请填写真实的姓名!</div>
+            </li>
+            <!--<li class="myInfo-sex">-->
+                <!--<div class="left">-->
+                    <!--性别:-->
+                    <!--<input class="myInfo-input" type="radio" name="sex" value="男" ng-model="personInfo.sex">男-->
+                    <!--<input class="myInfo-input" type="radio" name="sex" value="女" ng-model="personInfo.sex">女-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li>出生日期:-->
+                <!--<input style="width: 40%;margin-right: 35%;" type="date" ng-model="personInfo.birthday" class="myInfo-right-input">-->
+            <!--</li>-->
+            <!--<li style="margin-bottom: 5%">身份证号:-->
+                <!--<input ng-model="personInfo.idCard" type="text" class="myInfo-right-input ID-card" >-->
+                <!--<div class="myInfo-right-div">请填写你的18位身份证号！</div>-->
+            <!--</li>-->
+            <li>电话号码:
+                <input type="text" ng-model="personInfo.mobilePhone" class="myInfo-right-input">
+                <!--<input type="number" ng-model="personInfo.mobilePhone" class="myInfo-right-input">-->
+            </li>
+            <li class="myInfo-right-submit">
+                <!--<button class="submit-btn" ng-click="savePersonBaseInfo()">保存</button>-->
+                <button class="submit-btn" ng-click="save()">保存</button>
+            </li>
+        </ul>
+    </div>
+    <!--学习记录-->
+    <div  ng-if="actives=='learn'"  style="overflow-y: scroll;height: 600px;"
+          ng-controller="learnRecordCtrl"
+          class="myInfo-right right">
+        <div class="myinfoRightFirst" style="float: top;background-color:#fff;">
+            <span class="iconfont icon-line1-copy1" style="color:#3671ce;margin-left: 2%;"></span>
+            <span>学习记录</span>
+        </div>
+        <div class="courseInfoSub box-shadow"
+             style="margin-bottom: 30px;width: 90%;height:175px;"
+             ng-repeat="item in m.learnInfoList"
+             ng-click="goCourseItem(item.courseId)">
+            <img style="width: 30%;float: left;" ng-src="{{item.img}}"/>
+            <div class="courseContent">
+                <h3 class="titleStyle">
+                    {{item.courseName}}
+                    <span class="typeColor2" ng-class="{'tagLearnSpan':item.learnMode=='学习',
+                    'tagExamSpan':item.learnMode=='测试'}">{{item.learnMode}}</span>
+                </h3>
+                <span style="color:#aaa; margin-right:20px; font-size:14px;">开始：{{item.startTime|customDate }}
+                    &nbsp;&nbsp;用时：
+                    {{jetLag(item.startTime,item.endTime)}}</span>
+                        <!--({{item.startTime|customDate:'time'}}&#45;&#45;{{item.endTime|customDate:'time'}})-->
+                <p class="font_min">
+                    <span class="myFontColor">总数：</span>
+                    <span style="color:rgba(0,0,0,0.8); margin-right:10px;">{{item.questionNumber}}</span>
+                    <span class="myFontColor">完成数：</span>
+                    <span style="color:rgba(0,0,0,0.8); margin-right:10px;">{{item.answerNumber}}</span>
+                    <span class="myFontColor">正确数：</span>
+                    <span style="color:rgba(0,0,0,0.8); margin-right:10px;">{{item.answerRightNumber}}</span>
+                    <span class="myFontColor">得分：</span>
+                    <span style="color:rgba(0,0,0,0.8); margin-right:10px;">{{item.score}}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--修改密码-->
+    <div  ng-if="actives=='edit'"  class="myInfo-right right">
+        <div class="myinfoRightFirst" style="float: top;background-color:#fff;">
+            <span class="iconfont icon-line1-copy1" style="color:#3671ce;margin-left: 2%;"></span>
+            <span>修改密码</span>
+        </div>
+        <div class="myinfoRightThree" ng-controller="MyInfo.UpdatePasswordCtrl">
+            <div>
+                <span>新密码</span>
+                <input type="password" ng-model="password"/>
+            </div>
+            <div>
+                <span>重复密码</span>
+                <input type="password" ng-model="repeatPassword"/>
+            </div>
+            <button style="width:120px;background-color: #3671ce" ng-click="savePassword()">保存</button>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+
+</div>

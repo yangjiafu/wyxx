@@ -1,0 +1,39 @@
+<star rating-value="sal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></star>
+
+<div>
+    Max: <input type="number" name="input" ng-model="max" min="0" max="99" required>
+    <p>current value: {{ratingVal}}</p>
+    <p>hover on : {{hoverVal?hoverVal:"none"}}</p>
+    <p>readonly :
+        <input type="checkbox" ng-model="readonly"></p>
+</div>
+
+<linec></linec>
+<!--<lineh></lineh>-->
+<br>
+<br>
+<style>
+
+
+
+    .rating {
+        color: #a9a9a9;
+        margin: 0;
+        padding: 0;
+    }
+    ul.rating {
+        display: inline-block;
+    }
+    .rating li {
+        list-style-type: none;
+        display: inline-block;
+        padding: 1px;
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .rating .filled {
+        color: #ffee33;
+    }
+
+</style>

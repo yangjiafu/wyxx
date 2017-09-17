@@ -1,0 +1,217 @@
+﻿<div id="background" class="loadingBackground" ng-if="showLoading" ></div>
+<div id="progressBar" class="progressBar" ng-if="showLoading" >音频加载中，请稍候...</div> 
+
+<div class="contentPlateTop" style="background-color: #f5f5f5;width:1200px;
+padding-top: 60px;font-size: 18px;min-height: 800px;">
+    <div class="examTop">
+        <ul>
+            <li style="color:#F66526;"><i class="icon iconfont icon-shijian"></i>&nbsp;{{m.learnInfo.useTime}}</li>
+            <li style="float:right;color:#fff;font-size: 18px;margin-right: 10px;">
+                <button class="quitBtn"
+                        style="width: 90%;height: 40px;background-color: #3671CF"
+                        ng-click="showLearnCompleteInfo()"
+                        data-target="#learnInfo" data-toggle="modal">
+                    <span class="iconfont">&#xe602;</span><span>退出学习</span>
+                </button>
+            </li>
+            <li ng-if="m.learn.curQuestion.fileType == 'text'">
+                <span class="pointer" ng-click="play()"><i class="iconfont">&#xe605;</i>语音播放</span>
+            </li>
+            <li ng-if="m.learn.curQuestion.fileType == 'text'">
+                <span class="pointer" ng-click="resume()" ng-if="continue == 'resume'"><i class="iconfont">&#xe61a;</i>继续</span>
+                <span class="pointer" ng-click="pause()" ng-if="continue == 'pause'"><i class="iconfont">&#xe683;</i>暂停</span>
+            </li>
+            <li ng-click="changeSize()" class="pointer">
+                <span class="iconfont">&#xe617;</span>字体大小
+            </li>
+            <li style="float: right;color: #5cb85c;font-size: 16px">
+                <div style="margin-left: 10px;" ng-if="m.params.difficulty=='0'">普通模式</div>
+                <div style="margin-left: 10px;" ng-if="m.params.difficulty=='1'">简单学习</div>
+                <div style="margin-left: 10px;" ng-if="m.params.difficulty=='2'">困难模式</div>
+                <div style="margin-left: 10px;" ng-if="m.params.difficulty=='3'">标准学习</div>
+            </li>
+        </ul>
+        <audio id="lessonAudio">
+            <source id="lessonAudioSource" src="http://www.ynjjxx.com/webttsfiles/test1.mp3" type="audio/mpeg">
+            Your browser does not support the audio tag.
+        </audio> 
+    </div>
+
+    <div class="left box-shadow examLeft" style="width:100%;min-height:620px;margin-bottom: 10px;padding-bottom: 60px;position: relative"
+         id="selectTxt">
+
+        <div class="parentTitle" >
+            <p ng-repeat=" (key,value) in m.learn.curQuestion.parentTitle" class="texinden{{key}}">
+                {{value | filterText}}
+            </p>
+        </div>
+
+
+
+
+
+
+
+
+        <div style="margin-left: 15px;height: 450px;overflow-y: auto; " id="selectInput">
+            <h5 ng-if="m.learn.curQuestion.type=='catalog' && m.learn.curQuestion.title!='图片' && m.learn.curQuestion.title!='视频' &&m.params.courseName!= m.learn.curQuestion.title"
+                class="size16"> {{m.learn.curQuestion.title | filterText}}</h5>
+            <h5 ng-if="m.learn.curQuestion.type=='question'">
+                <span class="lineHeight size16 " ng-if="m.params.difficulty=='3'">{{m.learn.curQuestion.title | filterText}}</span>
+                <span class="lineHeight size16 " ng-if="m.params.difficulty!='3'"
+                      ng-repeat="item in m.learn.curQuestion.title">{{item}}
+                    <br ng-if="item.length>=8"></span>
+                <span class="typeColor2 block "
+                      ng-if="m.learn.curQuestion.rightAnswerCount > 1">多选题（{{m.learn.curQuestion.rightAnswerCount}}）
+                </span>
+                <span class="typeColor2 block " ng-if="m.learn.curQuestion.rightAnswerCount == 1">单选题</span>
+            </h5>
+
+
+            <div ng-if="m.learn.curQuestion.type=='catalog'"
+                 ng-repeat="(key,value) in m.learn.curQuestion.items">
+                <!--{{m.learn.curQuestion.items}}-->
+                <span class="lineHeight"
+                      ng-if="value.title!='图片' && value.title!='视频' && value.type !='question'">
+                    <!--{{ judgeNext(value.title,key)}}-->
+                     {{value.title  | filterText}}
+                </span>
+            </div>
+
+            <div ng-if="m.learn.curQuestion.type=='question'"
+                 ng-repeat="item in m.learn.curQuestion.items"
+                 ng-click="selectAnswer(item)"
+                style="text-indent: 1em;margin-top: 20px">
+                <input type="checkbox" ng-checked="item.isUserChoice"/>
+                <span class="lineHeight text-danger {{className}}" style="text-decoration:line-through"
+                      ng-if="m.learn.curQuestion.answerStatus != 0 && item.type == 'errorAnswer' && item.isUserChoice">{{item.title}}</span>
+                <span class="lineHeight learnProper {{className}}"
+                      ng-if="m.learn.curQuestion.answerStatus != 0 && item.type == 'rightAnswer' && item.isUserChoice">{{item.title}}</span>
+                <span class="lineHeight pointer {{className}}"
+                      ng-if="m.learn.curQuestion.answerStatus == 0 || !item.isUserChoice">{{item.title}}</span>
+            </div>
+
+
+            <div ng-show="m.learn.curQuestion.fileType == 'video'" style="margin-left:20px; margin-right:20px;">
+                <!--<div class="prism-player" id="J_prismPlayer"></div>-->
+                <video id="myVideo" ng-src="{{m.learn.curQuestion.video.video}}" style="height: 400px"
+                       controls="controls"></video>
+            </div>
+            <div ng-if="m.learn.curQuestion.fileType == 'img'" style="margin-left:20px; margin-right:20px;">
+                <img ng-src="{{m.learn.curQuestion.file}}"
+                     data-toggle="modal"
+                     data-target="#showImg"
+                     style="height: 400px;"
+                     onerror="this.style.display='none'">
+            </div>
+
+            <div ng-if="m.learn.curQuestion.fileType == 'text'"
+                 id="changeSize"
+                 style="margin-left:20px; margin-right:20px; margin-bottom: 20px">
+                <!--7@{{m.learn.curQuestion.TextContent}}-->
+                <!--<p ng-repeat="i in showarr">{{i}}测试</p>-->
+
+                <div ng-repeat="item in m.learn.curQuestion.TextContent">
+                    <!--<p class="lineHeight1"  style="text-indent:2em">{{item}}</p>-->
+                    <p class="{{className}}"  style="text-indent:2em">{{item}}</p>
+                </div>
+                <!--{{m.learn}}-->
+                <!--<div ng-if="!m.learn.curQuestion.TextContent">-->
+                <!--<p class="lineHeight25" style="text-indent:2em">{{showarr}}</p>-->
+                <!--</div>-->
+            </div>
+        </div>
+
+
+
+        <div id="divBarLeft" style="position: absolute;bottom: 10px;left: 20px">
+            <button class="btn mainButton learnBtn" ng-click="prior()" ng-disabled="m.learn.index<=0"><i
+                    class="icon iconfont icon-shangyiti"></i>上一页
+            </button>
+            <button class="btn mainButton learnBtn" ng-click="submitQuestion(m.learn.curQuestion.rightAnswerCount)"
+
+                    ng-disabled="m.learn.curQuestion.type!='question'"><i class="icon iconfont icon-tijiao1"></i>选&nbsp;&nbsp;择
+            </button>
+            <button class="btn mainButton learnBtn" ng-click="next()"
+                    ng-disabled="m.learn.index>=m.learn.questions.length -1 || (m.learn.curQuestion.type=='question' && m.learn.curQuestion.answerStatus != 1)">
+                下一页<i class="icon iconfont icon-xiayiti"></i></button>
+        </div>
+    </div>
+
+</div>
+<div class="clear"></div>
+
+
+<div class="modal fade" id="showImg" role="dialog">
+    <button type="button" style="color: #fff" class="close" data-dismiss="modal">
+        <span aria-hidden="true" style="color: #fff">&times;</span>
+        <span class="sr-only"  style="color: #fff">Close</span></button>
+    <div class="modal-dialog" role="document">
+        <img src="{{m.learn.curQuestion.file}}">
+    </div>
+</div>
+
+<!--选择答案时候的提示-->
+<div class="modal fade" id="questionError" role="dialog" aria-labelledby="Error">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title size16 typeColor0" id="Error">错误提示!</h4>
+            </div>
+            <div class="modal-body size14">
+                正确答案有 <span class="typeColor2">{{qustionRights}}</span>个，
+                但是你选的答案有 <span class="typeColor2">{{qustionCheck}}</span>个
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--退出学习-->
+<div class="modal fade" id="learnInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel" style="font-size: 16px;">本次学习信息</h4>
+            </div>
+            <div class="modal-body learnInfo" style="font-size: 16px;">
+                <ul>
+                    <li><span class="learnInfoKey">课程名称：</span><span
+                            class="learnInfoValue">{{m.params.courseName}}</span></li>
+                    <li><span class="learnInfoKey">开始时间：</span><span class="learnInfoValue">{{m.learnInfo.startTime|customDate}}</span>
+                    </li>
+                    <li><span class="learnInfoKey">结束时间：</span><span class="learnInfoValue">{{m.learnInfo.endTime|customDate}}</span>
+                    </li>
+                    <li><span class="learnInfoKey">用时：</span><span class="learnInfoValue">{{m.learnInfo.useTime}}</span>
+                    </li>
+                    <li><span class="learnInfoKey">主题数：</span><span class="learnInfoValue">{{m.learnInfo.questionNumber}}</span>
+                    </li>
+                    <li><span class="learnInfoKey">完成主题数：</span><span class="learnInfoValue">{{m.learnInfo.answerNumber}}</span>
+                    </li>
+                    <li><span class="learnInfoKey">正确主题数：</span><span class="learnInfoValue">{{m.learnInfo.answerRightNumber}}</span>
+                    </li>
+                    <li><span class="learnInfoKey">得分：</span><span class="learnInfoValue">{{m.learnInfo.score}}</span>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn mainButton" ng-click="learnCompleted()"><i
+                        class="glyphicon glyphicon-ok-sign btnIcon"></i>确定
+                </button>
+                <button type="button" class="btn mainButton" data-dismiss="modal"><i
+                        class="glyphicon glyphicon-remove-sign btnIcon"></i>取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

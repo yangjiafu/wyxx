@@ -1,0 +1,44 @@
+.page-list .pagination {float:left;}
+.page-list .pagination span {cursor: pointer;}
+.page-list .pagination .separate span{cursor: default; border-top:none;border-bottom:none;}
+.page-list .pagination .separate span:hover {background: none;}
+.page-list .page-total {float:left; margin: 25px 20px;}
+.page-list .page-total input, .page-list .page-total select{height: 26px; border: 1px solid #ddd;}
+.page-list .page-total input {width: 40px; padding-left:3px;}
+.page-list .page-total select {width: 50px;}
+
+.lines{
+    height:2px;
+    border:none;
+    width: 70%;
+    border-radius: 30%;
+    background-color: #d3d3d3;
+    margin: 5px auto 5px auto;
+}
+.linesc{
+    width: 20%;
+    height: 3px;
+    margin: auto;
+    background-color: #67bc94
+}
+.linesh{
+    width: 20%;
+    height: 3px;
+    margin: auto;
+    border-radius: 10%;
+    background-color: #ff5f19
+}
+.liness{
+    height:2px;
+    border:none;
+    width: 150px;
+    border-radius: 30%;
+    background-color: #d3d3d3;
+    margin: 0 0 15px 0;
+}
+.linesx{
+    width: 20%;
+    height: 3px;
+    margin: auto 20%;
+    background-color: #49AEE0;
+}

@@ -1,0 +1,60 @@
+﻿<ion-view view-title="课程">
+    <ion-header-bar class="bar-positive">
+        <h2 class="title">全部课程</h2>
+    </ion-header-bar>
+    <ion-content delegate-handle="myscroll">
+        <!--<div class="swiper-container swiperImg">-->
+            <!--<div class="swiper-wrapper">-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="swiper-container swiperImg">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="{{adver[0]}}" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="{{adver[1]}}" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="{{adver[2]}}" alt="">
+                </div>
+
+            </div>
+            <!--<div class="swiper-pagination"></div>-->
+        </div>
+
+
+        <ion-list>
+            <ion-item style="border:none; "  ng-class="{'courseBg1':$index%2==1, 'courseBg2':$index%2==0}" class="nonPadding"  
+                      ng-repeat="classItem in m.sd.classifyCourse|filterEmptyClass">
+                <ion-list>
+                    <ion-item  style="padding-top:10px;padding-bottom:10px; background:none;border:none;" >
+                        <div style="float:left"><h2 class="title">{{classItem.title}}</h2></div> <a ng-if="classItem.nodes.length>3" ng-click="goClass(classItem.nodes,classItem.title)" style="float:right;font-size:12px;">更多...</a>
+                    </ion-item>
+                    <ion-item class="no-padding" style="border:none;padding-top:0; background:none;">
+                        <!--<div class="swiper-container mySwiper{{$index}}"  ng-class="{'courseBg1':$index%2==1, 'courseBg2':$index%2==0}">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"  ng-repeat="item in classItem.nodes|arrayLimit:3"  ng-click="toCourse(item.id)" style="padding-bottom:35px;position:relative;background:none;">
+                                            <img ng-src="{{item.img}}" style="height:70px;border-radius:5px; width:100%; max-width:150px;"/>
+                                            <h4 class="text-center" style="width:100%;position:absolute;bottom:0;color:#666;left:0;height:35px;line-height:35px;overflow:hidden;text-overflow
+    :ellipsis;white-space:nowrap;">{{item.title}}</h4>
+                                </div>
+                            </div>
+                        </div>-->
+                      <div class="row" style="padding:0"  ng-class="{'courseBg1':$index%2==1, 'courseBg2':$index%2==0}">
+                  
+                          <div class="col-33" ng-repeat="item in classItem.nodes|arrayLimit:3" ng-click="toCourse(item.id)" style="padding-bottom:35px;padding-left:10px;padpadding-right:10px;position:relative;background:none;">
+                            <img ng-src="{{item.img}}" style="height:70px;border-radius:5px; width:100%; max-width:150px;" />
+                            <h4 class="text-center" style="width:100%;position:absolute;bottom:0;color:#666;left:0;height:35px;line-height:35px;overflow:hidden;text-overflow
+    :ellipsis;white-space:nowrap;">
+                              {{item.title}}
+                            </h4>
+                          </div>
+                   
+                      </div>
+                    </ion-item>
+                </ion-list>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

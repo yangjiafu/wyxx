@@ -1,0 +1,144 @@
+﻿<script type="text/ng-template" id="nodes_renderer.html">
+    <div ui-tree-handle class="tree-node tree-node-content">
+        <a ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)">
+            <span class="glyphicon" style="transform:scale(0.5)" ng-class="{
+          'glyphicon-chevron-right': collapsed,
+          'glyphicon-chevron-down': !collapsed
+        }"></span>
+        </a>
+        <a data-nodrag ng-click="selectTreeNode(node)" ng-if="!node.IsAnswer" ng-class="{'text-warning':node.selected, 'text-info': !node.selected}">
+            <!--显示问题树-->
+            {{node.title}}
+        </a>
+        <a ng-if="node.IsAnswer && !node.isUserSelect && node.isRight" ng-class="text-info">
+            <!--显示未回答的问题-->
+            ---------------------------
+        </a>
+        <a ng-if="node.IsAnswer && node.isUserSelect && node.isKeep" ng-class="{'text-danger': node.isUserSelect!=node.isRight, 'text-info': node.isUserSelect==node.isRight}">
+            <!--显示已经回答的问题-->
+            <!--<SPAN ng-if="node.isUserSelect!=node.isRight" style="TEXT-DECORATION: line-through">{{node.title}}</SPAN>-->
+            <SPAN ng-if="node.isUserSelect==node.isRight">{{node.title}}</SPAN>
+        </a>
+    </div>
+    <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+        <li ng-repeat="node in node.nodes | filter:treeNodeFilter" ui-tree-node ng-include="'nodes_renderer.html'">
+        </li>
+    </ol>
+</script>
+<div class="panel panel-default mt15" ng-controller="LearnCourseCtrl" ng-init="loadData()">
+    <div class="panel-heading">
+        {{courseName}}
+        <div style="float:right">
+            <i class="glyphicon glyphicon-time"></i>&nbsp;{{useTime}} &nbsp;&nbsp;
+            <button class="btn btn-primary btn-sm" ng-click="showLearnCompleteInfo()" data-target="#learnInfo" data-toggle="modal"><i class="glyphicon glyphicon-log-out btnIcon"></i>退出学习</button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-body learnDiv">
+                        <div ui-tree id="tree-root" drag-enabled="false">
+                            <ol ui-tree-nodes ng-model="items">
+                                <li ng-repeat="node in items" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="learnFloatButtonDiv">
+                            <a href="#divVideo" class="btn btn-default btnCustom1" ng-disabled="!questionItem.hasVideo"><i class="glyphicon glyphicon-film btnIcon1"></i>视频</a>
+                            <a href="#divImage" class="btn btn-default btnCustom1" ng-disabled="!questionItem.hasImg"><i class="glyphicon glyphicon-picture btnIcon1"></i>图片</a>
+                            <a href="#divText" class="btn btn-default btnCustom1" ng-disabled="!questionItem.hasText"><i class="glyphicon glyphicon-file btnIcon1"></i>文本</a>
+                            <a href="#divZSD" class="btn btn-default btnCustom1"><i class="glyphicon glyphicon-list-alt btnIcon1"></i>知识点</a>
+                        </div>
+                        <br />
+                        <div id="divVideo" style="width:100%" class="panel panel-default" ng-if="questionItem.hasVideo">
+                            <div class="panel-heading"><strong>{{questionItem.node.title}}</strong><small style="float:right">视频</small> </div>
+                            <div class="panel-body">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <video class="embed-responsive-item" style="background-color:dimgrey" controls ng-src="{{questionItem.node.Video}}"></video>
+                                </div>
+                            </div>
+                        </div>
+ 
+                        <div id="divImage" class="panel panel-default" ng-if="questionItem.hasImg">
+                            <div class="panel-heading"><strong>{{questionItem.node.title}}</strong> <small style="float:right">图片</small></div>
+                            <div class="panel-body">
+                                <img ng-src="{{questionItem.node.Image}}" class="img-responsive" onerror="this.style.display='none'">
+                            </div>
+                        </div>
+
+                        <div id="divText" class="panel panel-default" ng-if="questionItem.hasText">
+                            <div class="panel-heading"><strong>{{questionItem.node.title}}</strong><small style="float:right">文本</small></div>
+                            <div class="panel-body">
+                                {{questionItem.node.TextContent}}
+                            </div>
+                        </div>
+      
+                        <div id="divZSD" class="panel panel-default">
+                            <div class="panel-heading"><strong>{{questionItem.node.title}}</strong>(正确选项{{currentQuestion.rightAnswerCount}}项)<small style="float:right">知识点</small></div>
+                            <div id="divZSDBody" class="panel-body">
+                                <ul>
+                                    <li class="list-group-item-text" ng-repeat="item in currentQuestion.answers">
+                                        <input type="checkbox" ng-checked="item.isUserSelect" ng-click="selectAnswer(item);"/>
+                                        <span ng-click="selectAnswer(item);">
+                                            <span ng-if="!item.isUserSelect || !currentQuestion.isUserAnswer">{{item.title}}</span>
+                                            <span ng-if="item.isUserSelect && currentQuestion.isUserAnswer && item.isUserSelect!=item.isRight" class="text-danger" style="text-decoration: line-through">{{item.title}}</span>
+                                            <span ng-if="item.isUserSelect && currentQuestion.isUserAnswer && item.isUserSelect==item.isRight" class="text-info">{{item.title}}</span>
+                                        </span>
+                                    </li>
+                                    <li><span class="promptInfo" ng-if="currentQuestion.isUserAnswerRight && currentQuestion.isUserAnswer"><i class="glyphicon glyphicon-ok" style="color:forestgreen"></i>回答正确</span></li>
+                                    <li><span class="promptInfo" ng-if="!currentQuestion.isUserAnswerRight && currentQuestion.isUserAnswer"><i class="glyphicon glyphicon-remove" style="color:red"></i>回答有误</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <br/>
+                        
+                        <nav id="wxLearnButtons" class="navbar navbar-default">
+                            <!--<label ng-if="currentQuestionNumber==1">已经是第一题</label>
+                            <label ng-if="currentQuestionNumber==questionCount">已经是最后一题</label>-->
+                            <ul>
+                                <li style="width:33%"><button class="btn btn-info btnCustom" ng-click="priso()" ng-disabled="currentQuestionNumber==1"><i class="glyphicon glyphicon-step-backward btnIcon"></i>上一题</button></li>
+                                <li style="width:33%"><button class="btn btn-info btnCustom" ng-click="submitQuestion()"><i class="glyphicon glyphicon-upload btnIcon"></i>提交</button></li>
+                                <li style="width:33%"><button class="btn btn-info btnCustom" ng-click="next()" ng-disabled="currentQuestionNumber==questionCount"><i class="glyphicon glyphicon-step-forward btnIcon"></i>下一题</button></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="learnInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">本次学习信息</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="form-group">
+                        <li class="form-control"><span class="pull-left">课程名称：</span><span class="text-primary pull-right">{{learnRecordInfo.courseName}}</span></li>
+                        <li class="form-control"><span class="pull-left">学习模式：</span><span class="text-primary pull-right">{{learnRecordInfo.learnMode}}</span></li>
+                        <li class="form-control"><span class="pull-left">难度：</span><span class="text-primary pull-right">{{learnRecordInfo.difficulty}}</span></li>
+                        <li class="form-control"><span class="pull-left">开始时间：</span><span class="text-primary pull-right">{{learnRecordInfo.startTime|customDate}}</span></li>
+                        <li class="form-control"><span class="pull-left">结束时间：</span><span class="text-primary pull-right">{{learnRecordInfo.endTime|customDate}}</span></li>
+                        <li class="form-control"><span class="pull-left">用时：</span><span class="text-primary pull-right">{{learnRecordInfo.useTime}}</span></li>
+                        <li class="form-control"><span class="pull-left">主题数：</span><span class="text-primary pull-right">{{learnRecordInfo.questionNumber}}</span></li>
+                        <li class="form-control"><span class="pull-left">完成主题数：</span><span class="text-primary pull-right">{{learnRecordInfo.answerNumber}}</span></li>
+                        <li class="form-control"><span class="pull-left">正确主题数：</span><span class="text-primary pull-right">{{learnRecordInfo.answerRightNumber}}</span></li>
+                        <li class="form-control"><span class="pull-left">得分：</span><span class="text-primary pull-right">{{learnRecordInfo.score}}</span></li>
+                    </ul>
+                    <h1>{{learnType}}</h1>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btnCustom" ng-click="learnCompleted()"><i class="glyphicon glyphicon-ok-sign btnIcon"></i>确定</button>
+                    <button type="button" class="btn btn-default btnCustom" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign btnIcon"></i>取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

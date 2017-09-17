@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>IconFont</title>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="iconfont.css">
+</head>
+<body>
+    <div class="main markdown">
+        <h1>IconFont 图标</h1>
+        <ul class="icon_lists clear">
+            
+                <li>
+                <i class="icon iconfont icon-line"></i>
+                    <div class="name">line</div>
+                    <div class="fontclass">.icon-line</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-icopersonlcentermessage"></i>
+                    <div class="name">Ico_personl center_Message</div>
+                    <div class="fontclass">.icon-icopersonlcentermessage</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-downward"></i>
+                    <div class="name">down</div>
+                    <div class="fontclass">.icon-downward</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-zan"></i>
+                    <div class="name">赞</div>
+                    <div class="fontclass">.icon-zan</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-lock"></i>
+                    <div class="name">lock</div>
+                    <div class="fontclass">.icon-lock</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-shijian"></i>
+                    <div class="name">时间</div>
+                    <div class="fontclass">.icon-shijian</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-sousuo"></i>
+                    <div class="name">搜索</div>
+                    <div class="fontclass">.icon-sousuo</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-luyin1"></i>
+                    <div class="name">录音</div>
+                    <div class="fontclass">.icon-luyin1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-4"></i>
+                    <div class="name">ico-pen</div>
+                    <div class="fontclass">.icon-4</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-guanbi1"></i>
+                    <div class="name">line</div>
+                    <div class="fontclass">.icon-guanbi1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-cplay1"></i>
+                    <div class="name">播放</div>
+                    <div class="fontclass">.icon-cplay1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-tuichu"></i>
+                    <div class="name">退出</div>
+                    <div class="fontclass">.icon-tuichu</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-weibo-copy"></i>
+                    <div class="name">微博</div>
+                    <div class="fontclass">.icon-weibo-copy</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-print"></i>
+                    <div class="name">打印</div>
+                    <div class="fontclass">.icon-print</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-Untitled-2"></i>
+                    <div class="name">Line</div>
+                    <div class="fontclass">.icon-Untitled-2</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-line1"></i>
+                    <div class="name">line</div>
+                    <div class="fontclass">.icon-line1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-zantingtingzhi"></i>
+                    <div class="name">暂停 停止</div>
+                    <div class="fontclass">.icon-zantingtingzhi</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-yuyinbofang"></i>
+                    <div class="name">语音播放</div>
+                    <div class="fontclass">.icon-yuyinbofang</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-ziti"></i>
+                    <div class="name">字体</div>
+                    <div class="fontclass">.icon-ziti</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-kunnan"></i>
+                    <div class="name">困难</div>
+                    <div class="fontclass">.icon-kunnan</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-jiandan"></i>
+                    <div class="name">简单</div>
+                    <div class="fontclass">.icon-jiandan</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-xiazai"></i>
+                    <div class="name">下载</div>
+                    <div class="fontclass">.icon-xiazai</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-qq"></i>
+                    <div class="name">qq</div>
+                    <div class="fontclass">.icon-qq</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-collection_fill"></i>
+                    <div class="name">collection_fill</div>
+                    <div class="fontclass">.icon-collection_fill</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-collection"></i>
+                    <div class="name">collection</div>
+                    <div class="fontclass">.icon-collection</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-like_fill"></i>
+                    <div class="name">like_fill</div>
+                    <div class="fontclass">.icon-like_fill</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-like"></i>
+                    <div class="name">like</div>
+                    <div class="fontclass">.icon-like</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-zan2"></i>
+                    <div class="name">赞</div>
+                    <div class="fontclass">.icon-zan2</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-weixin"></i>
+                    <div class="name">微信</div>
+                    <div class="fontclass">.icon-weixin</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-renqun"></i>
+                    <div class="name">人群</div>
+                    <div class="fontclass">.icon-renqun</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-zan1"></i>
+                    <div class="name">赞</div>
+                    <div class="fontclass">.icon-zan1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-shenfenzheng"></i>
+                    <div class="name">身份证</div>
+                    <div class="fontclass">.icon-shenfenzheng</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-quanping"></i>
+                    <div class="name">全屏</div>
+                    <div class="fontclass">.icon-quanping</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-jiantouyou"></i>
+                    <div class="name">箭头 右</div>
+                    <div class="fontclass">.icon-jiantouyou</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-jiantouyou-copy"></i>
+                    <div class="name">箭头 右</div>
+                    <div class="fontclass">.icon-jiantouyou-copy</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-quanping-copy"></i>
+                    <div class="name">全屏</div>
+                    <div class="fontclass">.icon-quanping-copy</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-collection_fill-copy"></i>
+                    <div class="name">collection_fill</div>
+                    <div class="fontclass">.icon-collection_fill-copy</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-collection_fill-copy1"></i>
+                    <div class="name">collection_fill</div>
+                    <div class="fontclass">.icon-collection_fill-copy1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-line1-copy"></i>
+                    <div class="name">line</div>
+                    <div class="fontclass">.icon-line1-copy</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-line1-copy1"></i>
+                    <div class="name">line</div>
+                    <div class="fontclass">.icon-line1-copy1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-jiantouyou-copy1"></i>
+                    <div class="name">箭头 右</div>
+                    <div class="fontclass">.icon-jiantouyou-copy1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-jiantouyou-copy-copy"></i>
+                    <div class="name">箭头 右</div>
+                    <div class="fontclass">.icon-jiantouyou-copy-copy</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-jiantouyou-copy-copy1"></i>
+                    <div class="name">箭头 右</div>
+                    <div class="fontclass">.icon-jiantouyou-copy-copy1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-downward-copy"></i>
+                    <div class="name">down</div>
+                    <div class="fontclass">.icon-downward-copy</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-shijian-copy"></i>
+                    <div class="name">时间</div>
+                    <div class="fontclass">.icon-shijian-copy</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-sousuo-copy"></i>
+                    <div class="name">搜索</div>
+                    <div class="fontclass">.icon-sousuo-copy</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-quanping-copy1"></i>
+                    <div class="name">全屏</div>
+                    <div class="fontclass">.icon-quanping-copy1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-like_fill-copy"></i>
+                    <div class="name">like_fill</div>
+                    <div class="fontclass">.icon-like_fill-copy</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-Untitled-2-copy"></i>
+                    <div class="name">Line</div>
+                    <div class="fontclass">.icon-Untitled-2-copy</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-shanchu"></i>
+                    <div class="name">删 除</div>
+                    <div class="fontclass">.icon-shanchu</div>
+                </li>
+            
+        </ul>
+
+        <h2 id="font-class-">font-class引用</h2>
+        <hr>
+
+        <p>font-class是unicode使用方式的一种变种，主要是解决unicode书写不直观，语意不明确的问题。</p>
+        <p>与unicode使用方式相比，具有如下特点：</p>
+        <ul>
+        <li>兼容性良好，支持ie8+，及所有现代浏览器。</li>
+        <li>相比于unicode语意明确，书写更直观。可以很容易分辨这个icon是什么。</li>
+        <li>因为使用class来定义图标，所以当要替换图标时，只需要修改class里面的unicode引用。</li>
+        <li>不过因为本质上还是使用的字体，所以多色图标还是不支持的。</li>
+        </ul>
+        <p>使用步骤如下：</p>
+        <h3 id="-fontclass-">第一步：引入项目下面生成的fontclass代码：</h3>
+
+
+        <pre><code class="lang-js hljs javascript"><span class="hljs-comment">&lt;link rel="stylesheet" type="text/css" href="./iconfont.css"&gt;</span></code></pre>
+        <h3 id="-">第二步：挑选相应图标并获取类名，应用于页面：</h3>
+        <pre><code class="lang-css hljs">&lt;<span class="hljs-selector-tag">i</span> <span class="hljs-selector-tag">class</span>="<span class="hljs-selector-tag">iconfont</span> <span class="hljs-selector-tag">icon-xxx</span>"&gt;&lt;/<span class="hljs-selector-tag">i</span>&gt;</code></pre>
+        <blockquote>
+        <p>"iconfont"是你项目下的font-family。可以通过编辑项目查看，默认是"iconfont"。</p>
+        </blockquote>
+    </div>
+</body>
+</html>
