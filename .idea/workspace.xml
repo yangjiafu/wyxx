@@ -18,8 +18,8 @@
       <file leaf-file-name="learnCourse1.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ionic/www/angular/appView/learnCourse1.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="137" column="0" lean-forward="true" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+            <state relative-caret-position="1206">
+              <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
@@ -36,51 +36,106 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ionic/www/index.html">
+      <file leaf-file-name="LearnCourse1Ctrl.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ionic/www/angular/Controller/LearnCourse1Ctrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="65" column="7" lean-forward="true" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
+            <state relative-caret-position="229">
+              <caret line="99" column="49" lean-forward="true" selection-start-line="99" selection-start-column="49" selection-end-line="99" selection-end-column="49" />
+              <folding>
+                <element signature="e#5253#5861#0" expanded="false" />
+                <element signature="e#5932#6623#0" expanded="false" />
+                <element signature="e#6671#6734#0" expanded="false" />
+                <element signature="e#6786#7751#0" expanded="false" />
+                <element signature="e#7804#7936#0" expanded="false" />
+                <element signature="e#9570#10449#0" expanded="false" />
+                <element signature="e#10539#10790#0" expanded="false" />
+                <element signature="e#17270#18146#0" expanded="false" />
+                <element signature="e#26583#26777#0" expanded="false" />
+                <element signature="e#26997#27952#0" expanded="false" />
+                <element signature="e#29554#30138#0" expanded="false" />
+                <element signature="e#30229#30786#0" expanded="false" />
+                <marker date="1506248549963" expanded="true" signature="23579:23609" ph="..." />
+                <marker date="1506248549963" expanded="true" signature="24033:24073" ph="..." />
+                <marker date="1506248549963" expanded="true" signature="24624:24636" ph="..." />
+                <marker date="1506248549963" expanded="true" signature="26320:26326" ph=" " />
+                <marker date="1506248549963" expanded="true" signature="26326:26332" ph=" " />
+                <marker date="1506248549963" expanded="true" signature="26332:26338" ph=" " />
+                <marker date="1506248549963" expanded="true" signature="26338:26344" ph=" " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="appCourseItemCtrl.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ionic/www/angular/Controller/appCourseItemCtrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="407">
+              <caret line="69" column="32" lean-forward="false" selection-start-line="69" selection-start-column="20" selection-end-line="69" selection-end-column="32" />
+              <folding>
+                <marker date="1506247676791" expanded="true" signature="7525:7540" ph="..." />
+                <marker date="1506247676791" expanded="true" signature="7613:7626" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="appMain.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ionic/www/angular/appMain.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="279" column="21" lean-forward="true" selection-start-line="279" selection-start-column="21" selection-end-line="279" selection-end-column="21" />
+              <folding>
+                <marker date="1506247676857" expanded="true" signature="4189:4207" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="learnCourse1.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jjxxnew2/WebView/learnCourse1.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-828">
+              <caret line="22" column="123" lean-forward="true" selection-start-line="22" selection-start-column="123" selection-end-line="22" selection-end-column="123" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="LearnCourse1Ctrl.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ionic/www/angular/Controller/LearnCourse1Ctrl.js">
+        <entry file="file://$PROJECT_DIR$/jjxxnew2/controller/LearnCourse1Ctrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="577" column="30" lean-forward="true" selection-start-line="577" selection-start-column="30" selection-end-line="577" selection-end-column="30" />
-              <folding>
-                <element signature="e#5192#5800#0" expanded="false" />
-                <element signature="e#5871#6562#0" expanded="false" />
-                <element signature="e#6610#6673#0" expanded="false" />
-                <element signature="e#6725#7690#0" expanded="false" />
-                <element signature="e#7743#7875#0" expanded="false" />
-                <element signature="e#9509#10388#0" expanded="false" />
-                <element signature="e#10478#10729#0" expanded="false" />
-                <element signature="e#17209#18085#0" expanded="false" />
-                <element signature="e#26522#26716#0" expanded="false" />
-                <element signature="e#26936#27891#0" expanded="false" />
-                <element signature="e#29493#30077#0" expanded="false" />
-                <element signature="e#30168#30725#0" expanded="false" />
-                <marker date="1506242448541" expanded="true" signature="23518:23548" ph="..." />
-                <marker date="1506242448541" expanded="true" signature="23972:24012" ph="..." />
-                <marker date="1506242448541" expanded="true" signature="24563:24575" ph="..." />
-                <marker date="1506242448541" expanded="true" signature="26259:26265" ph=" " />
-                <marker date="1506242448541" expanded="true" signature="26265:26271" ph=" " />
-                <marker date="1506242448541" expanded="true" signature="26271:26277" ph=" " />
-                <marker date="1506242448541" expanded="true" signature="26277:26283" ph=" " />
-              </folding>
+            <state relative-caret-position="1818">
+              <caret line="96" column="111" lean-forward="true" selection-start-line="96" selection-start-column="111" selection-end-line="96" selection-end-column="111" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ionic/www/Content/app.css">
+      <file leaf-file-name="courseItemCtrl.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jjxxnew2/controller/courseItemCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="551" column="1" lean-forward="true" selection-start-line="551" selection-start-column="1" selection-end-line="551" selection-end-column="1" />
+            <state relative-caret-position="194">
+              <caret line="88" column="28" lean-forward="false" selection-start-line="88" selection-start-column="28" selection-end-line="88" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jjxxnew2/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="672">
+              <caret line="64" column="52" lean-forward="true" selection-start-line="64" selection-start-column="52" selection-end-line="64" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="courseitem.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jjxxnew2/WebView/courseitem.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="134" column="6" lean-forward="true" selection-start-line="134" selection-start-column="6" selection-end-line="134" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -100,7 +155,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>addCourseNodeSimpleItem</find>
       <find>learnMode</find>
       <find>getCourse</find>
       <find>hotList</find>
@@ -125,11 +179,12 @@
       <find>getTextContent</find>
       <find>courseNameEx</find>
       <find>getContent</find>
-      <find>courseName</find>
       <find>ng-class</find>
       <find>swiper</find>
       <find>swiper-slide</find>
       <find>input</find>
+      <find>$stateParams</find>
+      <find>courseName</find>
     </findStrings>
     <replaceStrings>
       <replace>controller</replace>
@@ -152,7 +207,7 @@
         <option value="$PROJECT_DIR$/ionic/www/angular/appView/learnRecord.html" />
         <option value="$PROJECT_DIR$/ionic/www/angular/Controller/PersonCtrl.js" />
         <option value="$PROJECT_DIR$/ionic/www/angular/appView/video.html" />
-        <option value="$USER_HOME$/Desktop/DataService.js" />
+        <option value="$PROJECT_DIR$/../../DataService.js" />
         <option value="$PROJECT_DIR$/jjxxnew2/Content/courseItemCtrl.js" />
         <option value="$PROJECT_DIR$/jjxxnew2/WebView/test.ts" />
         <option value="$PROJECT_DIR$/jjxxnew2/Service/CourseService1.js" />
@@ -187,8 +242,8 @@
         <option value="$PROJECT_DIR$/ionic/www/angular/Controller/appCourseItemCtrl.js" />
         <option value="$PROJECT_DIR$/ionic/www/angular/appMain.js" />
         <option value="$PROJECT_DIR$/ionic/www/angular/appView/learnCourse1.html" />
-        <option value="$PROJECT_DIR$/ionic/www/angular/Controller/LearnCourse1Ctrl.js" />
         <option value="$PROJECT_DIR$/ionic/www/Content/app.css" />
+        <option value="$PROJECT_DIR$/ionic/www/angular/Controller/LearnCourse1Ctrl.js" />
       </list>
     </option>
   </component>
@@ -199,8 +254,6 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/ionic/cordova-plugin-IFlyspeech/node_modules" />
-    <handled-path value="$PROJECT_DIR$/ionic/plugins/cordova-plugin-xunfeiListenSpeaking/node_modules" />
     <handled-path value="$PROJECT_DIR$/ionic/www/Scripts/node_modules" />
     <handled-path value="$PROJECT_DIR$/www/Scripts/node_modules" />
   </component>
@@ -225,17 +278,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="xyxx" />
+              <option name="myItemId" value="wyxx" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="xyxx" />
+              <option name="myItemId" value="wyxx" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -369,17 +422,19 @@
       <workItem from="1506043068347" duration="20876000" />
       <workItem from="1506128694455" duration="15663000" />
       <workItem from="1506240520032" duration="4366000" />
+      <workItem from="1506247781032" duration="5000" />
+      <workItem from="1506247920981" duration="796000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="310898000" />
+    <option name="totallyTimeSpent" value="311699000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1367713" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17339313" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -578,13 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jjxxnew2/WebView/courseitem.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="36" column="32" lean-forward="true" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ionic/www/Scripts/speech.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="366">
@@ -655,13 +703,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jjxxnew2/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="70" column="51" lean-forward="true" selection-start-line="70" selection-start-column="51" selection-end-line="70" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ionic/www/angular/Service/DataService.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="338">
@@ -680,7 +721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6">
           <caret line="257" column="22" lean-forward="true" selection-start-line="257" selection-start-column="22" selection-end-line="257" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -688,7 +728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -696,7 +735,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1425">
           <caret line="122" column="1" lean-forward="true" selection-start-line="122" selection-start-column="1" selection-end-line="122" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -704,7 +742,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="135" column="15" lean-forward="false" selection-start-line="135" selection-start-column="15" selection-end-line="135" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -712,42 +749,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="645" column="0" lean-forward="false" selection-start-line="645" selection-start-column="0" selection-end-line="647" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jjxxnew2/WebView/learnCourse1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="61" column="155" lean-forward="false" selection-start-line="61" selection-start-column="145" selection-end-line="61" selection-end-column="155" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ionic/www/angular/appMain.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="277" column="28" lean-forward="true" selection-start-line="277" selection-start-column="28" selection-end-line="277" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jjxxnew2/controller/courseItemCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="99" column="30" lean-forward="true" selection-start-line="99" selection-start-column="30" selection-end-line="99" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ionic/www/angular/Controller/appCourseItemCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="65" column="33" lean-forward="false" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jjxxnew2/controller/LearnCourse1Ctrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-563">
-          <caret line="94" column="44" lean-forward="true" selection-start-line="94" selection-start-column="44" selection-end-line="94" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -755,6 +756,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="348">
           <caret line="102" column="1" lean-forward="false" selection-start-line="102" selection-start-column="1" selection-end-line="102" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ionic/www/Content/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="557" column="10" lean-forward="false" selection-start-line="557" selection-start-column="10" selection-end-line="557" selection-end-column="10" />
           <folding />
         </state>
       </provider>
@@ -762,15 +770,15 @@
     <entry file="file://$PROJECT_DIR$/ionic/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
-          <caret line="65" column="7" lean-forward="true" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
+          <caret line="65" column="7" lean-forward="false" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ionic/www/angular/appView/learnCourse1.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="137" column="0" lean-forward="true" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+        <state relative-caret-position="1206">
+          <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
@@ -786,39 +794,92 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ionic/www/angular/Controller/LearnCourse1Ctrl.js">
+    <entry file="file://$PROJECT_DIR$/jjxxnew2/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="577" column="30" lean-forward="true" selection-start-line="577" selection-start-column="30" selection-end-line="577" selection-end-column="30" />
+        <state relative-caret-position="672">
+          <caret line="64" column="52" lean-forward="true" selection-start-line="64" selection-start-column="52" selection-end-line="64" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjxxnew2/WebView/courseitem.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="134" column="6" lean-forward="true" selection-start-line="134" selection-start-column="6" selection-end-line="134" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjxxnew2/controller/LearnCourse1Ctrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1818">
+          <caret line="96" column="111" lean-forward="true" selection-start-line="96" selection-start-column="111" selection-end-line="96" selection-end-column="111" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjxxnew2/controller/courseItemCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="88" column="28" lean-forward="false" selection-start-line="88" selection-start-column="28" selection-end-line="88" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjxxnew2/WebView/learnCourse1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-828">
+          <caret line="22" column="123" lean-forward="true" selection-start-line="22" selection-start-column="123" selection-end-line="22" selection-end-column="123" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ionic/www/angular/appMain.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="279" column="21" lean-forward="true" selection-start-line="279" selection-start-column="21" selection-end-line="279" selection-end-column="21" />
           <folding>
-            <element signature="e#5192#5800#0" expanded="false" />
-            <element signature="e#5871#6562#0" expanded="false" />
-            <element signature="e#6610#6673#0" expanded="false" />
-            <element signature="e#6725#7690#0" expanded="false" />
-            <element signature="e#7743#7875#0" expanded="false" />
-            <element signature="e#9509#10388#0" expanded="false" />
-            <element signature="e#10478#10729#0" expanded="false" />
-            <element signature="e#17209#18085#0" expanded="false" />
-            <element signature="e#26522#26716#0" expanded="false" />
-            <element signature="e#26936#27891#0" expanded="false" />
-            <element signature="e#29493#30077#0" expanded="false" />
-            <element signature="e#30168#30725#0" expanded="false" />
-            <marker date="1506242448541" expanded="true" signature="23518:23548" ph="..." />
-            <marker date="1506242448541" expanded="true" signature="23972:24012" ph="..." />
-            <marker date="1506242448541" expanded="true" signature="24563:24575" ph="..." />
-            <marker date="1506242448541" expanded="true" signature="26259:26265" ph=" " />
-            <marker date="1506242448541" expanded="true" signature="26265:26271" ph=" " />
-            <marker date="1506242448541" expanded="true" signature="26271:26277" ph=" " />
-            <marker date="1506242448541" expanded="true" signature="26277:26283" ph=" " />
+            <marker date="1506247676857" expanded="true" signature="4189:4207" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ionic/www/Content/app.css">
+    <entry file="file://$PROJECT_DIR$/ionic/www/angular/Controller/appCourseItemCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="551" column="1" lean-forward="true" selection-start-line="551" selection-start-column="1" selection-end-line="551" selection-end-column="1" />
-          <folding />
+        <state relative-caret-position="407">
+          <caret line="69" column="32" lean-forward="false" selection-start-line="69" selection-start-column="20" selection-end-line="69" selection-end-column="32" />
+          <folding>
+            <marker date="1506247676791" expanded="true" signature="7525:7540" ph="..." />
+            <marker date="1506247676791" expanded="true" signature="7613:7626" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ionic/www/angular/Controller/LearnCourse1Ctrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="99" column="49" lean-forward="true" selection-start-line="99" selection-start-column="49" selection-end-line="99" selection-end-column="49" />
+          <folding>
+            <element signature="e#5253#5861#0" expanded="false" />
+            <element signature="e#5932#6623#0" expanded="false" />
+            <element signature="e#6671#6734#0" expanded="false" />
+            <element signature="e#6786#7751#0" expanded="false" />
+            <element signature="e#7804#7936#0" expanded="false" />
+            <element signature="e#9570#10449#0" expanded="false" />
+            <element signature="e#10539#10790#0" expanded="false" />
+            <element signature="e#17270#18146#0" expanded="false" />
+            <element signature="e#26583#26777#0" expanded="false" />
+            <element signature="e#26997#27952#0" expanded="false" />
+            <element signature="e#29554#30138#0" expanded="false" />
+            <element signature="e#30229#30786#0" expanded="false" />
+            <marker date="1506248549963" expanded="true" signature="23579:23609" ph="..." />
+            <marker date="1506248549963" expanded="true" signature="24033:24073" ph="..." />
+            <marker date="1506248549963" expanded="true" signature="24624:24636" ph="..." />
+            <marker date="1506248549963" expanded="true" signature="26320:26326" ph=" " />
+            <marker date="1506248549963" expanded="true" signature="26326:26332" ph=" " />
+            <marker date="1506248549963" expanded="true" signature="26332:26338" ph=" " />
+            <marker date="1506248549963" expanded="true" signature="26338:26344" ph=" " />
+          </folding>
         </state>
       </provider>
     </entry>

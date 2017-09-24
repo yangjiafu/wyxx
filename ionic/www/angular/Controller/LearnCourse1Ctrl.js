@@ -26,7 +26,8 @@
                 params:{
                     courseId:$stateParams.courseId,
                     courseName:$stateParams.courseName,
-                    difficulty:$stateParams.difficulty
+                    difficulty:$stateParams.difficulty,
+                    courseNameEx: $stateParams.courseNameEx
                 },
                 learn: courseService1.learn,
                 learnInfo: {
