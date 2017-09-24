@@ -41,6 +41,7 @@
                     type: "question",
                     file: node.File,
                     fileType: $window.getFileType(node.File),
+                    guid: node.Guid,
                     items: [],
                     parentTitle: [],
                     answerStatus: 0     // 0 没有回答，  1 回答正确  ，  -1 回答错误
@@ -117,6 +118,7 @@
                         type: type,
                         file: node.File,
                         fileType: $window.getFileType(node.File),
+                        guid: node.Guid,
                         items: [],
                         parentTitle:[]
                     }
@@ -395,5 +397,7 @@
                 result.score = parseInt((result.doRightQuestionCount / result.questionCount) * 100);
                 return result;
             };
+
+
         }]);
 })();

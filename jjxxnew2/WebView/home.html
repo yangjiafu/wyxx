@@ -48,11 +48,11 @@
         <div class="contentPlateTopBG box-shadow pointer"
              ng-click="goCourseItem(value.id)"
              ng-repeat="(key,value) in contentPlateTopItem">
-            <div style="background: url({{value.imgUrl}}) no-repeat center;background-size: cover"></div>
+            <div style="background: url({{value.img}}) no-repeat center;background-size: cover"></div>
             <div style="background: url('img/bg/bg1.png') no-repeat center;background-size: cover"></div>
             <br>
-            <h2 style="font-size: 20px;font-weight: bolder;margin:10px 20px">{{value.contentPlateTitle}}</h2>
-            <p class="marginLeft20 typeStyle typeStyleBG{{key}} ">{{value.type}}</p>
+            <h2 style="font-size: 20px;font-weight: bolder;margin:10px 20px">{{value.title}}</h2>
+            <p class="marginLeft20 typeStyle typeStyleBG{{key}} ">{{value.status}}</p>
             <br/>
             <span class="marginLeft20 typeColor{{key}}">立即查看
                 <span class="iconfont icon-jiantouyou"></span>

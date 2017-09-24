@@ -41,27 +41,40 @@
            };
 
            //轮播图下方几个小模块
-           $scope.contentPlateTopItem = [
-               {
-                   id:63,
-                   contentPlateTitle:'中国法制史',
-                   type:'夏朝的法律制度',
-                   imgUrl:'img/bg/images/第一章夏朝的法律制度.jpg'
-               },
-               {
-                   id:33,
-                   contentPlateTitle:'财政与金融',
-                   type:'财政与金融概述',
-                   imgUrl:'img/bg/images/第一章财政概述.jpg'
-               },
-               {
-                   id:31,
-                   contentPlateTitle:'实用管理基础',
-                   type:'实用基础管理总论',
-                   imgUrl:'img/bg/images/第一章总论.jpg'
-               }
-           ];
+           // $scope.contentPlateTopItem = [
+           //     {
+           //         id:63,
+           //         contentPlateTitle:'中国法制史',
+           //         type:'夏朝的法律制度',
+           //         imgUrl:'img/bg/images/第一章夏朝的法律制度.jpg'
+           //     },
+           //     {
+           //         id:33,
+           //         contentPlateTitle:'财政与金融',
+           //         type:'财政与金融概述',
+           //         imgUrl:'img/bg/images/第一章财政概述.jpg'
+           //     },
+           //     {
+           //         id:31,
+           //         contentPlateTitle:'实用管理基础',
+           //         type:'实用基础管理总论',
+           //         imgUrl:'img/bg/images/第一章总论.jpg'
+           //     }
+           // ];
+            $scope.contentPlateTopItem = [];
+           $scope._loadNew = function () {
+               dataService.getCourseList({
+                   type:'最新课程',
+                   limit: 3
+               }).then(function (args) {
+                   for (var i =0;i<args.length;i++){
 
+                       args[i].starRating = parseInt(args[i].starRating);
+                   }
+                   $scope.contentPlateTopItem = args;
+               })
+           };
+           $scope._loadNew();
 
 
            //精品课程与热门课程模块

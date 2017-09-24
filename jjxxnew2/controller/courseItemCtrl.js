@@ -86,6 +86,7 @@
                         //var difficulty = 2;
                         var courseId = $scope.courseInfo.baseInfo.id;
                         var courseName = $scope.courseInfo.baseInfo.title;
+                        var courseNameEx = $scope.courseInfo.baseInfo.titleEx;
 
                         if ($scope.courseInfo.baseInfo.version == "1") {
                             $state.go('learnCourse', {
@@ -93,7 +94,7 @@
                                 courseName: courseName,
                                 difficulty: difficulty,
                                 parent: 'courseItem',
-                                parentID: $scope.parentId
+                                parentID: $scope.parentId,
                             });
                         }
                         else {
@@ -102,7 +103,8 @@
                                 courseName: courseName,
                                 difficulty: difficulty,
                                 parent: 'courseItem',
-                                parentID: $scope.parentId
+                                parentID: $scope.parentId,
+                                courseNameEx: courseNameEx
                             });
                         }
                         $scope.$emit('hiddenNav');

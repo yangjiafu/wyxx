@@ -32,17 +32,26 @@
             </div>
 
             <div class="courseInfoSubButton">
-                <button class="myBtnCourseItem btnLearnEasy" ng-click="showLearn(0)" ng-if="m.isOldLearn"
-                        ng-disabled="!courseInfo">普通模式
+                <!--<button class="myBtnCourseItem " style="background-color: #F5C9B9" ng-click="showLearn(0)" ng-if="m.isOldLearn"-->
+                        <!--ng-disabled="!courseInfo">普通学习-->
+                <!--</button>-->
+                <button class="myBtnCourseItem "
+                        style="background-color:#F5A09F;"
+                        ng-click="showLearn(1)"
+                        ng-if="m.isLearnEasy" ng-disabled="!courseInfo">简单学习
                 </button>
-                <button class="myBtnCourseItem btnLearnEasy" style="background-color:#f56a6a;" ng-click="showLearn(1)"
-                        ng-if="m.isLearnEasy" ng-disabled="!courseInfo"><span class="iconfont">&#xe60f;</span>简单学习
-                </button>
-                <button class="myBtnCourseItem btnLearnNormal" ng-click="showLearn(2)" ng-if="m.isLearnNormal"
-                        ng-disabled="!courseInfo">困难模式
-                </button>
-                <button class="myBtnCourseItem btnLearnHard" style="background-color:#f56a6a;" ng-click="showLearn(3)"
-                        ng-if="m.isLearnHard" ng-disabled="!courseInfo"><span class="iconfont">&#xe60e;</span>标准学习
+                <button class="myBtnCourseItem"
+                        style="background-color: #F58582"
+                        ng-click="showLearn(2)"
+                        ng-if="m.isLearnNormal"
+                     ng-disabled="!courseInfo">
+                     普通学习
+               </button>
+                <button class="myBtnCourseItem "
+                        style="background-color:#f56a6a;"
+                        ng-click="showLearn(3)"
+                        ng-if="m.isLearnHard"
+                        ng-disabled="!courseInfo">标准学习
                 </button>
                 <button class="myBtnCourseItem marginRight pointer typeColor1" ng-click="showExam()"
                         style="background-color:#55b5ff;">

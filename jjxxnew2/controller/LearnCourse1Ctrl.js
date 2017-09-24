@@ -1,9 +1,9 @@
 ﻿(function() {
     angular.module("app")
         .controller("LearnCourse1Ctrl", ["$scope", "$interval", "$stateParams", "dataService",
-            "$state", "myConfig", "$log", "courseService1", "$timeout", "$q", "dataShareService","utilityService",
+            "$state", "myConfig", "$log", "courseService1", "$timeout", "$q", "dataShareService","utilityService","storeService",
             function ($scope, $interval, $stateParams, dataService,
-                      $state, myConfig, $log, courseService1, $timeout, $q, dataShareService,utilityService) {
+                      $state, myConfig, $log, courseService1, $timeout, $q, dataShareService,utilityService,storeService) {
                 var scope = $scope;
                 $scope.parent = $stateParams.parent;
                 $scope.parentID = $stateParams.parentID;
@@ -15,16 +15,24 @@
                 $scope.className = 'lineHeight1';//文本样式的默认字体
                 // $scope.lineHeight = 25;
                 $scope.showLoading = false;//加载音频文件显示loading
-                $scope.generaTitle = 'question';
-                $scope.inputId = '';
-                $scope.asList = [];//节点的问答列表项
-                $scope.simpleList = [];//节点案例列表
-                $scope.sunasList =[];
+                // $scope.inputId = '';
+                $scope.hotList = [];//热门评论列表
+                $scope.newList = []; //最新列表
+
+                $scope.valueId = '';//定义bootstrap显示的模态框的数据传递变量
+                $scope.valuePersonId = '';
+                $scope.NodeType = '';
+
+                $scope.userId = dataService.userInfo.personId;
+                // $scope.showask = '';//显示回复的input
+                $scope.showdelete1 = false;
+                $scope.start = 0; //开始加载的条数
 
                 $scope.m = {
                     params:{
                         courseId:$stateParams.courseId,
                         courseName:$stateParams.courseName,
+                        courseNameEx: $stateParams.courseNameEx,
                         difficulty:$stateParams.difficulty
                     },
                     learn: courseService1.learn,
@@ -39,11 +47,11 @@
                         startTime: new Date(),
                         endTime: new Date(),
                         useTime:"",
-                        askContent:'',//问问题的内容
-                        replyContent:'',//回复问题的内容
+                        // askContent:'',//问问题的内容
+                        // replyContent:'',//回复问题的内容
                         exampleContent: '',//提交案例的内容
-                        loginLodin: '',//提交时候的提示
-                        loginExamplLodin: '' //提交案例时候的提示
+                        // loginLodin: '',//提交时候的提示
+                        // loginExamplLodin: '' //提交案例时候的提示
                     },
                     isShowLearnInfo: false
                 };
@@ -76,32 +84,6 @@
 
                 };
 
-                //获取课程节点问答列表
-                $scope.getCourseASList = function (nodeid) {
-                    dataService.getCourseNodeASList({
-                        courseId: $scope.m.params.courseId,
-                        nodeId: nodeid,
-                        start:0,
-                        limit:100
-                    }).then(function (args) {
-                        $scope.asList = args;
-
-                        // if($scope.asList.length == 0)
-                        // else
-                        //     $scope.sunasList = args;
-                    }, function (args) {
-                    })
-                };
-
-                //判断是否登陆
-                $scope.isLogin = function () {
-                    if (dataService.userInfo.personId){
-                        return dataService.userInfo.personId
-                    }else {
-                        return false
-                    }
-                };
-
 
                 $scope.getContent = function (courseItem) {
                     var defer = $q.defer();
@@ -112,8 +94,9 @@
                         if (courseItem.file.indexOf(".txt") < 0)
                         {defer.resolve("");}
                         else {
+                         var courseNameEx = $scope.m.params.courseNameEx ?   $scope.m.params.courseNameEx : "";
                     dataService.getTextContent({
-                        courseName: $scope.m.params.courseName,
+                        courseName: $scope.m.params.courseName + courseNameEx,
                         fileName: courseItem.file
                     })
                         .then(function (args) {
@@ -196,6 +179,7 @@
 
                 $scope.submitQuestion = function (rights) {
                     var item = $scope.m.learn.curQuestion;
+
                     if (item.type != 'question') return false;
                     var checkBock = $("#selectInput input[type='checkbox']:checked").length;
                     if (rights !=  checkBock)
@@ -206,6 +190,8 @@
                         return false
                     }
                     courseService1.checkLearnQuestionAnswer($scope.m.learn.curQuestion);
+                    var score = courseService1.getLearnScore();
+                    $scope.m.learnInfo.score = score.score;
                 };
 
                 $scope.selectAnswer = function (item) {
@@ -272,7 +258,7 @@
                     $scope.m.learnInfo.useTime = moment(t3 * 1000).utc().utcOffset(0).format('HH:mm:ss');
                 }, 1000);
 
-                $scope.loadData();
+
 
 
                 var random = function(array) {
@@ -283,37 +269,13 @@
                     return arr1;
                 };
 
-                //提交问答项
-                $scope.addCourseASItem = function (nodeid) {
-                    //
-                    // if($scope.m.learn.curQuestion.type=='question'){
-                    //     utilityService.alert("答题界面禁止提交问答");
-                    //     return;
-                    // }
-                    if(!$scope.isLogin()){
-                        utilityService.alert("请登录");
-                        return;
-                    } else
-                        if ($scope.m.learnInfo.replyContent == ''){
-                        utilityService.alert("填写内容在提交");
-                        return;
-                    }
-                    $scope.m.learnInfo.loginLodin = '正在提交!';
-                    dataService.addCourseNodeASItem({
-                        courseId: $scope.m.params.courseId,
-                        nodeId: nodeid,
-                        content: $scope.m.learnInfo.replyContent,
-                        personId: $scope.isLogin()
-                    }).then(function (args) {
-                        $scope.m.learnInfo.replyContent = '';
-                        $scope.getCourseASList(nodeid);
-                        $scope.m.learnInfo.loginLodin = '提交成功!';
-                    })
-                };
+
 
                 //提交案例内容
-                $scope.addCourseSimpleItem = function(nodeId){
-                    if (!$scope.isLogin()){
+                $scope.addCourseSimpleItem = function(nodeId,nodeType){
+                    if(nodeType=='question')
+                        return;
+                    if (!$scope.userId){
                         utilityService.alert("请登录");
                         return;
                     }
@@ -322,36 +284,69 @@
                         utilityService.alert("填写内容再提交");
                         return;
                     }
-                    $scope.m.learnInfo.loginExamplLodin = '正在提交！';
                     dataService.addCourseNodeSimpleItem({
                       courseId:$scope.m.params.courseId,
                       nodeId:nodeId,
+                      parentId:  0,
+                      type: '',
+                      learnMode:$scope.m.params.difficulty,
                       content:$scope.m.learnInfo.exampleContent,
-                      personId:$scope.isLogin()
+                      personId:$scope.userId
                   }).then(function (args) {
-                      $scope.getCourseSimpleList(nodeId);
-                      $scope.m.learnInfo.loginExamplLodin = '案例提交成功！';
+                      $scope.getCourseSimpleList(nodeId,'最新',100);
                       $scope.m.learnInfo.exampleContent = '';
                   })
                 };
                 //获取案例内容
-                $scope.getCourseSimpleList = function (nodeId) {
+                $scope.getCourseSimpleList = function (nodeId,orderType,limit) {
                     dataService.getCourseNodeSimpleList({
                         courseId:$scope.m.params.courseId,
                         nodeId:nodeId,
+                        personId: $scope.userId,
+                        type: '',
+                        learnMode: $scope.m.params.difficulty,
+                        orderType: orderType,//热门或最新
                         start:0,
-                        limit:100
+                        limit:limit
                     }).then(function (args) {
-                        $scope.simpleList = args;
+                        // if (args.length>0){
+                            if (orderType == '最新')
+                                $scope.newList = args;
+                            // {
+                            //     // $scope.newList=[];
+                            //     for (var item in args)
+                            //     $scope.newList.push(args[item]);
+                            // }
+                            if (orderType == '热门')
+                            // {
+                                $scope.hotList = args;
+                            //        for (var item in args)
+                            //         $scope.hotList.push(args[item]);
+                            // }
+                        // }
+                    },function (args) {
+                        //alert(args);
                     })
                 };
+
+                //点击删除按钮时给变量赋值
+                $scope.deleteNews = function (userId,personId,nodeType) {
+                    $scope.valueId = userId,
+                    $scope.valuePersonId = personId,
+                    $scope.NodeType = nodeType
+                };
+                //确认删除时调用删除方法
+                $scope.deleteConframe = function () {
+                    $scope.deleteExample($scope.valueId,$scope.valuePersonId,$scope.m.learn.curQuestion.guid,$scope.NodeType);
+                };
+
                 //删除案例内容
-                $scope.deleteExample = function (id,personId,nodeId) {
-                    if (!$scope.isLogin()){
+                $scope.deleteExample = function (id,personId,nodeId,orderType) {
+                    if (!$scope.userId){
                         utilityService.alert("请登录！");
                         return;
                     }
-                    if (personId!=$scope.isLogin())
+                    if (personId!=$scope.userId)
                     {
                         utilityService.alert("不是本人不能删除！");
                         return;
@@ -359,41 +354,33 @@
                     dataService.deleteCourseNodeSimpleItem({
                         id:id
                     }).then(function (args) {
-                        $scope.getCourseSimpleList(nodeId);
+                        $scope.getCourseSimpleList(nodeId,'热门',6);
+                        $scope.getCourseSimpleList(nodeId,'最新',100);
                     })
-                }
+                };
+
                 //案例点赞
-                $scope.likeCourseSimple = function (id,nodeid) {
-                    if (!$scope.isLogin()){
+                $scope.likeCourseSimple = function (id,nodeid,orderType) {
+                    if (!$scope.userId){
                         utilityService.alert('请先登录');
                         return
                     }
                     dataService.likeCourseNodeSimple({
                         id:id,
-                        // userId:dataService.userInfo.personId,
-                        personId:$scope.isLogin(),
+                        personId:$scope.userId,
                         isLike: 1
                     }).then(function (args) {
-                        $scope.getCourseSimpleList(nodeid);
+                        // $scope.getCourseSimpleList(nodeid,orderType);
+                        $scope.getCourseSimpleList(nodeid,'最新',100);
+                        $scope.getCourseSimpleList(nodeid,'热门',6);
                     })
                 };
-                //案例编辑
-                $scope.editSimple = function (id,personid,content,nodeId) {
-                    $scope.m.learnInfo.exampleContent = content;
-                    if (!$scope.isLogin()){
-                        utilityService.alert('请登录')
-                    }
-                    if(personid!=$scope.isLogin()){
-                        utilityService.alert('不是本人不能编辑');
-                    }
-                    dataService.updateCourseNodeSimpleItem({
-                        id:id,
-                        content:$scope.m.learnInfo.exampleContent,
-                        personId:$scope.isLogin()
-                    }).then(function () {
-                        $scope.getCourseSimpleList(nodeId);
-                    })
-                }
+                //点击加载六条
+                // $scope.addNewList = function (nodeId) {
+                    // $scope.start+=6;
+                //     $scope.getCourseSimpleList(nodeId,'最新',$scope.start+=6)
+                // };
+
 
 
                 $scope.$watch("m.learn.curQuestion", function (newValue, oldValue) {
@@ -412,29 +399,31 @@
                         //提交问题
                         // $scope.addCourseASItem(newValue.guid);
                         //获取问题
-                        $scope.getCourseASList(newValue.guid);
+                        // $scope.getCourseASList(newValue.guid);
                         //提交案例
                         // $scope.addCourseSimpleItem(newValue.guid);
                         //获取案例
-                        $scope.getCourseSimpleList(newValue.guid);
+                         $scope.getCourseSimpleList(newValue.guid,'热门',6);
+                         $scope.getCourseSimpleList(newValue.guid,'最新',100);
                     }
-
+                    $scope.m.learnInfo.exampleContent = '';
                 });
                 //点击回复按钮是显示input
-                $scope.showInput = function(id){
-                    $scope.inputId = id;
-                };
+                // $scope.showInput = function(id){
+                //     $scope.inputId = id;
+                // };
 
 
 
 
 
                 var alyPlay = null;
-                createVideo = function (item, video) {
+                var createVideo = function (item, video) {
 
                 }
                 var pauseVideo = function () {
                     var myVideo = document.getElementById("myVideo");
+                    if (!myVideo)return;
                     myVideo.pause();
                 };
 
@@ -481,7 +470,17 @@
                     }
                 };
 
-
+                var token = storeService.getLocalValue("token");
+                if (token){
+                    dataService.loginByToken({
+                        token:token
+                    })
+                }
+                $scope.getUserId = function () {
+                    $scope.userId = dataService.userInfo.personId;
+                };
+                // $scope.getUserId();
+                $scope.loadData();
 
             }]);
 })();

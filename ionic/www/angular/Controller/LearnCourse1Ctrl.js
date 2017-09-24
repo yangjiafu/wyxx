@@ -1,10 +1,23 @@
 ﻿(function() {
     angular.module("app")
     .controller("LearnCourse1Ctrl", ["$scope", "$interval", "$stateParams", "dataService",
-        "convertService", "$state", "myConfig", "$log", "utilityService", "courseService1", "$ionicSlideBoxDelegate", "storeService", "$timeout", "$q","$ionicPopup",
+        "convertService", "$state", "myConfig", "$log", "utilityService", "courseService1", "$ionicSlideBoxDelegate", "storeService", "$timeout", "$q","$ionicPopup","$ionicScrollDelegate",
         function ($scope, $interval, $stateParams, dataService, convertService,
-            $state, myConfig, $log, utilityService, courseService1, $ionicSlideBoxDelegate, storeService, $timeout, $q, $ionicPopup) {
+            $state, myConfig, $log, utilityService, courseService1, $ionicSlideBoxDelegate, storeService, $timeout, $q, $ionicPopup,$ionicScrollDelegate) {
             var scope = $scope;
+
+            $scope.hotList = [];//热门评论列表
+            $scope.newList = []; //最新列表
+
+            $scope.valueId = '';//定义bootstrap显示的模态框的数据传递变量
+            $scope.valuePersonId = '';
+            $scope.NodeType = '';
+
+            $scope.userId = dataService.userInfo.personId;
+            // $scope.showask = '';//显示回复的input
+            $scope.showdelete1 = false;
+            $scope.start = 0; //开始加载的条数
+
             var fontSize = localStorage.getItem("fontsize");
             if (!fontSize) {
                 localStorage.setItem("fontsize", "14px");
@@ -25,9 +38,10 @@
                     score: 0,
                     startTime: new Date(),
                     endTime: new Date(),
-                    useTime:""
+                    useTime:"",
+                    exampleContent: ''//提交案例的内容
                 },
-                isShowLearnInfo: false,
+                isShowLearnInfo: false
             };
 
             $scope.changeFontSize = function() {
@@ -54,6 +68,9 @@
                         if ($scope.m.learn.questions[i].fileType == "video") {
                             $scope.m.learn.questions[i].video = splitVideo($scope.m.learn.questions[i].file);
                         }
+                        if($scope.m.learn.questions[i].type=='question'){
+                            $scope.m.learn.questions[i].items = random($scope.m.learn.questions[i].items);
+                        }
                     }
                     $scope.m.learn.curQuestion = $scope.m.learn.questions[0];
                     $scope.m.learn.index = 0;
@@ -76,8 +93,9 @@
                     defer.resolve("");
                 }
                 else {
+                    var courseNameEx = $scope.m.params.courseNameEx ?   $scope.m.params.courseNameEx : "";
                     dataService.getTextContent({
-                        courseName: $scope.m.params.courseName,
+                        courseName: $scope.m.params.courseName + courseNameEx,
                         fileName: courseItem.file
                     })
                     .then(function (args) {
@@ -181,6 +199,7 @@
 
             var priorNextMarker = false;
             $scope.next = function () {
+                $scope.scrollTop();
                 if (priorNextMarker == true)return;
                 priorNextMarker = true;
                 courseService1.nextLearn();
@@ -191,6 +210,7 @@
             };
 
             $scope.prior = function () {
+                $scope.scrollTop();
                 if (priorNextMarker == true)return;
                 priorNextMarker = true;
                 courseService1.priorLearn();
@@ -350,7 +370,7 @@
                         .then(function (args) {
                             if (scope.m.learn.questions.length > tempIndex) {
                                 var html = "";
-                                html += '<div id="slide"' + tempIndex + ' class="swiper-slide">';
+                                html += '<div id="slide' + tempIndex + '" class="swiper-slide add-auto-height">';
                                 if (scope.m.learn.questions[tempIndex].type == "catalog") {
                                     html += getCatalogHtml(scope.m.learn.questions[tempIndex]);
                                 }
@@ -584,6 +604,141 @@
                 }
                 return html;
             }
+
+            var random = function(array) {
+                var arr = array;
+                var arr1 =  arr.sort(function() {
+                    return .5 - Math.random();
+                });
+                return arr1;
+            };
+
+            //滚动到顶部
+            $scope.scrollTop = function() {
+                $ionicScrollDelegate.scrollTop();
+            };
+
+            //提交案例内容
+            $scope.addCourseSimpleItem = function(nodeId,nodeType){
+                if(nodeType=='question')
+                    return;
+                if (!$scope.userId){
+                    utilityService.alert("请登录");
+                    return;
+                }
+                else
+                if ($scope.m.learnInfo.exampleContent ==''){
+                    utilityService.alert("填写内容再提交");
+                    return;
+                }
+                dataService.addCourseNodeSimpleItem({
+                    courseId:$scope.m.params.courseId,
+                    nodeId:nodeId,
+                    parentId:  0,
+                    type: '',
+                    learnMode:$scope.m.params.difficulty,
+                    content:$scope.m.learnInfo.exampleContent,
+                    personId:$scope.userId
+                }).then(function (args) {
+                    $scope.getCourseSimpleList(nodeId,'最新',100);
+                    $scope.m.learnInfo.exampleContent = '';
+                })
+            };
+            //获取案例内容
+            $scope.getCourseSimpleList = function (nodeId,orderType,limit) {
+                dataService.getCourseNodeSimpleList({
+                    courseId:$scope.m.params.courseId,
+                    nodeId:nodeId,
+                    personId: $scope.userId,
+                    type: '',
+                    learnMode: $scope.m.params.difficulty,
+                    orderType: orderType,//热门或最新
+                    start:0,
+                    limit:limit
+                }).then(function (args) {
+                    // if (args.length>0){
+                    if (orderType == '最新')
+                        $scope.newList = args;
+
+                    if (orderType == '热门')
+                        $scope.hotList = args;
+
+                },function (args) {
+                    //alert(args);
+                })
+            };
+
+            // 一个确认对话框
+            $scope.deleteNews = function(userId,personId,nodeType) {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: '提示！',
+                    template: '确认删除?',
+                    okText: '确认',
+                    cancelText: '取消'
+                });
+                confirmPopup.then(function(res) {
+                    if(res) {
+                        $scope.deleteExample(userId,personId,$scope.m.learn.curQuestion.guid,nodeType);
+                    } else {
+                        // console.log('You are not sure');
+                    }
+                });
+            };
+
+
+            //删除案例内容
+            $scope.deleteExample = function (id,personId,nodeId,orderType) {
+                if (!$scope.userId){
+                    utilityService.alert("请登录！");
+                    return;
+                }
+                if (personId!=$scope.userId)
+                {
+                    utilityService.alert("不是本人不能删除！");
+                    return;
+                }
+                dataService.deleteCourseNodeSimpleItem({
+                    id:id
+                }).then(function (args) {
+                    $scope.getCourseSimpleList(nodeId,'热门',6);
+                    $scope.getCourseSimpleList(nodeId,'最新',100);
+                })
+            };
+
+            //案例点赞
+            $scope.likeCourseSimple = function (id,nodeid,orderType) {
+                if (!$scope.userId){
+                    utilityService.alert('请先登录');
+                    return
+                }
+                dataService.likeCourseNodeSimple({
+                    id:id,
+                    personId:$scope.userId,
+                    isLike: 1
+                }).then(function (args) {
+                    // $scope.getCourseSimpleList(nodeid,orderType);
+                    $scope.getCourseSimpleList(nodeid,'最新',100);
+                    $scope.getCourseSimpleList(nodeid,'热门',6);
+                })
+            };
+            //点击加载六条
+            // $scope.addNewList = function (nodeId) {
+            // $scope.start+=6;
+            //     $scope.getCourseSimpleList(nodeId,'最新',$scope.start+=6)
+            // };
+
+
+
+            $scope.$watch("m.learn.curQuestion",function (newValue,oldValue) {
+                if (newValue && newValue.guid)
+                {
+                    //获取案例
+                    $scope.getCourseSimpleList(newValue.guid,'热门',6);
+                    $scope.getCourseSimpleList(newValue.guid,'最新',100);
+                };
+                $scope.m.learnInfo.exampleContent = '';
+            });
+
 
         }]);
 })();

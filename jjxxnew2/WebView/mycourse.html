@@ -15,7 +15,7 @@
     <div class="courseInfoSub box-shadow"
          style="margin-bottom: 30px"
          ng-repeat="item in m.courseList">
-        <img  style="width: 300px;float: left;" ng-src="{{m.config.filesUrl}}/courses/{{item.courseName}}.jpg" alt="">
+        <img  style="width: 300px;float: left;" ng-src="{{m.config.filesUrl}}/Courses/{{item.courseName}}.jpg" alt="">
         <div class="courseContent">
             <h3 class="size16" >{{item.courseName}}</h3>
             <p class="titleStyle  nonMargin" style="width: 100%">{{item.summarySmall}}</p>
@@ -24,10 +24,22 @@
             </div>
 
             <div class="courseInfoSubButton" style="width:100%;height:45px;">
-                <button class="myBtnCourseItem btnLearnEasy" ng-click="learn(item,0)" ng-if="item.isOldLearn" ng-disabled="courseInfo">开始学习</button>
-                <button class="myBtnCourseItem btnLearnEasy" style="background-color:#f56a6a;" ng-click="learn(item,1)" ng-if="item.isLearnEasy" ng-disabled="courseInfo"><span class="iconfont">&#xe60f;</span>简单学习</button>
-                <button class="myBtnCourseItem btnLearnNormal" ng-click="learn(item,2)" ng-if="item.isLearnNormal" ng-disabled="courseInfo">开始学习</button>
-                <button class="myBtnCourseItem btnLearnHard" style="background-color:#f56a6a;" ng-click="learn(item,3)" ng-if="item.isLearnHard" ng-disabled="courseInfo"><span class="iconfont">&#xe60e;</span>标准学习</button>
+                <!--<button class="myBtnCourseItem btnLearnEasy" ng-click="learn(item,0)" ng-if="item.isOldLearn" ng-disabled="courseInfo">开始学习</button>-->
+                <button class="myBtnCourseItem btnLearnEasy"
+                        style="background-color:#F5A09F;"
+                        ng-click="learn(item,1)"
+                        ng-if="item.isLearnEasy"
+                        ng-disabled="courseInfo">简单学习</button>
+                <button class="myBtnCourseItem btnLearnNormal"
+                        style="background-color: #F58582"
+                        ng-click="learn(item,2)"
+                        ng-if="item.isLearnNormal"
+                        ng-disabled="courseInfo">普通学习</button>
+                <button class="myBtnCourseItem btnLearnHard"
+                        style="background-color:#f56a6a;"
+                        ng-click="learn(item,3)"
+                        ng-if="item.isLearnHard"
+                        ng-disabled="courseInfo">标准学习</button>
                 <button class="marginRight pointer" style="background-color:#55b5ff;" ng-click="exam(item)"  ng-if="item.isExam">
                     <span class="iconfont">&#xe602;</span>
                     测试

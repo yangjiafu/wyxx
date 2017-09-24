@@ -501,7 +501,8 @@ textarea {
     min-width: 980px;
 }
 .banner{
-    width:100%;
+    width:80%;
+    margin: auto;
     height:370px;
 }
 .bannerList{
@@ -516,7 +517,7 @@ textarea {
     height: 100%;
     transition: .5s;
     background: url("../img/banner/banner1.png") no-repeat ;
-    background-size: 100% auto;
+    background-size: cover;
 }
 .contentList{
     height:370px;
@@ -618,9 +619,11 @@ li.moreList:hover div.contentList{
 }
 .typeStyle{
     color: #fff;
-    width: 60%;
-    padding: 5px;
-    font-size: 16px
+    /*width: 60%;*/
+    display: inline-block;
+    padding: 5px 50px 5px 5px;
+    font-size: 16px;
+    margin: 20px 20px;
 }
 .typeStyleBG0{
     background-color: #e96e66;

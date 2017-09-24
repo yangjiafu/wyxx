@@ -1,11 +1,16 @@
 ﻿<div id="background" class="loadingBackground" ng-if="showLoading" ></div>
-<div id="progressBar" class="progressBar" ng-if="showLoading" >音频加载中，请稍候...</div> 
-
+<div id="progressBar" class="progressBar" ng-if="showLoading" >音频加载中，请稍候...</div>
 <div class="contentPlateTop" style="background-color: #f5f5f5;width:1200px;
 padding-top: 60px;font-size: 18px;min-height: 800px;">
     <div class="examTop">
         <ul>
-            <li style="color:#F66526;"><i class="icon iconfont icon-shijian"></i>&nbsp;{{m.learnInfo.useTime}}</li>
+            <!--<li style="color:#F66526;"><i class="icon iconfont icon-shijian"></i>&nbsp;{{m.learnInfo.useTime}}</li>-->
+            <li style="color: #5cb85c;font-size: 16px">
+                <!--<div style="margin-left: 10px;" ng-if="m.params.difficulty=='0'">普通模式</div>-->
+                <div style="margin-left: 10px;" ng-if="m.params.difficulty=='1'">简单学习</div>
+                <div style="margin-left: 10px;" ng-if="m.params.difficulty=='2'">一般学习</div>
+                <div style="margin-left: 10px;" ng-if="m.params.difficulty=='3'">标准学习</div>
+            </li>
             <li style="float:right;color:#fff;font-size: 18px;margin-right: 10px;">
                 <button class="quitBtn"
                         style="width: 90%;height: 40px;background-color: #3671CF"
@@ -24,64 +29,72 @@ padding-top: 60px;font-size: 18px;min-height: 800px;">
             <li ng-click="changeSize()" class="pointer">
                 <span class="iconfont">&#xe617;</span>字体大小
             </li>
-            <li style="float: right;color: #5cb85c;font-size: 16px">
-                <div style="margin-left: 10px;" ng-if="m.params.difficulty=='0'">普通模式</div>
-                <div style="margin-left: 10px;" ng-if="m.params.difficulty=='1'">简单学习</div>
-                <div style="margin-left: 10px;" ng-if="m.params.difficulty=='2'">困难模式</div>
-                <div style="margin-left: 10px;" ng-if="m.params.difficulty=='3'">标准学习</div>
+            <li><span style="color: red">{{m.learn.curQuestion.guid}}</span>
+            </li>
+            <li style="float: right">
+                得分:{{m.learnInfo.score}}
             </li>
         </ul>
         <audio id="lessonAudio">
             <source id="lessonAudioSource" src="http://www.ynjjxx.com/webttsfiles/test1.mp3" type="audio/mpeg">
             Your browser does not support the audio tag.
-        </audio> 
+        </audio>
     </div>
+    courseId:{{m.learnInfo.courseId}}
 
+    {{getUserId()}}
     <div class="left box-shadow examLeft"
          style="width:100%;min-height:620px;margin-top:0;margin-bottom: 10px;padding-bottom: 60px;position: relative" id="selectTxt">
 
-        <div style="display: inline-block;margin-left: 1%;height: 560px;width: 59%;border: 1px solid #eee"
+        <div style="display: inline-block;
+        margin-left: 1%;height: 560px;width: 70%;border: 1px solid #eee"
              id="selectInput">
             <div class="parentTitle">
                 <p ng-repeat=" (key,value) in m.learn.curQuestion.parentTitle" class="texinden{{key}}">
                     {{value | filterText}}
                 </p>
             </div>
-            <h5 ng-if="m.learn.curQuestion.type=='catalog' && m.learn.curQuestion.title!='图片' && m.learn.curQuestion.title!='视频' &&m.params.courseName!= m.learn.curQuestion.title"
-                class="size16"> {{m.learn.curQuestion.title | filterText}}</h5>
-            <h5 ng-if="m.learn.curQuestion.type=='question'" style="margin-left: 20px">
-                <span class="lineHeight size16 " ng-if="m.params.difficulty=='3'">{{m.learn.curQuestion.title | filterText}}</span>
-                <span class="lineHeight size16 " ng-if="m.params.difficulty!='3'"
-                      ng-repeat="item in m.learn.curQuestion.title">{{item}}
-                    <br ng-if="item.length>=8"></span>
-                <span class="typeColor2 block "
-                      ng-if="m.learn.curQuestion.rightAnswerCount > 1">多选题（{{m.learn.curQuestion.rightAnswerCount}}）
-                </span>
-                <span class="typeColor2 block " ng-if="m.learn.curQuestion.rightAnswerCount == 1">单选题</span>
-            </h5>
+            <!--{{m.learn.curQuestion.fileType}}-->
+            <div style="overflow-y: auto;height: 420px"
+                    ng-if="m.learn.curQuestion.fileType == ''">
+            <!--<div style="overflow-y: auto;height: 420px"-->
+                    <!--ng-if="m.learn.curQuestion.fileType != 'video' && m.learn.curQuestion.fileType != 'img'&&m.learn.curQuestion.fileType != 'text'">-->
+                <h5 ng-if="m.learn.curQuestion.type=='catalog' && m.learn.curQuestion.title!='图片' && m.learn.curQuestion.title!='视频' && m.params.courseName!= m.learn.curQuestion.title"
+                    class="size16"> {{m.learn.curQuestion.title | filterText}}</h5>
+                <h5 ng-if="m.learn.curQuestion.type=='question'" style="margin-left: 20px">
+                    <span class="lineHeight size16 " ng-if="m.params.difficulty=='3'">{{m.learn.curQuestion.title | filterText}}</span>
+                    <span class="lineHeight size16 " ng-if="m.params.difficulty!='3'"
+                          ng-repeat="item in m.learn.curQuestion.title">{{item}}
+                        <br ng-if="item.length>=8"></span>
+                    <span class="typeColor2 block "
+                          ng-if="m.learn.curQuestion.rightAnswerCount > 1">多选题（{{m.learn.curQuestion.rightAnswerCount}}）
+                    </span>
+                    <span class="typeColor2 block " ng-if="m.learn.curQuestion.rightAnswerCount == 1">单选题</span>
+                </h5>
 
 
-            <div ng-if="m.learn.curQuestion.type=='catalog'"
-                 ng-repeat="(key,value) in m.learn.curQuestion.items">
-                <!--{{m.learn.curQuestion.items}}-->
-                <span class="lineHeight"
-                      ng-if="value.title!='图片' && value.title!='视频' && value.type !='question'">
-                    <!--{{ judgeNext(value.title,key)}}-->
-                     {{value.title  | filterText}}
-                </span>
-            </div>
+                <div ng-if="m.learn.curQuestion.type=='catalog'"
+                     ng-repeat="(key,value) in m.learn.curQuestion.items">
+                    <!--{{m.learn.curQuestion.items}}-->
+                    <span class="lineHeight"
+                          ng-if="value.title!='图片' && value.title!='视频' && value.type !='question'">
+                        <!--{{ judgeNext(value.title,key)}}-->
+                         {{value.title  | filterText}}
+                    </span>
+                </div>
 
-            <div ng-if="m.learn.curQuestion.type=='question'"
-                 ng-repeat="item in m.learn.curQuestion.items"
-                 ng-click="selectAnswer(item)"
-                style="text-indent: 1em;margin-top: 20px;">
-                <input type="checkbox" ng-checked="item.isUserChoice"/>
-                <span class="lineHeight text-danger {{className}}" style="text-decoration:line-through"
-                      ng-if="m.learn.curQuestion.answerStatus != 0 && item.type == 'errorAnswer' && item.isUserChoice">{{item.title}}</span>
-                <span class="lineHeight learnProper {{className}}"
-                      ng-if="m.learn.curQuestion.answerStatus != 0 && item.type == 'rightAnswer' && item.isUserChoice">{{item.title}}</span>
-                <span class="lineHeight pointer {{className}}"
-                      ng-if="m.learn.curQuestion.answerStatus == 0 || !item.isUserChoice">{{item.title}}</span>
+                <div ng-if="m.learn.curQuestion.type=='question'"
+                     ng-repeat="item in m.learn.curQuestion.items"
+                     ng-click="selectAnswer(item)"
+                    style="text-indent: 1em;margin-top: 20px;">
+                    <input type="checkbox" ng-checked="item.isUserChoice"/>
+                    <span class="lineHeight text-danger {{className}}" style="text-decoration:line-through"
+                          ng-if="m.learn.curQuestion.answerStatus != 0 && item.type == 'errorAnswer' && item.isUserChoice">{{item.title}}</span>
+                    <span class="lineHeight learnProper {{className}}"
+                          ng-if="m.learn.curQuestion.answerStatus != 0 && item.type == 'rightAnswer' && item.isUserChoice">{{item.title}}</span>
+                    <span class="lineHeight pointer {{className}}"
+                          ng-if="m.learn.curQuestion.answerStatus == 0 || !item.isUserChoice">{{item.title}}</span>
+                </div>
             </div>
 
 
@@ -97,7 +110,7 @@ padding-top: 60px;font-size: 18px;min-height: 800px;">
                 <img ng-src="{{m.learn.curQuestion.file}}"
                      data-toggle="modal"
                      data-target="#showImg"
-                     style="max-width: 90%;max-height: 540px"
+                     style="max-height: 440px"
                      onerror="this.style.display='none'">
             </div>
 
@@ -111,74 +124,71 @@ padding-top: 60px;font-size: 18px;min-height: 800px;">
             </div>
         </div>
 
-        <div style="display: inline-block;width: 38%;height: 560px;margin-left: 1%;vertical-align: top;border: 1px solid #eee">
-            <div class="login-first"
-                 style="text-align: center;border-bottom:1px solid #eee;background-color: #fcf7e4">
-                <span class="pointer loginTitle"
-                      ng-click="generaTitle ='question'"
-                      style="font-size: 18px"
-                      ng-class="{'loginActive':generaTitle=='question'}">问答</span>
-                <span class="pointer loginTitle"
-                      style="margin-left: 20px;font-size: 18px"
-                      ng-click="generaTitle = 'example'"
-                      ng-class="{'loginActive':generaTitle=='example'}">案例</span>
-            </div>
-            <div style="width: 100%;height: 80%;"
-                 ng-if="generaTitle =='question'">
-                <div style="height: 30%">
-                    <textarea ng-model="m.learnInfo.replyContent"
-                              style="width: 94%;height: 100px;margin:15px 3% 0 3%;border-color: #eee;resize:none;background-color: #f5f5f5"></textarea>
-                    <span style="color: #f56a6a;margin-left: 5%">{{loginLodin}}</span>
-                    <span class="pointer loginMenu right"
-                          style="margin-right: 3%"
-                          ng-click="addCourseASItem(m.learn.curQuestion.guid)">提交</span>
-                </div>
-                <div style="height: 75%;margin-top: 5%;overflow-y: auto;width: 97%;">
+        <div style="display: inline-block;width: 28%;height: 560px;margin-left: 0.5%;vertical-align: top;border: 1px solid #eee">
+            <div style="width: 100%;height: 100%;">
+                <div style="height: 93%;overflow-y: auto;width: 100%;">
+                    <span class="saycontent"  ng-if="hotList.length>0">
+                            <span class="iconfont">&#xe609;</span>热门评论</span>
                     <ul class="eqStyle">
-                        <li ng-repeat="(key,value) in asList" ng-class="{'discussItemActive':(key%2==0)}">
-                            <span class="qustionName">{{value.personName}}:</span>
-                            <span class="qustionContent">{{value.content}}</span>
-                            <span class="qustionBottom">
-                                {{value.addTime |customDate}}
-                            </span>
-                        </li>
-                    </ul>
-                    <div style="margin-left: 5%" ng-if="asList.length==0">没有问答内容</div>
-                </div>
-            </div>
-
-            <div style="width: 100%;height: 80%;"
-                 ng-if="generaTitle =='example'">
-                <div style="height: 30%;">
-                    <textarea ng-model="m.learnInfo.exampleContent"
-                              style="width: 94%;height: 100px;margin:15px 3% 0 3%;border-color: #eee;resize:none;background-color: #f5f5f5"></textarea>
-
-                    <span style="color: #f56a6a;margin-left: 5%">{{loginExamplLodin}}</span>
-                    <span class="pointer loginMenu right"
-                          style="margin-right: 3%"
-                          ng-click="addCourseSimpleItem(m.learn.curQuestion.guid)">提交</span>
-                </div>
-                <div style="height: 75%;margin-top: 5%;overflow-y: auto;width: 97%;">
-                    <ul class="eqStyle">
-                        <li ng-class="{'discussItemActive':(key%2==0)}" ng-repeat="(key,value) in simpleList">
+                        <li ng-class="{'discussItemActive':(key%2==0)}"
+                            ng-repeat="(key,value) in hotList">
                             <span class="qustionName">{{value.personName}}</span>
-                            <span class="qustionContent">{{value.content}}</span>
-                            <span class="block">
-                                <!--<span ng-click="editSimple(value.id,value.personId,value.content,value.guid)">编辑</span>-->
-                                <span class="pointer"
-                                      ng-click="deleteExample(value.id,value.personId,m.learn.curQuestion.guid)">
+                            <span class="pointer right"
+                                  style="margin-left: 10px"
+                                  ng-class="{'typeColor2':value.isLike == '1', '':value.isLike=='0'}"
+                                  ng-click="likeCourseSimple(value.id,m.learn.curQuestion.guid,'热门')">
+                                 <span class="iconfont" >&#xe610;</span>{{value.num}}</span>
+                            <span class="qustionContents">{{value.content}}</span>
+                            <span class="block" style="color: #A4A9B2;text-indent: 0">
+                                <span class="qustionBottom">{{value.addTime | customDate}}</span>
+                                <span class="pointer delete right"
+                                      ng-if="value.personId == userId"
+                                      ng-click = "deleteNews(value.id,value.personId,'热门')"
+                                      data-target="#showDelete1" data-toggle="modal">
                                     <span class="iconfont">&#xe634;</span>删除</span>
-                                <span class="pointer"
-                                      style="margin-left: 10px"
-                                      ng-click="likeCourseSimple(value.id,m.learn.curQuestion.guid)">
-                                    <span class="iconfont" >&#xe610;</span>{{value.num}}</span>
                             </span>
-                            <span class="qustionBottom">{{value.addTime | customDate}}</span>
                         </li>
                     </ul>
-                    <div style="margin-left: 5%" ng-if="simpleList.length==0">
-                        没有案例
+                        <span class="saycontent" ng-if="newList.length>0">
+                            <span class="iconfont">&#xe609;</span>最新评论</span>
+                    <ul class="eqStyle">
+                        <li ng-class="{'discussItemActive':(key%2==0)}"
+                            ng-repeat="(key,value) in newList">
+                            <span class="qustionName">{{value.personName}}</span>
+                            <span class="pointer right"
+                                  style="margin-left: 10px"
+                                  ng-class="{'typeColor2':value.isLike == '1', '':value.isLike=='0'}"
+                                  ng-click="likeCourseSimple(value.id,m.learn.curQuestion.guid,'最新')">
+                                    <span class="iconfont" >&#xe610;</span>{{value.num}}</span>
+                            <span class="qustionContents">{{value.content}}</span>
+                            <span class="block" style="color: #A4A9B2;text-indent: 0">
+                                <span class="qustionBottom">{{value.addTime | customDate}}</span>
+                                <span class="pointer delete right"
+                                      data-target="#showDelete1"
+                                      ng-if="value.personId == userId"
+                                      ng-click = "deleteNews(value.id,value.personId,'热门')"
+                                      data-toggle="modal">
+                                    <span class="iconfont">&#xe634;</span>删除</span>
+                            </span>
+                        </li>
+                        <!--<span ng-if="newList.length>=6&&newList.length%6==0"-->
+                              <!--ng-click="addNewList(m.learn.curQuestion.guid)">更多...</span>-->
+                    </ul>
+                    <div style="margin-left: 5%" ng-if="newList.length==0&&hotList.length==0">
+                        没有互动问答
+                        <!--{{newList.length==0}}-hot-{{hotList.length==0}}-->
                     </div>
+                </div>
+                <div style="height: 5%;">
+                    <input ng-model="m.learnInfo.exampleContent"
+                              placeholder="输入内容..."
+                              ng-readonly="m.learn.curQuestion.type=='question'"
+                              style="width: 100%;margin-bottom: 15px;
+                              padding:5px 10px;background-color: #EDFAF1;border: 1px solid #eee;">
+                    <button class="btn mainButton learnBtn right"
+                            ng-disabled="m.learn.curQuestion.type=='question'"
+                            style="background-color: #3474ce;color: #fff"
+                          ng-click="addCourseSimpleItem(m.learn.curQuestion.guid,m.learn.curQuestion.type)">提交</button>
                 </div>
             </div>
         </div>
@@ -201,6 +211,25 @@ padding-top: 60px;font-size: 18px;min-height: 800px;">
 </div>
 <div class="clear"></div>
 
+
+<!--删除时候的模态框-->
+<div class="modal fade" id="showDelete1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 40%;margin:30% auto 0 auto;text-align: center">
+            <div class="modal-body" style="margin: auto" role="document">
+                确认删除！
+            </div>
+            <div class="modal-footer" style="margin: auto;text-align: center">
+                <button
+                        ng-click="deleteConframe()"
+                        type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="modal fade" id="showImg" role="dialog">
     <button type="button" style="color: #fff" class="close" data-dismiss="modal">
         <span aria-hidden="true" style="color: #fff">&times;</span>
@@ -209,6 +238,7 @@ padding-top: 60px;font-size: 18px;min-height: 800px;">
         <img src="{{m.learn.curQuestion.file}}">
     </div>
 </div>
+
 <!--选择答案时候的提示-->
 <div class="modal fade" id="questionError" role="dialog" aria-labelledby="Error">
     <div class="modal-dialog" role="document">

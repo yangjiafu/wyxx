@@ -43,7 +43,6 @@
                 else {
                     $scope.m.isOldLearn = true;
                 }
-                
             }, function (args) {
             });
         };
@@ -58,12 +57,18 @@
             //var difficulty = 2;
             var courseId = $scope.courseInfo.baseInfo.id;
             var courseName = $scope.courseInfo.baseInfo.title;
+            var courseNameEx = $scope.courseInfo.baseInfo.titleEx;
 
             if ($scope.courseInfo.baseInfo.version == "1") {
                 $state.go('learnCourse', { courseId: courseId, courseName: courseName, difficulty: difficulty });
             }
             else {
-                $state.go('learnCourse1', { courseId: courseId, courseName: courseName, difficulty: difficulty });
+                $state.go('learnCourse1', {
+                    courseId: courseId,
+                    courseName: courseName,
+                    difficulty: difficulty,
+                    courseNameEx: courseNameEx
+                });
             }
         };
 

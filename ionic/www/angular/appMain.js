@@ -49,10 +49,10 @@
     videoPlatform: "yd",
     version: "1.0.60",
     //serviceUrl: "http://localhost:57322/",
-    //serviceUrl: "http://www.kmztsoftware.com/ZSDT",
-    //filesUrl: "http://www.kmztsoftware.com/CourseFiles",
-    serviceUrl: "http://www.ynjjxx.com/ZSDT",
-    filesUrl:"http://www.ynjjxx.com/CourseFiles",
+    serviceUrl: "http://www.kmztsoftware.com/ZSDT",
+    filesUrl: "http://www.kmztsoftware.com/CourseFiles",
+     //serviceUrl: "http://www.ynjjxx.com/ZSDT",
+     //filesUrl:"http://www.ynjjxx.com/CourseFiles",
     needSelectDifficulty:false,
     templates: [
         {
@@ -276,7 +276,7 @@
         controller: 'LearnCourseCtrl'
     })
     .state('learnCourse1', {
-        url: '/learnCourse1/:courseId/:courseName/:difficulty',
+        url: '/learnCourse1/:courseId/:courseName/:difficulty/:courseNameEx',
         cache: false,
         templateUrl: 'angular/appView/learnCourse1.html',
         controller: 'LearnCourse1Ctrl'

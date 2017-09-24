@@ -16,8 +16,8 @@
         // var menu = $stateParams.loginMenu;
         // 登录方法
             $scope.info= {
-                a:'',
-                p:''
+                userName:'',
+                pwd:''
             };
 
         $scope.login = function () {
@@ -31,14 +31,14 @@
             });
             }
             else {
-                dataService.login({ account: $scope.info.a, password: $scope.info.p })
+                dataService.login({ account: $scope.info.userName, password: $scope.info.pwd})
             .then(function (args) {
                 // 处理 IE 登录
                 // $scope.toggleLoginBox();
                 // $state.go('home');
                 $scope.$emit('navBtn','首页');
-                $scope.$emit('hiddenLogin', "欢迎您:" + args.personName);
-                $scope.$emit("onLogin", "欢迎您:" + args.personName);
+                $scope.$emit('hiddenLogin');
+                // $scope.$emit("onLogin", "欢迎您:" + args.personName);
             }, function (args) {
                 alert(args);
             });
@@ -61,7 +61,6 @@
             // $scope.$on('showloginMenu',function (event, data) {
             //     console.log('LoginCtrl',data);
             // });
-
 
             $scope.actives= 'entry' ;
             // $scope.actives=  $stateParams.showloginMenu ;

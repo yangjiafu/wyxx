@@ -120,11 +120,11 @@
                     <ul>
                         <li>
                             用户名:<input class="login-input" type="text"
-                                       ng-model="info.a">
+                                       ng-model="info.userName">
                         </li>
                         <li>
                             密&nbsp;&nbsp;&nbsp;码:<input class="login-input" style="margin-left: 9px;"
-                                                        type="password"  ng-model="info.p" >
+                                                        type="password"  ng-model="info.pwd" >
                         </li>
                         <li><button  ng-click="login()" style="border:none;border-radius: 2px;">登录</button></li>
                         <li style="margin-top: 13%">
@@ -211,23 +211,14 @@
             <li ng-click="goMyCourse(); " ng-class="{'activeBottom':navMenu=='我的课程'}"><span>我的课程</span></li>
             <li ng-click="goMyInformation(); " ng-class="{'activeBottom':navMenu=='我的信息'}"  ><span>我的信息</span></li>
 	    <li><span></span></li>
-            <!--<li ng-class="{'activeBottom':navMenu=='新闻资讯'}"  ng-click="navMenu='新闻资讯';goNew()"><span>新闻资讯</span></li>-->
-            <!--<li ng-click="goStars()"><a href="">信息</a></li>
-            <li style="position: relative">
-                <input type="text" class="searchInput" placeholder="搜索...">
-                <img src="img/icon/search.png" alt="" class="searchInputimg">
-               <span class="iconfont"
-                style="border: 1px solid #e3e3e3;padding: 6px;margin-left: -5px;">&#xe70a;</span>
-            </li>
-		-->
             <li style="float:right">
-                {{loginInfo}}&nbsp;&nbsp;
-                <span ng-if="!loginInfo">
+                {{getLoginInfo()}}&nbsp;&nbsp;
+                <span ng-if="!getLoginInfo()">
                     <span ng-click="showLoginBox('entry')">登录</span> &nbsp;/&nbsp;
                     <span ng-click="showLoginBox('enroll')" style="color: red">注册</span>
                     <span class="iconfont">&#xe625;</span>
                 </span>
-                <span ng-if="loginInfo"ng-click="exitLogin();"style="color: red">
+                <span ng-if="getLoginInfo()"ng-click="exitLogin();"style="color: red">
                     <span class="iconfont">&#xe640;</span>退出
                 </span>
             </li>
@@ -241,11 +232,11 @@
     <h1 style="font-size: 20px;margin: 5px 0 5px 0"><a  target="_blank"  href="http://www.ynjjxx.com/gw/aboutus.html">关于我们</a></h1>
     <div class="line" style="margin: auto"></div>
     <ul class="ulStyle footerUl" style="display: table;margin: auto;">
-        
+
 	<!-- <li><a href="">帮助</a></li>
-        <li><a href="">隐私声明</a></li> 
-        <li><a href="http://www.ynjjxx.com/gw/">用户协议</a></li> 
-        <li><a href="" title="0871-65399886">联系方式</a></li> 
+        <li><a href="">隐私声明</a></li>
+        <li><a href="http://www.ynjjxx.com/gw/">用户协议</a></li>
+        <li><a href="" title="0871-65399886">联系方式</a></li>
         <li><a href="http://www.ynjjxx.com/gw/aboutus.html">关于我们</a></li>-->
     </ul>
     <div class="line" style="margin: auto"></div>
@@ -263,14 +254,13 @@
     (function(){
             document.body.style.width = screen.width + 'px';
             $('#screenWidth').css('minHeight',(screen.height-180)+'px');
-            if (screen.width>1360) {
+            if (screen.width>1380) {
                 $('#screenWidth').css(
-                    {'minWidth': '1380px', 'margin': 'auto', 'position':'relative'}
+                    {'width': '1380px', 'margin': 'auto', 'position':'relative'}
                 );
 //                $('#screenWidth,#headtopWidth,#footerWidth').css(
 //                    {'width': '1380px', 'margin': 'auto', 'position':'relative'}
 //                );
-
             }
         }()
     )
