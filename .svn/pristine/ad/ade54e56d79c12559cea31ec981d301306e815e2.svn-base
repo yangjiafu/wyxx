@@ -1,0 +1,196 @@
+.examRight{
+    height: 320px;
+    width: 25%;
+    margin-left: 5%;
+    margin-bottom: 20px
+}
+.examLeft{
+    height: 500px;
+    width: 65%;
+    margin-top: 30px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    position: relative
+}
+.examLeft>p{
+    line-height: 30px;
+}
+.parentTitle{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: rgba(54,113,207,.1);
+}
+.learnProper{
+    font-size: 16px;
+    color: #2e6da4;
+}
+.block{
+    margin-top: 5px;
+    text-indent: 1em;
+    font-size: 14px!important;
+    display: block;
+}
+.examRightPlate{
+    padding: 5px 10px;
+    min-height: 40px;width: 100%;background-color: #fff;text-align: center;margin-bottom: 10px;
+    font-size: 14px;line-height: 40px;
+}
+.quitBtn{
+    width: 100%;
+    height: 100%;
+    border: none!important;
+    background-color: white
+}
+
+/*改动样式*/
+.examTop{
+    position: fixed;
+    width:1200px;
+    height:60px;
+    top: 0;
+    margin: auto;
+    background-color: #fff;
+}
+.examTop li {
+    float: left;
+    width: 140px;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+}
+.quitBtn span:first-child{
+    display: inline-block;
+    font-size: 18px;
+    margin-right: 10px;
+}
+.examNav{
+    width:100%;
+    height:80px;
+    background-color: #959597;
+    line-height: 80px;
+    text-align: center;
+    color: #fff;
+    border:1px solid transparent;
+}
+.examNav>div{
+    display: inline-block;
+}
+.examNav div:first-child{
+    font-size: 22px;
+    font-weight: 800;
+}
+/*.examNac-right{*/
+/*font-size: 16px;*/
+/*color:#fff;*/
+/*position: relative;*/
+/*top:0;*/
+/*left:10px;*/
+/*}*/
+.examFooter{
+    width:100%;
+    height:60px;
+    line-height: 60px;
+    background-color: #fff;
+    border-top:2px solid #3671cf;
+    margin-bottom: 20px;
+}
+.examFooter button{
+    width: 33%;
+    height:100%;
+    background-color: #fff;
+    border-right:1px solid #F0F0F0;
+    color:#3671cf;
+    font-size: 18px;
+    border-radius: 0;
+}
+.courseInfoSubButton{
+    margin-top: 15px;
+}
+.courseInfoSubButton button{
+
+    padding: 5px 8px;
+    font-size: 16px;
+    border:none;
+    color:#fff;
+    border-radius: 5px;
+}
+
+#selectInput>h5>span{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+/*课程学习评论2部分的样式*/
+.qustionName{
+    display: inline-block;
+    color: #9d9d9d;
+    font-size: 14px;
+}
+.qustionContents{
+    display: block;
+    /*text-indent: 2em;*/
+    /*margin-left: 10%;*/
+    width: 96%;
+    padding: 5px 10px;
+    font-size: 16px;
+    word-wrap:break-word;
+}
+.qustionBottom{
+    display: inline-block;
+    /*margin-left: 10%;*/
+    margin-right: 10%;
+    color: #d5d5d5;
+    font-size: 14px
+}
+.eqStyle{
+    margin: 0 0 20px 0;
+}
+
+.eqStyle>li{
+    transition: all .2s;
+    padding: 10px 3% 10px 3%;
+    /*padding-top: 10px;*/
+    border-bottom: 1px solid #f1f1f1;
+    /*margin-top: 10px;*/
+}
+.eqStyle>li li{
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+.qustionInput{
+    border: 1px solid #d5d5d5;
+    border-radius: 2px;
+    font-size: 14px;
+    width: 50%;
+    color: #9d9d9d;
+    margin-left: 10%;
+}
+.loginMenu{
+    background-color: #3474ce;
+    padding: 8px 14px;
+    margin-right: 5%;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 14px;
+}
+.qustionReply{
+    width: 100%;
+}
+.saycontent{
+    padding: 5px 10px;
+    /*background-color: #f5dcd4;*/
+    color: #ff847f;
+    display: block;
+}
+.saycontent>.iconfont{
+    font-size: 18px;
+    font-weight: 700;
+    color: #ff847f;
+}
+/*.delete{*/
+    /*float: right;*/
+    /*margin-right: 10px;*/
+/*}*/

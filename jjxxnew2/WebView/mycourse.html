@@ -15,7 +15,7 @@
     <div class="courseInfoSub box-shadow"
          style="margin-bottom: 30px"
          ng-repeat="item in m.courseList">
-        <img  style="width: 300px;float: left;" ng-src="{{m.config.filesUrl}}/Courses/{{item.courseName}}.jpg" alt="">
+        <img  style="width: 300px;float: left;" ng-src="{{m.config.filesUrl}}/Courses/{{item.courseName+item.courseNameEx}}.jpg" alt="">
         <div class="courseContent">
             <h3 class="size16" >{{item.courseName}}</h3>
             <p class="titleStyle  nonMargin" style="width: 100%">{{item.summarySmall}}</p>

@@ -1,0 +1,152 @@
+<div id="courseInfo" class="content" style="background-color:#f5f5f5;">
+    <div class="myNav breadCrumb">
+        您的位置：
+        <span ng-repeat="(key,value) in m.nav"
+              ng-click="goAllCourse(value.id)">
+            <span ng-if="key!=0">&nbsp;>&nbsp;</span>
+            <span class="pointer">{{value.title}}</span>
+
+        </span>
+    </div>
+    <!--<p ng-repeat="id in m.nav">{{id}}</p>-->
+    <div class="courseInfoSub box-shadow">
+        <img style="width: 300px;float: left;" ng-src="{{courseInfo.baseInfo.img}}" alt="">
+        <div class="courseContent">
+            <h3 style="font-size: 16px;font-weight: 600;margin-top: 0;margin-bottom: 15px">
+                {{courseInfo.baseInfo.title}}</h3>
+
+            <p class="titleStyle  nonMargin" style="width: 100%;font-size: 14px">{{courseInfo.baseInfo.summarySmall}}</p>
+
+            <div style="padding: 15px 0 5px 0;">
+                <!--<span class="bg-title marginRight"> {{courseInfo.baseInfo.status}}</span>-->
+                学习 <span style="color: #3671cf">{{courseInfo.baseInfo.learnCount}}</span>人
+                <span class="marginRight"></span>
+                收藏 <span style="color: #3671cf">{{courseInfo.baseInfo.keepCount}}</span>人
+                <span class="marginRight"></span>
+                <span style="display: none">{{Item.starRating = courseInfo.baseInfo.starRating.toFixed(1)}}</span>
+                <span>
+                    <!--<star rating-value="courseInfo.baseInfo.starRating" max=5 readonly="true"></star>-->
+                    <star rating-value="courseInfo.baseInfo.starRating" max=5 on-hover="onHover" on-leave="onLeave"
+                          readonly="true"></star>
+                </span>
+            </div>
+
+            <div class="courseInfoSubButton">
+                <!--<button class="myBtnCourseItem " style="background-color: #F5C9B9" ng-click="showLearn(0)" ng-if="m.isOldLearn"-->
+                        <!--ng-disabled="!courseInfo">普通学习-->
+                <!--</button>-->
+                <button class="myBtnCourseItem "
+                        style="background-color:#F5A09F;"
+                        ng-click="showLearn(1)"
+                        ng-if="m.isLearnEasy" ng-disabled="!courseInfo">简单学习
+                </button>
+                <button class="myBtnCourseItem"
+                        style="background-color: #F58582"
+                        ng-click="showLearn(2)"
+                        ng-if="m.isLearnNormal"
+                     ng-disabled="!courseInfo">
+                     普通学习
+               </button>
+                <button class="myBtnCourseItem "
+                        style="background-color:#f56a6a;"
+                        ng-click="showLearn(3)"
+                        ng-if="m.isLearnHard"
+                        ng-disabled="!courseInfo">标准学习
+                </button>
+                <button class="myBtnCourseItem marginRight pointer typeColor1" ng-click="showExam()"
+                        style="background-color:#55b5ff;">
+                    <span class="iconfont">&#xe602;</span>
+                    测试
+                </button>
+                <button class=" myBtnCourseItem pointer typeColor2" ng-click="doKeep()"
+                        style="background-color:#f4c900;">
+                    <span class="iconfont">&#xe708;</span>
+                    收藏
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="courseList box-shadow">
+        <ul class="ulStyle marginRight">
+            <li ng-click="coursePlate='课程简介'" ng-class="{'activeBottom':coursePlate=='课程简介'}">课程简介</li>
+            <li ng-click="coursePlate='课程目录'" ng-class="{'activeBottom':coursePlate=='课程目录'}">课程目录</li>
+            <li ng-click="coursePlate='评价'" ng-class="{'activeBottom':coursePlate=='评价'}">评价
+                <span class="typeColor0">（{{courseInfo.baseInfo.discussCount}}）</span></li>
+        </ul>
+    </div>
+
+
+    <div class="coursePlate" style=" height: 400px;overflow-y: scroll">
+        <p class="courselineHeight" style="text-indent: 2em" ng-if="coursePlate=='课程简介'">
+            {{courseInfo.baseInfo.summary}}
+        </p>
+        <div ng-if="coursePlate=='课程目录'">
+            <div id="courseCatalog">
+                <div class="padding">
+                    <div ng-repeat="s1 in courseInfo.catalog.nodes"
+                         ng-if="s1.title.indexOf('图片')<0 && s1.title.indexOf('视频')<0">
+                        <h5 class="myFontColor courselineHeight size16" style="margin: 15px 0 0 0">{{s1.title | filterText}}</h5>
+                        <h5 class="myFontColor courselineHeight"  style="margin: 15px 0 0 0" ng-repeat="s2 in s1.nodes"
+                            ng-if="(s2.title.indexOf('图片')<0 && s2.title.indexOf('视频')<0)&&(s2.title|filterText)!=''">
+                            <span style="margin-left:25px;">{{s2.title | filterText}}</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="coursePlate=='评价'">
+            <div id="myCourseDiscuss">
+                <!--<h3>评价该课程</h3>-->
+                <!--<ljx-star-tool enable-edit="true" star-number="m.score" max-value="5" style="font-size:20px; padding-left:30px;"></ljx-star-tool>-->
+                <textarea style="width: 100%;height: 100px;padding: 10px" placeholder="请对课程进行评价"
+                          ng-model='m.discuss'></textarea>
+                <star rating-value="m.score" max="max" on-hover="onHover" on-leave="onLeave" readonly="false"></star>
+                <!--{{m.score}}-->
+                <button class="submit-btn" ng-click="submitDiscuss()">提交</button>
+            </div>
+            <div class="separated"></div>
+            <div id="courseDiscuss">
+                <h3 class="size16">评论详情（{{courseInfo.baseInfo.discussCount}}）</h3>
+                <div id="courseDiscussInfo">
+                    <ul>
+                        <li class="discussItem"
+                            ng-repeat="(key,value) in courseInfo.discusses"
+                            ng-class="{'discussItemActive':key%2==0}">
+                            <!--<img src="../imgs/personIcon.png" />-->
+                            <div style="width: 50%">
+                                <span class="discussPerson">{{value.personName}}</span>
+                                <star rating-value="value.score" max="max" on-hover="onHover" on-leave="onLeave"
+                                      readonly="true"></star>
+                                <!--{{value.score}}-->
+                                <span class="discussTime right">{{value.discussTime|customDate:'date'}}</span>
+                                <p>{{value.discussContent}}</p>
+                            </div>
+                        </li>
+                        <li class="discussItem" style="padding-top:0px; border:none;">
+                            <!--<ljx-page-control page-step="10" record-count="{{courseInfo.discusses.length}}"></ljx-page-control>-->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--选择答案时候的提示-->
+<div class="modal fade" id="hintLogin" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 400px;height: 180px;margin: auto">
+            <div class="modal-header size14">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <span class="size16 typeColor0">提示！</span>
+            </div>
+            <div class="modal-body" style="text-align: center;margin-top: 20px">
+                <span class="typeColor2" style="font-size: 20px">{{modalText}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+

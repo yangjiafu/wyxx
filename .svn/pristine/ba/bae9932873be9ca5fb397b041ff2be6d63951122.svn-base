@@ -1,0 +1,772 @@
+﻿(function() {
+    angular.module("app")
+    .controller("LearnCourse1Ctrl", ["$scope", "$interval", "$stateParams", "dataService",
+        "convertService", "$state", "myConfig", "$log", "utilityService", "courseService1", "$ionicSlideBoxDelegate", "storeService", "$timeout", "$q","$ionicPopup","$ionicScrollDelegate","$compile",
+        function ($scope, $interval, $stateParams, dataService, convertService,
+            $state, myConfig, $log, utilityService, courseService1, $ionicSlideBoxDelegate, storeService, $timeout, $q, $ionicPopup,$ionicScrollDelegate,$compile) {
+            var scope = $scope;
+
+            $scope.hotList = [];//热门评论列表
+            $scope.newList = []; //最新列表
+
+            $scope.valueId = '';//定义bootstrap显示的模态框的数据传递变量
+            $scope.valuePersonId = '';
+            $scope.NodeType = '';
+
+            $scope.play = false;
+
+            $scope.userId = dataService.userInfo.personId;
+            // $scope.showask = '';//显示回复的input
+            $scope.showdelete1 = false;
+            $scope.start = 0; //开始加载的条数
+
+            var fontSize = localStorage.getItem("fontsize");
+            if (!fontSize) {
+                localStorage.setItem("fontsize", "14px");
+            }
+            $scope.m = {
+                params:{
+                    courseId:$stateParams.courseId,
+                    courseName:$stateParams.courseName,
+                    difficulty:$stateParams.difficulty,
+                    courseNameEx: $stateParams.courseNameEx
+                },
+                learn: courseService1.learn,
+                learnInfo: {
+                    courseId: $stateParams.courseId,
+                    learnMode: "学习",
+                    questionNumber: 0,
+                    answerNumber: 0,
+                    answerRightNumber: 0,
+                    score: 0,
+                    startTime: new Date(),
+                    endTime: new Date(),
+                    useTime:"",
+                    exampleContent: ''//提交案例的内容
+                },
+                isShowLearnInfo: false
+            };
+
+            $scope.changeFontSize = function() {
+                if (localStorage.getItem("fontsize") == "14px") {
+                    localStorage.setItem("fontsize", "16px");
+
+                }
+                else if (localStorage.getItem("fontsize") == "16px") {
+                    localStorage.setItem("fontsize", "18px");
+                }
+                else if (localStorage.getItem("fontsize") == "18px") {
+                    localStorage.setItem("fontsize", "14px");
+                }
+                $(".customSize").css("font-size", localStorage.getItem("fontsize"));
+            }
+
+
+            $scope.loadData = function () {
+                dataService.getCourseContent({
+                    courseId: $scope.m.params.courseId
+                }).then(function (args) {
+                    courseService1.loadLearnInfo(args[0], $scope.m.params.difficulty);
+                    for (var i = 0; i < $scope.m.learn.questions.length; i++) {
+                        if ($scope.m.learn.questions[i].fileType == "video") {
+                            $scope.m.learn.questions[i].video = splitVideo($scope.m.learn.questions[i].file);
+                        }
+                        if($scope.m.learn.questions[i].type=='question'){
+                            $scope.m.learn.questions[i].items = random($scope.m.learn.questions[i].items);
+                        }
+                    }
+                    $scope.m.learn.curQuestion = $scope.m.learn.questions[0];
+                    $scope.m.learn.index = 0;
+                    //if (storeService.getLocalValue($scope.m.params.courseId + "_index")){
+                    //    $scope.m.learn.index = storeService.getLocalValue($scope.m.params.courseId + "_index")
+                    //}
+                    $timeout(createSwiper, 500);
+                }, function (args) {
+                });
+            };
+
+
+            $scope.getContent = function (courseItem) {
+
+                var defer = $q.defer();
+                if (!courseItem) {
+                    defer.resolve("");
+                }
+                else if (courseItem.file.indexOf(".txt") < 0){
+                    defer.resolve("");
+                }
+                else {
+                    var courseNameEx = $scope.m.params.courseNameEx ?   $scope.m.params.courseNameEx : "";
+                    dataService.getTextContent({
+                        courseName: $scope.m.params.courseName + courseNameEx,
+                        fileName: courseItem.file
+                    })
+                    .then(function (args) {
+                        //setContent(tempIndex, args, true);
+                        var array = args.split("\n");
+                        var list = [];
+                        for (var i = 0; i < array.length; i++) {
+                            if (array[i] !== "") {
+                                list.push(array[i]);
+                            }
+                        }
+                        courseItem.TextContent = list;
+                        defer.resolve(list);
+                    }, function (args) { defer.reject(""); });
+                }
+
+                return defer.promise;
+            }
+
+            // 退出的时候显示本次学习信息
+            $scope.showLearnCompleteInfo = function () {
+                $scope.stopVideo();
+                $scope.m.isShowLearnInfo = true;
+                var score = courseService1.getLearnScore();
+                $scope.m.learnInfo.questionNumber = score.questionCount;
+                $scope.m.learnInfo.answerNumber = score.doQuestionCount;
+                $scope.m.learnInfo.answerRightNumber = score.doRightQuestionCount;
+                $scope.m.learnInfo.score = score.score;
+                $scope.m.learnInfo.endTime = new Date();
+                //$scope.m.learnInfo.startTime = $scope.modal.startTime;
+                //$scope.m.learnInfo.useTime = $scope.modal.useTime;
+            };
+
+            // 退出课程
+            $scope.learnCompleted = function () {
+                $scope.m.learnInfo.startTime = utilityService.getDateDbString($scope.m.learnInfo.startTime);
+                $scope.m.learnInfo.endTime = utilityService.getDateDbString($scope.m.learnInfo.endTime);
+
+                dataService.saveLearnInfo($scope.m.learnInfo)
+                .then(function (args) {
+                    $scope.m.isShowLearnInfo = false;
+                    storeService.setLocalValue($scope.m.params.courseId + "_index", $scope.m.learn.index);
+                    //$scope.loadData();
+                    $state.go("tab.allCourseList");
+                }, function (args) {
+                    utilityService.alert(args);
+                });
+            };
+
+
+            $scope.closeTimer = function () {
+                $interval.cancel($scope.timer);
+            };
+
+
+            $scope.submitQuestion = function () {
+                var item = $scope.m.learn.curQuestion;
+                if (item.type != 'question') return false;
+                var checkboxCount = $(".swiper-slide-active input[type='checkbox']:checked").length;
+                if (item.rightAnswerCount != checkboxCount) {
+                    var alertPopup = $ionicPopup.alert({
+                        title: '',
+                        template: '正确答案有' + item.rightAnswerCount + '个，你现在选中' + checkboxCount +'个',
+                        okText: '确定',
+                        okType: 'button-positive'
+                    });
+                    alertPopup.then(function (res) {
+                        console.log('Thank you ');
+                    });
+                    return false;
+                }
+                selectAnswerEx();
+                courseService1.checkLearnQuestionAnswer($scope.m.learn.curQuestion);
+                setAnswerClass(true);
+                setLockSwipe();
+            };
+
+            $scope.selectAnswer = function (item) {
+                $scope.m.learn.curQuestion.answerStatus = 0;
+                item.isUserChoice = !item.isUserChoice;
+            };
+
+            var setLockSwipe = function(){
+                //if(m_swiper.activeIndex == 0){
+                //    m_swiper.lockSwipeToPrev();
+                //}
+
+                if(m_swiper.activeIndex < m_swiper.slides.length - 1){
+                    var temp = $scope.m.learn.questions[m_swiper.activeIndex];
+                    if (temp.type=="question" && temp.answerStatus != 1)
+                        m_swiper.lockSwipeToNext();
+                    else
+                        m_swiper.unlockSwipeToNext();
+
+                    if (temp.file.indexOf(".txt") >= 0) {
+                        scope.getContent(temp);
+                    }
+                }
+
+                scope.m.learn.curQuestion = scope.m.learn.questions[m_swiper.activeIndex];
+            }
+
+            var priorNextMarker = false;
+            $scope.next = function () {
+                $scope.scrollTop();
+                if (priorNextMarker == true)return;
+                priorNextMarker = true;
+                courseService1.nextLearn();
+                //$scope.slideChanged(tempIndex);
+                m_swiper.slideNext();
+
+                $timeout(function(){priorNextMarker = false;}, 500);
+            };
+
+            $scope.prior = function () {
+                $scope.scrollTop();
+                if (priorNextMarker == true)return;
+                priorNextMarker = true;
+                courseService1.priorLearn();
+                //$scope.slideChanged(tempIndex);
+                m_swiper.slidePrev();
+                $timeout(function(){priorNextMarker = false;}, 500);
+            };
+
+            var splitVideo = function (video) {
+                var result = {
+                    video: "",
+                    ydVideo: "",
+                    alyVideo: ""
+                };
+                var temp = video;
+                if (video.indexOf("@yd@") >= 0) {
+                    var t = temp.split("@yd@");
+                    result.video = t[0];
+                    temp = t[1];
+                }
+                else if (video.indexOf("@aly@") >= 0) {
+                    var tt = temp.split("@aly@");
+                    if (result.video == "") {
+                        result.video = tt[0];
+                    }
+                    else {
+                        result.ydVideo = tt[0];
+                    }
+                    result.alyVideo = tt[1];
+                }
+                else {
+                    result.video = temp;
+                }
+                return result;
+            };
+
+            var t1 = moment().unix();
+            $scope.timer = $interval(function () {
+
+                $scope.m.learnInfo.endTime = new Date();
+                var t2 = moment().unix();
+                var t3 = t2 - t1;
+                $scope.m.learnInfo.useTime = moment(t3 * 1000).utc().utcOffset(0).format('HH:mm:ss');
+            }, 1000);
+
+            $scope.loadData();
+
+            createVideo = function (item, video, index) {
+                return;
+                if (item.alyPlay) return;
+                $timeout(function () {
+                    try {
+                        // android apiKey   bwdmqod3j2fbgfldopxxbglzon729vqcjsqz1xe87sgoc921xcz84zx84bvkqeym
+                        // html    apiKey   712by3pqx7pgwi5vxhepzlm4oiomiicpz821myaiu5d4mdngxs2xnx9jrpp7p9hh
+
+                        if (video.alyVideo != "") {
+                            //// 从视频点播获取资源
+                            //item.alyPlay = new prismplayer({
+                            //    id: "J_prismPlayer" + index,
+                            //    autoplay: false,
+                            //    width: "100%",
+                            //    vid: video.alyVideo,
+                            //    playauth: "",
+                            //    accId: "LTAIvX5Yi4jRvZRp",
+                            //    accSecret: "NBUnKZQ7kg04J7uL7i1sXCWHDwMmI0",
+                            //    apiKey: "712by3pqx7pgwi5vxhepzlm4oiomiicpz821myaiu5d4mdngxs2xnx9jrpp7p9hh"
+                            //    //prismType:1
+                            //});
+
+                            // 从服务器获取资源
+                            item.alyPlay = new prismplayer({
+                                id: "J_prismPlayer" + index,
+                                autoplay: false,
+                                width: "100%",
+                                //accId: "LTAIvX5Yi4jRvZRp",
+                                //accSecret: "NBUnKZQ7kg04J7uL7i1sXCWHDwMmI0",
+                                //apiKey: "712by3pqx7pgwi5vxhepzlm4oiomiicpz821myaiu5d4mdngxs2xnx9jrpp7p9hh",
+                                source: video.video
+                            });
+                        }
+                        else {
+                            // 从服务器获取资源
+                            item.alyPlay = new prismplayer({
+                                id: "J_prismPlayer" + index,
+                                autoplay: false,
+                                width: "100%",
+                                //accId: "LTAIvX5Yi4jRvZRp",
+                                //accSecret: "NBUnKZQ7kg04J7uL7i1sXCWHDwMmI0",
+                                //apiKey: "712by3pqx7pgwi5vxhepzlm4oiomiicpz821myaiu5d4mdngxs2xnx9jrpp7p9hh",
+                                source: video.video
+                            });
+                        }
+                    }
+                    catch (exception) {
+                        scope.m.exception = exception;
+                    }
+
+                }, 100);
+
+            }
+
+            var m_swiper = null;
+            var createSwiper = function() {
+                m_swiper = new Swiper('.swiper-container', {
+                    pagination: '.swiper-pagination',
+                    freeMode: false,
+                    speed:300,
+                    shortSwipes: true,
+                    threshold:70,
+                    onSlideChangeEnd: function (swiper) {
+                        //alert(swiper.activeIndex);
+                        var item = scope.m.learn.questions[swiper.activeIndex];
+                        createVideo(item, item.video, swiper.activeIndex);
+                        setLockSwipe();
+                        addSwiper(swiper);
+                        var id = "#slide" + swiper.activeIndex;
+                        angular.element(id).scrollTop = 0;
+                        window.scrollTo(0, -1000);
+                        //$('body,html').scrollTop(0);
+                    },
+                    onSlideChangeStart: function (swiper) {
+                        var item = scope.m.learn.questions[swiper.previousIndex];
+                        if (item.fileType == "video") {
+                            if (item.alyPlay) {
+                                item.alyPlay.pause();
+                            }
+                        }
+                    }
+                });
+
+
+
+                addSwiper(m_swiper)
+                .then(function (args) {
+                    addSwiper(m_swiper);
+                })
+                .then(function (args) {
+                    var item = scope.m.learn.questions[0];
+                    createVideo(item, item.video, 0);
+
+                    item = scope.m.learn.questions[1];
+                    createVideo(item, item.video, 1);
+
+                    $(".customSize").css("font-size", localStorage.getItem("fontsize"));
+                });
+
+            }
+
+            var addSwiper = function(swiper) {
+                var defer = $q.defer();
+                if (!swiper || !swiper.slides) {
+                    defer.reject("");
+                }
+                else {
+                    var tempIndex = swiper.slides.length;
+                    var item = scope.m.learn.questions[tempIndex];
+                    scope.getContent(item)
+                        .then(function (args) {
+                            if (scope.m.learn.questions.length > tempIndex) {
+                                var html = "";
+                                html += '<div id="slide' + tempIndex + '" class="swiper-slide add-auto-height">';
+                                if (scope.m.learn.questions[tempIndex].type == "catalog") {
+                                    html += getCatalogHtml(scope.m.learn.questions[tempIndex]);
+                                }
+                                else if (scope.m.learn.questions[tempIndex].type == "question") {
+                                    html += getQuestionHtml(scope.m.learn.questions[tempIndex], tempIndex);
+                                }
+                                html += '</div>';
+                                // swiper.appendSlide(html);
+                                swiper.appendSlide($compile(html)($scope));
+                                setEventListenerEx(swiper.slides.length - 2);
+                                setEventListenerEx(swiper.slides.length - 1);
+
+                                //if (scope.m.learn.questions[tempIndex].fileType == "video") {
+                                //    createVideo(scope.m.learn.questions[tempIndex], scope.m.learn.questions[tempIndex].video, tempIndex);
+                                //}
+                            }
+                            defer.resolve("");
+                        }, function (args) {
+                            defer.reject("");
+                        });
+                }
+
+                return defer.promise;
+            };
+
+            var setEventListenerEx = function (index) {
+                $("div[id*='questionDiv" + index + "']").unbind("click").click(function () {
+                    var id = this.id;
+                    var checkId = "#" + id.replace("questionDiv", "questionCheck");
+                    var check = $(checkId)[0].checked;   //$(checkId).attr("checked");
+                    if (check) {
+                        //$(checkId).attr("checked", false);
+                        $(checkId)[0].checked = false;
+                    }
+                    else {
+                        //$(checkId).attr("checked", true);
+                        $(checkId)[0].checked = true;
+                    }
+                    setAnswerClass(false);
+                });
+
+                //$("#questionPanel").unbind("touchmove").on("touchmove", function (event) {
+                //    event.preventDefault();
+                //});
+            };
+
+            var setAnswerClass = function (isShowResult) {
+                var id = "span[id*='questionSpan" + m_swiper.activeIndex + "']";
+                if (isShowResult) {
+                    $(id).each(function (index, element) {
+                        var question = scope.m.learn.questions[m_swiper.activeIndex];
+                        if (question.answerStatus != 0 &&                      // 回答状态为已经回答
+                            question.items[index].type == 'errorAnswer' &&      // 答案类型为错误答案
+                            question.items[index].isUserChoice) {                // 用户选择情况为选择
+                            // 显示错误答案
+                            $(element).addClass("assertive");
+                            $(element).attr("style",
+                                "text-decoration:line-through;" );
+                        }
+                        else if (question.answerStatus != 0 &&
+                            question.items[index].type == 'rightAnswer' &&
+                            question.items[index].isUserChoice) {
+                            // 显示正确答案
+                            $(element).addClass("positive");
+                        }
+                    });
+                }
+                else {
+                    $(id).each(function (index, element) {
+                        $(element).removeClass("assertive");
+                        $(element).removeClass("positive");
+                        $(element).attr("style", "");
+                    });
+                }
+            };
+
+            var selectAnswerEx = function () {
+                var id = "input[id*='questionCheck" + m_swiper.activeIndex + "']";
+                $(id).each(function (index, element) {
+                    var checkValue = $(element)[0].checked;
+                    if (checkValue) {
+                        scope.m.learn.questions[m_swiper.activeIndex].items[index].isUserChoice = true;
+                    }
+                    else {
+                        scope.m.learn.questions[m_swiper.activeIndex].items[index].isUserChoice = false;
+                    }
+                })
+            };
+
+            var getCatalogHtml = function (item) {
+
+                var html = "";
+                // 处理标题
+                //html = angular.element("#catalogTitleTemplate").html();
+
+                html = angular.element("#catalogTemplate").html();
+
+                var tab = "&nbsp;&nbsp;&nbsp;&nbsp;";
+                var parentTitle = "";
+
+                for (var i = 1; i < item.parentTitle.length; i++) {
+                    if(item.parentTitle[i].indexOf("#") >= 0){
+                        continue;
+                    }
+                    parentTitle += "<div class='title" + (i+1).toString() + "'>";
+                    for (var j = 0; j <= i; j++){
+                        parentTitle += tab;
+                    }
+                    parentTitle += item.parentTitle[i];
+                    parentTitle += "</div>";
+                }
+                if (item.title.indexOf("图片") >= 0 || item.title.indexOf("视频") >= 0)
+                    html = html.replace("#parentTitle#", parentTitle);
+                else
+                    html = html.replace("#parentTitle#", parentTitle);
+
+                // 处理内容
+                for (var i = 0; i < item.items.length; i++) {
+                    if (item.items[i].title.indexOf("图片") >= 0 ||
+                        item.items[i].title.indexOf("视频") >= 0 ||
+                        item.items[i].type == "question" )
+                        continue;
+                   // html += '<div class="leftIndentation" style="margin:10px;" ><span>' + item.items[i].title + '</span></div>';
+                }
+
+                // 处理资源
+                html += getCourseResourceHtml(item);
+                return html;
+            };
+
+            var getQuestionHtml = function(item, index) {
+                var html = "";
+
+                html = angular.element("#catalogTemplate").html();
+
+                var tab = "&nbsp;&nbsp;&nbsp;&nbsp;";
+                var parentTitle = "";
+                for (var i = 1; i < item.parentTitle.length; i++) {
+                    parentTitle += "<div class='title" + (i + 1).toString() + "'>";
+                    for (var j = 0; j <= i; j++) {
+                        parentTitle += tab;
+                    }
+                    parentTitle += item.parentTitle[i];
+                    parentTitle += "</div>";
+                }
+                if (item.title.indexOf("图片") >= 0 || item.title.indexOf("视频") >= 0)
+                    html = html.replace("#parentTitle#", parentTitle);
+                else
+                    html = html.replace("#parentTitle#", parentTitle);
+
+
+                // 处理标题
+                var titleList = [];
+                if (typeof item.title == "string") {
+                    titleList = item.title.split("。");
+                }
+                else {
+                    titleList = item.title;
+                }
+                for (var i = 0; i < titleList.length; i++) {
+                    titleList[i] = titleList[i].replace("@check@", "");
+                    if (titleList[i].trim() == "") {
+                        titleList.splice(i, 1);
+                    }
+                }
+
+                html += '<div class="padding">';
+                html += '<strong>';
+
+                for (var i = 0; i < titleList.length; i++) {
+                    html += '<span style="display:block; margin-top:8px;">' + titleList[i] + '</span>';
+                }
+                html += '</strong>';
+                html += '</div>';
+                var anwserCountStr = "";
+                if (item.rightAnswerCount > 1) {
+                    anwserCountStr = "多选[" + item.rightAnswerCount + "]";
+                }
+                else {
+                    anwserCountStr = "单选";
+                }
+                html += '<div style="padding-left:20px;background-color:white"  class="assertive">' + anwserCountStr + '</div>';
+
+                // 处理内容
+                html += getQuestionContentHtml(item,index);
+
+                // 处理资源
+                html += getCourseResourceHtml(item);
+                return html;
+            };
+
+            var getQuestionContentHtml = function (item, index) {
+                var html = "";
+
+                html += '<div id="questionPanel">';
+                for (var i = 0; i < item.items.length; i++) {
+                    html += '<div class="leftIndentation stable-border" style="margin:10px;" id="questionDiv' + index + "_" + i + '"/div>';
+                    html += '<input type="checkbox" id="questionCheck' + index + "_" + i + '"/>';
+                    html += '<span class="qustionStyle" id="questionSpan' + index + "_" + i + '">' + item.items[i].title + '</span>';
+                    html += '</div>';
+                }
+                html += '</div>';
+                return html;
+            }
+
+            var getCourseResourceHtml = function(item) {
+                var html = "";
+                if (item.fileType == "img") {
+                    html = angular.element("#imageTemplate").html();
+                    html = html.replace("#file#", item.file);
+                }
+                else if (item.fileType == "video") {
+                    html = angular.element("#videoTemplate").html();
+                    //if (item.video.alyVideo == "") {
+                    //    html = html.replace("#file#", item.video.video);       // 从阿里云服务器上获取视频
+                    //}
+                    //else {
+                    //    html = '<div class="prism-player" id="J_prismPlayer' + m_swiper.slides.length + '"></div>';   // 从阿里云视频点播上获取视频
+                    //}
+                    //html = html.replace("#file#", item.video.video);
+                    // html = '<div class="prism-player" id="J_prismPlayer' + m_swiper.slides.length + '"></div>';
+                    html = '<div style="position: relative;"><video controls style="width: 100%"  src="'+item.video.video+'" id="video'+m_swiper.slides.length+'"></video>' +
+                        '<div  ng-click="changePause('+m_swiper.slides.length+')" style="width: 100%;height: 75%;position: absolute;top: 0;"></div></div>'
+
+                }
+                else if (item.fileType == "text") {
+                    html += '<div class="padding">';
+                    for (var i = 0; i < item.TextContent.length; i++) {
+                        html += '<div class="item-text-wrap">';
+                        html += '<p class="customSize">&nbsp;&nbsp;&nbsp;&nbsp;' + item.TextContent[i] + '</p>';
+                        html += '</div>';
+                    }
+                    html += '</div>';
+                }
+                return html;
+            }
+
+
+            var random = function(array) {
+                var arr = array;
+                var arr1 =  arr.sort(function() {
+                    return .5 - Math.random();
+                });
+                return arr1;
+            };
+
+            //关闭视频
+            $scope.stopVideo = function () {
+                $('video').trigger('pause');
+                $scope.play = false
+            }
+
+            //播放或关闭视频
+           $scope.changePause = function (item) {
+               if ($scope.play==true) {
+                   $('#video' + item).trigger("pause");
+                   $scope.play = false
+               }else{
+                   $('#video' + item).trigger("play");
+                   $scope.play = true
+               }
+           };
+
+
+            //滚动到顶部
+            $scope.scrollTop = function() {
+                $ionicScrollDelegate.scrollTop();
+            };
+
+            //提交案例内容
+            $scope.addCourseSimpleItem = function(nodeId,nodeType){
+                if(nodeType=='question')
+                    return;
+                if (!$scope.userId){
+                    utilityService.alert("请登录");
+                    return;
+                }
+                else
+                if ($scope.m.learnInfo.exampleContent ==''){
+                    utilityService.alert("填写内容再提交");
+                    return;
+                }
+                dataService.addCourseNodeSimpleItem({
+                    courseId:$scope.m.params.courseId,
+                    nodeId:nodeId,
+                    parentId:  0,
+                    type: '',
+                    learnMode:$scope.m.params.difficulty,
+                    content:$scope.m.learnInfo.exampleContent,
+                    personId:$scope.userId
+                }).then(function (args) {
+                    $scope.getCourseSimpleList(nodeId,'最新',100);
+                    $scope.m.learnInfo.exampleContent = '';
+                })
+            };
+            //获取案例内容
+            $scope.getCourseSimpleList = function (nodeId,orderType,limit) {
+                dataService.getCourseNodeSimpleList({
+                    courseId:$scope.m.params.courseId,
+                    nodeId:nodeId,
+                    personId: $scope.userId,
+                    type: '',
+                    learnMode: $scope.m.params.difficulty,
+                    orderType: orderType,//热门或最新
+                    start:0,
+                    limit:limit
+                }).then(function (args) {
+                    // if (args.length>0){
+                    if (orderType == '最新')
+                        $scope.newList = args;
+
+                    if (orderType == '热门')
+                        $scope.hotList = args;
+
+                },function (args) {
+                    //alert(args);
+                })
+            };
+
+            // 一个确认对话框
+            $scope.deleteNews = function(userId,personId,nodeType) {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: '提示！',
+                    template: '确认删除?',
+                    okText: '确认',
+                    cancelText: '取消'
+                });
+                confirmPopup.then(function(res) {
+                    if(res) {
+                        $scope.deleteExample(userId,personId,$scope.m.learn.curQuestion.guid,nodeType);
+                    } else {
+                        // console.log('You are not sure');
+                    }
+                });
+            };
+
+
+            //删除案例内容
+            $scope.deleteExample = function (id,personId,nodeId,orderType) {
+                if (!$scope.userId){
+                    utilityService.alert("请登录！");
+                    return;
+                }
+                if (personId!=$scope.userId)
+                {
+                    utilityService.alert("不是本人不能删除！");
+                    return;
+                }
+                dataService.deleteCourseNodeSimpleItem({
+                    id:id
+                }).then(function (args) {
+                    $scope.getCourseSimpleList(nodeId,'热门',6);
+                    $scope.getCourseSimpleList(nodeId,'最新',100);
+                })
+            };
+
+            //案例点赞
+            $scope.likeCourseSimple = function (id,nodeid,orderType) {
+                if (!$scope.userId){
+                    utilityService.alert('请先登录');
+                    return
+                }
+                dataService.likeCourseNodeSimple({
+                    id:id,
+                    personId:$scope.userId,
+                    isLike: 1
+                }).then(function (args) {
+                    // $scope.getCourseSimpleList(nodeid,orderType);
+                    $scope.getCourseSimpleList(nodeid,'最新',100);
+                    $scope.getCourseSimpleList(nodeid,'热门',6);
+                })
+            };
+            //点击加载六条
+            // $scope.addNewList = function (nodeId) {
+            // $scope.start+=6;
+            //     $scope.getCourseSimpleList(nodeId,'最新',$scope.start+=6)
+            // };
+
+
+
+            $scope.$watch("m.learn.curQuestion",function (newValue,oldValue) {
+                $scope.stopVideo();//调用视频暂停方法
+                if (newValue && newValue.guid)
+                {
+                    //获取案例
+                    $scope.getCourseSimpleList(newValue.guid,'热门',6);
+                    $scope.getCourseSimpleList(newValue.guid,'最新',100);
+                };
+                $scope.m.learnInfo.exampleContent = '';
+            });
+
+
+        }]);
+})();

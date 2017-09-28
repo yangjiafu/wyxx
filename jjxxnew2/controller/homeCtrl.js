@@ -68,7 +68,6 @@
                    limit: 3
                }).then(function (args) {
                    for (var i =0;i<args.length;i++){
-
                        args[i].starRating = parseInt(args[i].starRating);
                    }
                    $scope.contentPlateTopItem = args;

@@ -26,7 +26,7 @@
                     $scope.m.learnInfoCount = args.count;
                     $scope.m.learnInfoList = args.list;
                     for (var i = 0; i < args.list.length; i++) {
-                        args.list[i].img = myConfig.filesUrl + "/courses/" + args.list[i].courseName + ".jpg";
+                        args.list[i].img = myConfig.filesUrl + "/courses/" + args.list[i].courseName + args.list[i].courseNameEx+".jpg";
                     }
                 }, function (args) {
                 });

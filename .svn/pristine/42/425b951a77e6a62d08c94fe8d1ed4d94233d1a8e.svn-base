@@ -1,0 +1,19 @@
+﻿<ion-view view-title="课程">
+  <ion-header-bar class="bar-positive">
+    <button class="button icon ion-chevron-left" style="font-size:16px; color:white; background-color:transparent; border:none;" ng-click="goBack()"></button>
+    <h1 class="title">{{m.title}}</h1>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list">
+      <div ng-repeat="item in m.list" class="item" ng-click="toCourse(item.id)">
+        <div style="float:left;width:80px;background-color:transparent;">
+          <img style="border-radius:100%;width:65px;height:65px;" ng-src="{{item.img}}" />
+        </div>
+        <div style="width:100%">
+          <span class="item-text-wrap" style="vertical-align:middle">{{item.title}}</span>
+        </div>
+      </div>
+
+    </div>
+  </ion-content>
+  </ion-view>

@@ -1,0 +1,191 @@
+﻿<script type="text/html" id="imageTemplate">
+    <ion-scroll zooming="false">
+        <img src="#file#" class="img-responsive" style="width:100%" onerror="this.style.display='none'">
+    </ion-scroll>
+</script>
+<script type="text/html" id="videoTemplate">
+    <video class="embed-responsive-item" style="background-color:dimgrey; width:100%;" controls="controls">
+        <source src="#file#" type="video/mp4" />
+    </video>
+</script>
+<!--<script type="text/html" id="textTemplate">
+    <div class="item-text-wrap padding">
+        <p >
+            &nbsp;&nbsp;&nbsp;&nbsp;#textItem#  带循环
+        </p>
+    </div>
+</script>-->
+
+<script type="text/template" id="catalogTitleTemplate">
+    <div class="padding">
+        <span>#title#</span>
+    </div>
+</script>
+
+<script type="text/template" id="catalogTemplate">
+    <div class="padding catalogContainer">
+        #parentTitle#
+    </div>
+</script>
+
+
+<!--<script type="text/template" id="questionTitleTemplate">
+    <strong>
+        <span style="float:right;"  class="assertive">(#rightAnswerCount#)</span>
+        <span style="display:block; margin-top:8px;">#text#  带循环</span>
+    </strong>
+</script>-->
+
+<ion-view view-title="">
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">{{m.params.courseName}}</h1>
+    </ion-header-bar>
+    <ion-content style="background-color:white;">
+        <ion-list>
+            <ion-item class="center" style="height:43px;padding-top:8px;">
+              <button  type="button" id="bnSpeaker" style="background-color:white;border-width:0px;margin-right:15px;" onclick="clickSpeechBn(0)">
+                <div>
+                  <img id="imgSpeaker" src="imgs/speaker1.png" style="width:24px;height:24px;vertical-align:middle">语音
+                </div>
+              </button>
+              <button type="button" style="background-color:white;border-width:0px;margin-right:15px;" ng-click="changeFontSize()">
+                <img src="imgs/font_size.png" style="width:20px;height:20px;vertical-align:middle">字体
+              </button>
+              <button type="button" ng-click="showLearnCompleteInfo()" style="background-color:white;border-width:0px;margin-right:0px;">
+                <img src="imgs/stop.png" style="width:24px;height:24px;vertical-align:middle">结束
+              </button>
+                <!--<h2 class="assertive" style="font-size:20px;display:none;">-->
+                    <!--<span class="pull-right myFontColor" style="font-size:14px;" ng-click="showLearnCompleteInfo()"><i class="iconfont icon-powerswitch myIocnColor" style="font-size:20px;"></i>结束</span>-->
+                <!--</h2>-->
+            </ion-item>
+        </ion-list>
+        <!--<ion-list style="height: 600px">-->
+            <!--<ion-scroll scroll-height="600px"style="height: 600px!important;">-->
+                <div ng-show="!m.isShowLearnInfo" class="swiper-container swiper-no-swiping"
+                     style="line-height:30px;font-size:20px;height: auto;">
+
+                        <div class="swiper-wrapper">
+
+                        </div>
+
+                        <div ng-if="m.learn.curQuestion.type != 'question'" style="display:block;width: 100%;margin-left: 0.5%;vertical-align: top;border: 1px solid #eee">
+                        <div style="width: 100%;background-color: #fff!important;">
+                                <span class="saycontent"  ng-if="hotList.length>0">
+                                    <span class="ion-minus-round roundStyle"></span>热门评论</span>
+                            <ul class="eqStyle">
+                                <li ng-repeat="(key,value) in hotList"
+                                    ng-class="{'discussItemActive':(key%2==0)}">
+                                    <span class="qustionName">{{value.personName}}</span>
+                                    <span class="pointer right"
+                                          style="margin-left: 10px"
+                                          ng-class="{'plateColor0':value.isLike == '1', '':value.isLike=='0'}"
+                                          ng-click="likeCourseSimple(value.id,m.learn.curQuestion.guid,'热门')">
+                                 <span class="ion-heart" ></span>{{value.num}}</span>
+                                    <span class="qustionContents">{{value.content}}</span>
+                                    <span class="block" style="color: #A4A9B2;text-indent: 0">
+                                <span class="qustionBottom">{{value.addTime | customDate}}</span>
+                                <span class="pointer delete right"
+                                      ng-if="value.personId == userId"
+                                      ng-click = "deleteNews(value.id,value.personId,'热门')"
+                                      data-target="#showDelete1" data-toggle="modal">
+                                    <span class="ion-trash-a"></span>删除</span>
+                            </span>
+                                </li>
+                            </ul>
+                            <span class="saycontent" ng-if="newList.length>0">
+                                    <span class="ion-minus-round roundStyle"></span>最新评论</span>
+                            <ul class="eqStyle">
+                                <li ng-repeat="(key,value) in newList"
+                                    ng-class="{'discussItemActive':(key%2==0)}">
+                                    <span class="qustionName">{{value.personName}}</span>
+                                    <span class="pointer right"
+                                          style="margin-left: 10px"
+                                          ng-class="{'plateColor0':value.isLike == '1', '':value.isLike=='0'}"
+                                          ng-click="likeCourseSimple(value.id,m.learn.curQuestion.guid,'最新')">
+                                    <span class="ion-heart" ></span>{{value.num}}</span>
+                                    <span class="qustionContents">{{value.content}}</span>
+                                    <span class="block" style="color: #A4A9B2;text-indent: 0">
+                                        <span class="qustionBottom">{{value.addTime | customDate}}</span>
+                                                <span class="pointer delete right"
+                                                      data-target="#showDelete1"
+                                                      ng-if="value.personId == userId"
+                                                      ng-click = "deleteNews(value.id,value.personId,'热门')"
+                                                      data-toggle="modal">
+                                        <span class="ion-trash-a"></span>删除</span>
+                                    </span>
+                                </li>
+                                <!--<span ng-if="newList.length>=6&&newList.length%6==0"-->
+                                <!--ng-click="addNewList(m.learn.curQuestion.guid)">更多...</span>-->
+                            </ul>
+                            <div style="margin-left: 5%" ng-if="newList.length==0&&hotList.length==0">
+                                没有互动问答
+                                <!--{{newList.length==0}}-hot-{{hotList.length==0}}-->
+                            </div>
+                        </div>
+
+                        <div class="submitBox">
+                            <div>
+                            <input ng-model="m.learnInfo.exampleContent"
+                                   placeholder="输入内容..."
+                                   style="width: 86%;border: none;border-radius:2px;padding: 3px 5px">
+                            <button style="background-color: rgba(0,0,0,0);color: #A4A9B2;padding-top: 5px;border: none"
+                                    ng-click="addCourseSimpleItem(m.learn.curQuestion.guid,m.learn.curQuestion.type)">
+                                发表</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            <!--</ion-scroll>-->
+        <!--</ion-list>-->
+
+
+        <ion-list ng-if="m.isShowLearnInfo">
+            <ion-item class="item-divider">
+                本次学习信息
+            </ion-item>
+            <ion-item>
+                <span class="pull-left">主题数：</span><span class="text-primary pull-right">{{m.learnInfo.questionNumber}}</span>
+            </ion-item>
+            <ion-item>
+                <span class="pull-left">完成主题数：</span><span class="text-primary pull-right">{{m.learnInfo.answerNumber}}</span>
+            </ion-item>
+            <ion-item>
+                <span class="pull-left">正确主题数：</span><span class="text-primary pull-right">{{m.learnInfo.answerRightNumber}}</span>
+            </ion-item>
+            <ion-item>
+                <span class="pull-left">得分：</span><span class="text-primary pull-right">{{m.learnInfo.score}}</span>
+            </ion-item>
+            <ion-item>
+                <button class="button button-balanced button-small padding-left pull-right" style="margin:0px 10px;" ng-click="m.isShowLearnInfo=false;">取&nbsp;&nbsp;&nbsp;&nbsp;消</button>
+                <button class="button button-balanced button-small padding-left pull-right padding-right" style="margin:0px 10px;" ng-click="learnCompleted()">确&nbsp;&nbsp;&nbsp;&nbsp;定</button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+    <ion-footer-bar>
+        <div class="button-bar">
+            <button class="button button-dark button-small "
+                    ng-disabled="m.learn.index<=0"
+                    ng-click="prior()">
+                <i class="ion-arrow-left-b padding"></i>上一个
+            </button>
+            <button class="button button-balanced button-small "
+                    ng-disabled="m.learn.curQuestion.type!='question'"
+                    ng-click="submitQuestion()">
+                <i class="ion-arrow-up-b padding"></i>提交
+            </button>
+            <button class="button button-dark button-small "
+                    ng-disabled="m.learn.index>=m.learn.questions.length -1 || (m.learn.curQuestion.type=='question' && m.learn.curQuestion.answerStatus != 1)"
+                    ng-click="next()">
+                <i class="ion-arrow-right-b padding"></i>下一个
+            </button>
+        </div>
+    </ion-footer-bar>
+
+    <!--<div id="videoContainHidden" style="display:none;">
+        <div class="prism-player" id="J_prismPlayer" ng-init="dealVideo(m.slider1.file, 1)"></div>
+    </div>-->
+</ion-view>
+
